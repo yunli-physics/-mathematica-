@@ -1,0 +1,581 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     23048,        560]
+NotebookOptionsPosition[     22686,        547]
+NotebookOutlinePosition[     23102,        564]
+CellTagsIndexPosition[     23059,        561]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9849070418767166`*^9, 3.9849070418777943`*^9}, 
+   3.985498351832258*^9},
+ CellLabel->"In[2]:=",ExpressionUUID->"e31111c4-685a-ac4b-adf3-98d01eb4fb0c"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.984907422886057*^9, 3.984907428869646*^9}, {
+  3.9854983404379272`*^9, 
+  3.985498343767967*^9}},ExpressionUUID->"b932602e-69d6-0c42-85b2-\
+b27d09cf76d3"],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"n1", "=", "1"}], ",", "n2", ",", "theta1", ",", "theta2", ",",
+        "sin1", ",", "sin2", ",", "ratio", ",", "rayIn", ",", "rayRefr", ",", 
+       "normal", ",", "surface"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"n2", "=", 
+       RowBox[{"Switch", "[", 
+        RowBox[{"medium", ",", "1", ",", 
+         RowBox[{"4", "/", "3"}], ",", "2", ",", "1.5"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"theta1", "=", 
+       RowBox[{"theta1Deg", " ", "Degree"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+        "direction", "==", "\"\<\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28\>\""}], 
+        ",", 
+        RowBox[{"(*", 
+         RowBox[{"\:539f\:6765\:7684\:65b9\:5411", "\:ff1a", 
+          RowBox[{"\:7a7a\:6c14", "\[RightArrow]", 
+           RowBox[{"\:6c34", "/", "\:73bb\:7483"}]}]}], "*)"}], 
+        RowBox[{
+         RowBox[{"sin1", "=", 
+          RowBox[{"Sin", "[", "theta1", "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"sin2", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"n1", "/", "n2"}], ")"}], " ", "sin1"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"sin2", ">", "1"}], ",", 
+           RowBox[{
+            RowBox[{"theta2", "=", "Indeterminate"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"rayRefr", "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"ratio", "=", "\"\<\:5168\:53cd\:5c04\>\""}]}], ",", 
+           RowBox[{
+            RowBox[{"theta2", "=", 
+             RowBox[{"ArcSin", "[", "sin2", "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"rayRefr", "=", 
+             RowBox[{"Arrow", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"1.2", " ", 
+                   RowBox[{"Tan", "[", "theta2", "]"}]}], ",", 
+                  RowBox[{"-", "1.2"}]}], "}"}]}], "}"}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"ratio", "=", 
+             RowBox[{"N", "[", 
+              RowBox[{
+               RowBox[{"sin1", "/", "sin2"}], ",", "4"}], "]"}]}]}]}], "]"}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"rayIn", "=", 
+          RowBox[{"Arrow", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "1.2"}], " ", 
+                RowBox[{"Tan", "[", "theta1", "]"}]}], ",", "1.2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}]}], "}"}], "]"}]}], ";"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{"\:65b0\:589e", "\:ff1a", 
+          RowBox[{
+          "\:5149\:8def\:53ef\:9006", "\[RightArrow]", "\:4ecb\:8d28", "\[RightArrow]",
+            "\:7a7a\:6c14"}]}], "*)"}], 
+        RowBox[{
+         RowBox[{"sin1", "=", 
+          RowBox[{"Sin", "[", "theta1", "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"sin2", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"n2", "/", "n1"}], ")"}], " ", "sin1"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"sin2", ">", "1"}], ",", 
+           RowBox[{
+            RowBox[{"theta2", "=", "Indeterminate"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"rayRefr", "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"ratio", "=", "\"\<\:5168\:53cd\:5c04\>\""}]}], ",", 
+           RowBox[{
+            RowBox[{"theta2", "=", 
+             RowBox[{"ArcSin", "[", "sin2", "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"rayRefr", "=", 
+             RowBox[{"Arrow", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"-", "1.2"}], " ", 
+                   RowBox[{"Tan", "[", "theta2", "]"}]}], ",", "1.2"}], 
+                 "}"}]}], "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"ratio", "=", 
+             RowBox[{"N", "[", 
+              RowBox[{
+               RowBox[{"sin1", "/", "sin2"}], ",", "4"}], "]"}]}]}]}], "]"}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"rayIn", "=", 
+          RowBox[{"Arrow", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"1.2", " ", 
+                RowBox[{"Tan", "[", "theta1", "]"}]}], ",", 
+               RowBox[{"-", "1.2"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}]}], "}"}], "]"}]}], ";"}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"normal", "=", 
+       RowBox[{"Line", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"-", "1.5"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1.5"}], "}"}]}], "}"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"surface", "=", 
+       RowBox[{"Line", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "0"}], "}"}]}], "}"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "Thick", ",", "Black", ",", "surface", ",", "Dashed", ",", "Gray", 
+            ",", "normal", ",", "Red", ",", "Thick", ",", "rayIn", ",", 
+            "Blue", ",", "Thick", ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"theta2", "=!=", "Indeterminate"}], ",", "rayRefr", ",", 
+              RowBox[{"{", "}"}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<\:7a7a\:6c14\>\"", ",", "14", ",", "Bold"}], 
+               "]"}], ",", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                "direction", 
+                 "==", "\"\<\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28\>\""}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"1.2", ",", "0.8"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"1.2", ",", 
+                  RowBox[{"-", "0.8"}]}], "}"}]}], "]"}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               
+               RowBox[{"\"\<\:6c34/\:73bb\:7483\>\"", ",", "14", ",", 
+                "Bold"}], "]"}], ",", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                "direction", 
+                 "==", "\"\<\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28\>\""}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"1.2", ",", 
+                  RowBox[{"-", "0.8"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"1.2", ",", "0.8"}], "}"}]}], "]"}]}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"PlotRange", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1.5"}], ",", "1.5"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ImageSize", "->", "550"}], ",", 
+          RowBox[{"BaseStyle", "->", 
+           RowBox[{"{", 
+            RowBox[{"FontSize", "->", "13"}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Grid", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:5165\:5c04\:89d2 \[Theta]\:2081\>\"", ",", 
+                  RowBox[{"Row", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"N", "[", 
+                    RowBox[{
+                    RowBox[{"theta1", "/", "Degree"}], ",", "3"}], "]"}], 
+                    ",", "\"\<\[Degree]\>\""}], "}"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:6298\:5c04\:89d2 \[Theta]\:2082\>\"", ",", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"theta2", "===", "Indeterminate"}], 
+                    ",", "\"\<\:5168\:53cd\:5c04\>\"", ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"N", "[", 
+                    RowBox[{
+                    RowBox[{"theta2", "/", "Degree"}], ",", "3"}], "]"}], 
+                    ",", "\"\<\[Degree]\>\""}], "}"}], "]"}]}], "]"}]}], 
+                 "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:6298\:5c04\:7387 n\:2082\>\"", ",", "n2"}], 
+                 "}"}], ",", 
+                RowBox[{"{", 
+                 
+                 RowBox[{"\"\<sin\[Theta]\:2081 / sin\[Theta]\:2082\>\"", ",",
+                   "ratio"}], "}"}]}], "}"}], ",", 
+              RowBox[{"Alignment", "->", "Left"}], ",", 
+              RowBox[{"Frame", "->", "All"}], ",", 
+              RowBox[{"Spacings", "->", 
+               RowBox[{"{", 
+                RowBox[{"2", ",", "1"}], "}"}]}], ",", 
+              RowBox[{"BaseStyle", "->", 
+               RowBox[{"{", 
+                RowBox[{"FontSize", "->", "13"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1.7"}], ",", 
+              RowBox[{"-", "1.2"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"PlotRange", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1.5"}], ",", "1.5"}], "}"}]}], "}"}]}]}], 
+         "]"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"(*", "\:539f\:6765\:7684\:63a7\:4ef6", "*)"}], 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "theta1Deg", ",", "30", 
+       ",", "\"\<\:5165\:5c04\:89d2 \[Theta]\:2081 (\[Degree])\>\""}], "}"}], 
+     ",", "0", ",", "89", ",", "1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"medium", ",", "1", ",", "\"\<\:4ecb\:8d28\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"1", "->", "\"\<\:6c34 (n\[TildeTilde]1.33)\>\""}], ",", 
+       RowBox[{"2", "->", "\"\<\:73bb\:7483 (n\[TildeTilde]1.5)\>\""}]}], 
+      "}"}]}], "}"}], ",", 
+   RowBox[{"(*", 
+    RowBox[{
+    "\:65b0\:589e", "\:ff1a", "\:5149\:8def\:53ef\:9006\:5f00\:5173"}], 
+    "*)"}], 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "direction", ",", "\"\<\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28\>\"", 
+       ",", "\"\<\:5149\:8def\:65b9\:5411\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28\>\"", 
+       ",", "\"\<\:4ecb\:8d28\[RightArrow]\:7a7a\:6c14\>\""}], "}"}]}], "}"}],
+    ",", 
+   RowBox[{"TrackedSymbols", ":>", 
+    RowBox[{"{", 
+     RowBox[{"theta1Deg", ",", "medium", ",", "direction"}], "}"}]}], ",", 
+   RowBox[{"ControlPlacement", "->", "Bottom"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.9849080886852303`*^9, 3.9849080886852303`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"dbee2ef5-e6fd-414f-8209-bb4c5a81bf55"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`direction$$ = 
+    "\:4ecb\:8d28\[RightArrow]\:7a7a\:6c14", $CellContext`medium$$ = 
+    1, $CellContext`theta1Deg$$ = 25, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`theta1Deg$$], 30, 
+       "\:5165\:5c04\:89d2 \[Theta]\:2081 (\[Degree])"}, 0, 89, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`medium$$], 1, "\:4ecb\:8d28"}, {
+      1 -> "\:6c34 (n\[TildeTilde]1.33)", 2 -> 
+       "\:73bb\:7483 (n\[TildeTilde]1.5)"}, ControlType -> SetterBar}, {{
+       Hold[$CellContext`direction$$], 
+       "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", "\:5149\:8def\:65b9\:5411"}, {
+      "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", 
+       "\:4ecb\:8d28\[RightArrow]\:7a7a\:6c14"}, ControlType -> SetterBar}}, 
+    Typeset`size$$ = {550., {203.38403328722342`, 209.11596671277658`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`direction$$ = 
+        "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", $CellContext`medium$$ = 
+        1, $CellContext`theta1Deg$$ = 30}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`n1$ = 
+         1, $CellContext`n2$, $CellContext`theta1$, $CellContext`theta2$, \
+$CellContext`sin1$, $CellContext`sin2$, $CellContext`ratio$, \
+$CellContext`rayIn$, $CellContext`rayRefr$, $CellContext`normal$, \
+$CellContext`surface$}, $CellContext`n2$ = 
+         Switch[$CellContext`medium$$, 1, 4/3, 2, 
+           1.5]; $CellContext`theta1$ = $CellContext`theta1Deg$$ Degree; 
+        If[$CellContext`direction$$ == 
+          "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", $CellContext`sin1$ = 
+           Sin[$CellContext`theta1$]; $CellContext`sin2$ = \
+($CellContext`n1$/$CellContext`n2$) $CellContext`sin1$; 
+          If[$CellContext`sin2$ > 
+            1, $CellContext`theta2$ = 
+             Indeterminate; $CellContext`rayRefr$ = {}; $CellContext`ratio$ = 
+             "\:5168\:53cd\:5c04", $CellContext`theta2$ = 
+             ArcSin[$CellContext`sin2$]; $CellContext`rayRefr$ = 
+             Arrow[{{0, 0}, {
+                1.2 Tan[$CellContext`theta2$], -1.2}}]; $CellContext`ratio$ = 
+             N[$CellContext`sin1$/$CellContext`sin2$, 
+               4]]; $CellContext`rayIn$ = 
+           Arrow[{{(-1.2) Tan[$CellContext`theta1$], 1.2}, {0, 0}}]; 
+          Null, $CellContext`sin1$ = 
+           Sin[$CellContext`theta1$]; $CellContext`sin2$ = \
+($CellContext`n2$/$CellContext`n1$) $CellContext`sin1$; 
+          If[$CellContext`sin2$ > 
+            1, $CellContext`theta2$ = 
+             Indeterminate; $CellContext`rayRefr$ = {}; $CellContext`ratio$ = 
+             "\:5168\:53cd\:5c04", $CellContext`theta2$ = 
+             ArcSin[$CellContext`sin2$]; $CellContext`rayRefr$ = 
+             Arrow[{{0, 
+                0}, {(-1.2) Tan[$CellContext`theta2$], 
+                 1.2}}]; $CellContext`ratio$ = 
+             N[$CellContext`sin1$/$CellContext`sin2$, 
+               4]]; $CellContext`rayIn$ = 
+           Arrow[{{1.2 Tan[$CellContext`theta1$], -1.2}, {0, 0}}]; 
+          Null]; $CellContext`normal$ = 
+         Line[{{0, -1.5}, {0, 1.5}}]; $CellContext`surface$ = 
+         Line[{{-2, 0}, {2, 0}}]; Show[
+          
+          Graphics[{
+           Thick, Black, $CellContext`surface$, Dashed, 
+            Gray, $CellContext`normal$, Red, Thick, $CellContext`rayIn$, Blue,
+             Thick, 
+            
+            If[$CellContext`theta2$ =!= 
+             Indeterminate, $CellContext`rayRefr$, {}], 
+            Text[
+             Style["\:7a7a\:6c14", 14, Bold], 
+             
+             If[$CellContext`direction$$ == 
+              "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", {1.2, 0.8}, {
+              1.2, -0.8}]], 
+            Text[
+             Style["\:6c34/\:73bb\:7483", 14, Bold], 
+             
+             If[$CellContext`direction$$ == 
+              "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", {1.2, -0.8}, {1.2, 
+              0.8}]]}, PlotRange -> {{-2, 2}, {-1.5, 1.5}}, ImageSize -> 550, 
+           BaseStyle -> {FontSize -> 13}], 
+          Graphics[
+           Inset[
+            Grid[{{"\:5165\:5c04\:89d2 \[Theta]\:2081", 
+               Row[{
+                 N[$CellContext`theta1$/Degree, 3], "\[Degree]"}]}, {
+              "\:6298\:5c04\:89d2 \[Theta]\:2082", 
+               
+               If[$CellContext`theta2$ === Indeterminate, 
+                "\:5168\:53cd\:5c04", 
+                Row[{
+                  N[$CellContext`theta2$/Degree, 3], "\[Degree]"}]]}, {
+              "\:6298\:5c04\:7387 n\:2082", $CellContext`n2$}, {
+              "sin\[Theta]\:2081 / sin\[Theta]\:2082", $CellContext`ratio$}}, 
+             Alignment -> Left, Frame -> All, Spacings -> {2, 1}, 
+             BaseStyle -> {FontSize -> 13}], {-1.7, -1.2}], 
+           PlotRange -> {{-2, 2}, {-1.5, 1.5}}]]], 
+      "Specifications" :> {{{$CellContext`theta1Deg$$, 30, 
+          "\:5165\:5c04\:89d2 \[Theta]\:2081 (\[Degree])"}, 0, 89, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`medium$$, 1, "\:4ecb\:8d28"}, {
+         1 -> "\:6c34 (n\[TildeTilde]1.33)", 2 -> 
+          "\:73bb\:7483 (n\[TildeTilde]1.5)"}}, {{$CellContext`direction$$, 
+          "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", 
+          "\:5149\:8def\:65b9\:5411"}, {
+         "\:7a7a\:6c14\[RightArrow]\:4ecb\:8d28", 
+          "\:4ecb\:8d28\[RightArrow]\:7a7a\:6c14"}}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`theta1Deg$$, $CellContext`medium$$, \
+$CellContext`direction$$}, ControlPlacement -> Bottom}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{595.9, {267.2450489122242, 272.9769823377774}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{{3.984908185432972*^9, 3.984908186478718*^9}, 
+   3.9849647413825245`*^9},ExpressionUUID->"d961fddc-e076-b64f-bfe1-\
+7f599b72394e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Power", "infy", 
+   "\"\:78b0\:5230\:65e0\:7a77\:8868\:8fbe\:5f0f \\!\\(\\*FractionBox[\\\"1\\\
+\", \\\"0.`\\\"]\\).\"", 2, 8, 257, 29755583625385363061, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.9849082432106743`*^9},
+ CellLabel->"",ExpressionUUID->"2cc54263-a516-df41-98d3-29eb94d177ea"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Infinity", "indet", 
+   "\"\:78b0\:5230\:4e0d\:5b9a\:8868\:8fbe\:5f0f \\!\\(\\*RowBox[{\\\"0\\\", \
+\\\" \\\", \\\"ComplexInfinity\\\"}]\\).\"", 2, 8, 258, 29755583625385363061, 
+   "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.9849082432494297`*^9},
+ CellLabel->"",ExpressionUUID->"a5a132ea-1ae9-fd4b-80c1-f68d08fe9c9f"],
+
+Cell["\<\
+                     1
+Power::infy: \:78b0\:5230\:65e0\:7a77\:8868\:8fbe\:5f0f -.
+                     0\
+\>", "Message",
+ CellChangeTimes->{3.984964716274559*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[1]:=",ExpressionUUID->"a63cb700-062f-dd4a-bf9a-\
+a387e5f64562"],
+
+Cell["Infinity::indet: \:78b0\:5230\:4e0d\:5b9a\:8868\:8fbe\:5f0f 0 \
+ComplexInfinity.", "Message",
+ CellChangeTimes->{3.984964716312351*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[1]:=",ExpressionUUID->"b6661c67-9145-cb42-a4a3-\
+2e13ebc615d8"],
+
+Cell["\<\
+                     1
+Power::infy: \:78b0\:5230\:65e0\:7a77\:8868\:8fbe\:5f0f -.
+                     0\
+\>", "Message",
+ CellChangeTimes->{3.984964719716112*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[1]:=",ExpressionUUID->"2df1e231-181f-6f49-9bb0-\
+fd169df65408"],
+
+Cell["Infinity::indet: \:78b0\:5230\:4e0d\:5b9a\:8868\:8fbe\:5f0f 0 \
+ComplexInfinity.", "Message",
+ CellChangeTimes->{3.9849647197191124`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[1]:=",ExpressionUUID->"6b33b09c-a67b-2744-9487-\
+f227884a861b"]
+}, Open  ]]
+},
+WindowSize->{1141.2, 639.6},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c6403887-6579-9a45-b8be-63a846568a4f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 200, 3, 28, "Input",ExpressionUUID->"e31111c4-685a-ac4b-adf3-98d01eb4fb0c"],
+Cell[1663, 38, 203, 4, 28, "Input",ExpressionUUID->"b932602e-69d6-0c42-85b2-b27d09cf76d3"],
+Cell[1869, 44, 12103, 306, 1049, "Input",ExpressionUUID->"dbee2ef5-e6fd-414f-8209-bb4c5a81bf55"],
+Cell[CellGroupData[{
+Cell[13997, 354, 6841, 135, 553, "Input",ExpressionUUID->"d961fddc-e076-b64f-bfe1-7f599b72394e"],
+Cell[20841, 491, 364, 8, 38, "Message",ExpressionUUID->"2cc54263-a516-df41-98d3-29eb94d177ea"],
+Cell[21208, 501, 392, 9, 26, "Message",ExpressionUUID->"a5a132ea-1ae9-fd4b-80c1-f68d08fe9c9f"],
+Cell[21603, 512, 280, 8, 46, "Message",ExpressionUUID->"a63cb700-062f-dd4a-bf9a-a387e5f64562"],
+Cell[21886, 522, 248, 5, 20, "Message",ExpressionUUID->"b6661c67-9145-cb42-a4a3-2e13ebc615d8"],
+Cell[22137, 529, 280, 8, 46, "Message",ExpressionUUID->"2df1e231-181f-6f49-9bb0-fd169df65408"],
+Cell[22420, 539, 250, 5, 20, "Message",ExpressionUUID->"6b33b09c-a67b-2744-9487-f227884a861b"]
+}, Open  ]]
+}
+]
+*)
+
