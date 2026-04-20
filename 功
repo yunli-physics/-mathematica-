@@ -1,0 +1,30 @@
+F = 10;
+s = 10;
+thetaRange = Range[0, 180];
+Manipulate[
+    Column[{
+        RowBox[{"Angle (degrees): ", Dynamic[thetaDegree]}],
+        Graphics[
+            {
+                Red,
+                Disk[{t, 0}, 0.3],
+                Point[{t, 0.3}],
+                Arrow[{{t, 0.3}, {t + F * Cos[thetaDegree / 180 * Pi], 0.3 + F * Sin[thetaDegree / 180 * Pi]}}],
+                Text[Style["F", FontSize -> 18], {t + F * Cos[thetaDegree / 180 * Pi] / 2, 0.3 + F * Sin[thetaDegree / 180 * Pi] / 2}]
+            },
+            Axes -> True,
+            AxesLabel -> {"x", ""},
+            PlotRange -> {{0, 10}, {-1, 1}}
+        ],
+        Plot[F * s * Cos[theta / 180 * Pi], {theta, 0, 180},
+             PlotRange -> All,
+             AxesLabel -> {"θ (degrees)", "W"}]
+    }],
+    {{thetaDegree, 0}, thetaRange,
+     Appearance -> "Slider"
+    },
+    {t, 0, 10,
+     AnimationRunning -> True,
+     AnimationRate -> 0.1
+    }
+]
