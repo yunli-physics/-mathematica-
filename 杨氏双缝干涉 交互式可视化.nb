@@ -1,0 +1,326 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     12637,        303]
+NotebookOptionsPosition[     12819,        295]
+NotebookOutlinePosition[     13270,        313]
+CellTagsIndexPosition[     13227,        310]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9862867353018703`*^9, 3.9862867353018703`*^9}, {
+   3.9862868138545723`*^9, 3.9862868174059963`*^9}, 
+   3.986286884191019*^9},ExpressionUUID->"98835491-0d5b-3643-8281-\
+170c2ae82a8f"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9862868801839714`*^9, 
+  3.9862868816754837`*^9}},ExpressionUUID->"2d629462-64a5-0e44-9a93-\
+0c6f855de87c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "\:6768\:6c0f\:53cc\:7f1d\:5e72\:6d89", " ", 
+    "\:4ea4\:4e92\:5f0f\:53ef\:89c6\:5316", 
+    RowBox[{"\:ff08", "\:4fee\:6b63\:7248", "\:ff09"}]}], "*)"}], 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "lam", ",", "d", ",", "L", ",", "dx", ",", "xRange", ",", "x", ",", 
+        "I"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{"\:5355\:4f4d\:8f6c\:6362", "\:ff1a", 
+        RowBox[{"nm", "\[RightArrow]", "m"}], ",", 
+        RowBox[{"mm", "\[RightArrow]", "m"}]}], "*)"}], 
+      RowBox[{
+       RowBox[{"lam", "=", 
+        RowBox[{"\[Lambda]", "*", 
+         RowBox[{"10", "^", 
+          RowBox[{"-", "9"}]}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"d", "=", 
+        RowBox[{"d0", "*", 
+         RowBox[{"10", "^", 
+          RowBox[{"-", "3"}]}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"L", "=", "L0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+       "(*", "\:53cc\:7f1d\:5e72\:6d89\:5149\:5f3a\:516c\:5f0f", "*)"}], 
+       RowBox[{
+        RowBox[{"I", "[", "x_", "]"}], "=", 
+        RowBox[{"4", "*", 
+         RowBox[{
+          RowBox[{"Cos", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Pi", "*", "d", "*", "x"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"lam", "*", "L"}], ")"}]}], "]"}], "^", "2"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", "\:6761\:7eb9\:95f4\:8ddd\:7406\:8bba\:503c", "*)"}], 
+       RowBox[{"dx", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"L", "*", "lam"}], ")"}], "/", "d"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xRange", "=", 
+        RowBox[{"6", " ", "dx"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"GraphicsRow", "[", 
+        RowBox[{"{", 
+         RowBox[{"(*", 
+          RowBox[{
+          "\:5de6", "\:ff1a", "\:5149\:5f3a\:5206\:5e03\:66f2\:7ebf"}], 
+          "*)"}], 
+         RowBox[{
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{"I", "[", "x", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{"-", "xRange"}], ",", "xRange"}], "}"}], ",", 
+            RowBox[{"PlotLabel", "->", 
+             RowBox[{"Style", "[", 
+              
+              RowBox[{"\"\<\:5e72\:6d89\:5149\:5f3a\:5206\:5e03\>\"", ",", 
+               "14", ",", "Bold"}], "]"}]}], ",", 
+            RowBox[{"AxesLabel", "->", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<\:4f4d\:7f6e x(m)\>\"", ",", "11"}], "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<\:76f8\:5bf9\:5149\:5f3a I\>\"", ",", "11"}], 
+                "]"}]}], "}"}]}], ",", 
+            RowBox[{"GridLines", "->", "Automatic"}], ",", 
+            RowBox[{"PlotTheme", "->", "\"\<Scientific\>\""}], ",", 
+            RowBox[{"ImageSize", "->", "400"}]}], "]"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "\:53f3", "\:ff1a", "\:5e72\:6d89\:6761\:7eb9\:6a21\:62df"}], 
+           "*)"}], 
+          RowBox[{"DensityPlot", "[", 
+           RowBox[{
+            RowBox[{"I", "[", "x", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{"-", "xRange"}], ",", "xRange"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "0", ",", "1"}], "}"}], ",", 
+            RowBox[{"PlotLabel", "->", 
+             RowBox[{"Style", "[", 
+              
+              RowBox[{"\"\<\:53cc\:7f1d\:5e72\:6d89\:6761\:7eb9\>\"", ",", 
+               "14", ",", "Bold"}], "]"}]}], ",", 
+            RowBox[{"AspectRatio", "->", 
+             RowBox[{"1", "/", "4"}]}], ",", 
+            RowBox[{"Frame", "->", "False"}], ",", 
+            RowBox[{"ColorFunction", "->", "\"\<GrayTones\>\""}], ",", 
+            RowBox[{"ImageSize", "->", "400"}]}], "]"}]}], "}"}], "]"}]}]}], 
+     "]"}], ",", 
+    RowBox[{"(*", "\:4ea4\:4e92\:63a7\:5236\:53c2\:6570", "*)"}], 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\[Lambda]", ",", "589", 
+        ",", "\"\<\:5165\:5c04\:5149\:6ce2\:957f \[Lambda] (nm)\>\""}], "}"}],
+       ",", "400", ",", "760", ",", "1", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "d0", ",", "0.5", ",", "\"\<\:53cc\:7f1d\:95f4\:8ddd d (mm)\>\""}], 
+       "}"}], ",", "0.1", ",", "1.5", ",", "0.05", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "L0", ",", "1.0", 
+        ",", "\"\<\:53cc\:7f1d\:5230\:5c4f\:8ddd\:79bb L (m)\>\""}], "}"}], ",",
+       "0.5", ",", "2.0", ",", "0.1", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{
+    "(*", "\:5e95\:90e8\:6559\:5b66\:516c\:5f0f\:4e0e\:5b9e\:65f6\:6570\:636e\
+", "*)"}], 
+    RowBox[{"Text", "[", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"\"\<\:6761\:7eb9\:95f4\:8ddd \[CapitalDelta]x = \>\"", "<>", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"L0", "*", "\[Lambda]", "*", 
+              RowBox[{"10", "^", 
+               RowBox[{"-", "9"}]}]}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"d0", "*", 
+              RowBox[{"10", "^", 
+               RowBox[{"-", "3"}]}]}], ")"}]}], ",", "4"}], "]"}], "]"}], 
+        "<>", "\"\< m\\n\>\"", 
+        "<>", "\"\<\:516c\:5f0f\:ff1a\[CapitalDelta]x = L\[Lambda]/d    \
+\:660e\:7eb9\:ff1a\[CapitalDelta]s = k\[Lambda]    \:6697\:7eb9\:ff1a\
+\[CapitalDelta]s = (2k+1)\[Lambda]/2\>\""}], ",", "13", ",", "Bold"}], "]"}], 
+     "]"}], ",", 
+    RowBox[{"ControlPlacement", "->", "Bottom"}], ",", 
+    RowBox[{"SaveDefinitions", "->", "True"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9862868980781384`*^9, 3.9862868980781384`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"c2f03e25-c850-ee4c-9113-faea1d6bbc65"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`d0$$ = 0.5, $CellContext`L0$$ = 
+    1., $CellContext`\[Lambda]$$ = 563, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Lambda]$$], 589, 
+       "\:5165\:5c04\:5149\:6ce2\:957f \[Lambda] (nm)"}, 400, 760, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`d0$$], 0.5, "\:53cc\:7f1d\:95f4\:8ddd d (mm)"}, 0.1, 
+      1.5, 0.05, ControlType -> Manipulator}, {{
+       Hold[$CellContext`L0$$], 1., 
+       "\:53cc\:7f1d\:5230\:5c4f\:8ddd\:79bb L (m)"}, 0.5, 2., 0.1, 
+      ControlType -> Manipulator}, {
+      Hold[
+       Text[
+        Style[
+        "\:6761\:7eb9\:95f4\:8ddd \[CapitalDelta]x =         -6\n1.000 10   \
+L0 \[Lambda]\n---------------\n      d0 m\n\:516c\:5f0f\:ff1a\[CapitalDelta]x \
+= L\[Lambda]/d    \:660e\:7eb9\:ff1a\[CapitalDelta]s = k\[Lambda]    \:6697\
+\:7eb9\:ff1a\[CapitalDelta]s = (2k+1)\[Lambda]/2", 13, Bold]]], 
+      Manipulate`Dump`ThisIsNotAControl, ControlType -> None}}, 
+    Typeset`size$$ = {640., {107.70795768332908`, 113.43989110888222`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`d0$$ = 0.5, $CellContext`L0$$ = 
+        1., $CellContext`\[Lambda]$$ = 589}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`lam$, $CellContext`d$, $CellContext`L$, \
+$CellContext`dx$, $CellContext`xRange$, $CellContext`x$, 
+         I$}, $CellContext`lam$ = $CellContext`\[Lambda]$$ 
+          10^(-9); $CellContext`d$ = $CellContext`d0$$ 
+          10^(-3); $CellContext`L$ = $CellContext`L0$$; I$[
+           Pattern[$CellContext`x$, 
+            Blank[]]] = 
+         4 Cos[(Pi $CellContext`d$ $CellContext`x$)/($CellContext`lam$ \
+$CellContext`L$)]^2; $CellContext`dx$ = ($CellContext`L$ \
+$CellContext`lam$)/$CellContext`d$; $CellContext`xRange$ = 6 $CellContext`dx$; 
+        GraphicsRow[{
+           Plot[
+            
+            I$[$CellContext`x$], {$CellContext`x$, -$CellContext`xRange$, \
+$CellContext`xRange$}, PlotLabel -> 
+            Style["\:5e72\:6d89\:5149\:5f3a\:5206\:5e03", 14, Bold], 
+            AxesLabel -> {
+              Style["\:4f4d\:7f6e x(m)", 11], 
+              Style["\:76f8\:5bf9\:5149\:5f3a I", 11]}, GridLines -> 
+            Automatic, PlotTheme -> "Scientific", ImageSize -> 400], 
+           DensityPlot[
+            
+            I$[$CellContext`x$], {$CellContext`x$, -$CellContext`xRange$, \
+$CellContext`xRange$}, {$CellContext`y, 0, 1}, PlotLabel -> 
+            Style["\:53cc\:7f1d\:5e72\:6d89\:6761\:7eb9", 14, Bold], 
+            AspectRatio -> 1/4, Frame -> False, ColorFunction -> "GrayTones", 
+            ImageSize -> 400]}]], 
+      "Specifications" :> {{{$CellContext`\[Lambda]$$, 589, 
+          "\:5165\:5c04\:5149\:6ce2\:957f \[Lambda] (nm)"}, 400, 760, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`d0$$, 0.5, 
+          "\:53cc\:7f1d\:95f4\:8ddd d (mm)"}, 0.1, 1.5, 0.05, Appearance -> 
+         "Labeled"}, {{$CellContext`L0$$, 1., 
+          "\:53cc\:7f1d\:5230\:5c4f\:8ddd\:79bb L (m)"}, 0.5, 2., 0.1, 
+         Appearance -> "Labeled"}, 
+        Text[
+         Style[
+         "\:6761\:7eb9\:95f4\:8ddd \[CapitalDelta]x =         -6\n1.000 10   \
+L0 \[Lambda]\n---------------\n      d0 m\n\:516c\:5f0f\:ff1a\[CapitalDelta]x \
+= L\[Lambda]/d    \:660e\:7eb9\:ff1a\[CapitalDelta]s = k\[Lambda]    \:6697\
+\:7eb9\:ff1a\[CapitalDelta]s = (2k+1)\[Lambda]/2", 13, Bold]]}, 
+      "Options" :> {ControlPlacement -> Bottom}, "DefaultOptions" :> {}],
+     ImageSizeCache->{685.9, {215.64911002707976`, 221.38104345263292`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.986286899302225*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"f79e4481-a495-484d-8012-e7385c3bf969"]
+}, Open  ]]
+},
+WindowSize->{1152, 650.4},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bf5b3af8-5b9b-7346-bc39-388aba30c764"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 233, 4, 28, "Input",ExpressionUUID->"98835491-0d5b-3643-8281-170c2ae82a8f"],
+Cell[1696, 39, 156, 3, 28, "Input",ExpressionUUID->"2d629462-64a5-0e44-9a93-0c6f855de87c"],
+Cell[CellGroupData[{
+Cell[1877, 46, 6155, 153, 460, "Input",ExpressionUUID->"c2f03e25-c850-ee4c-9113-faea1d6bbc65"],
+Cell[8035, 201, 4768, 91, 473, "Output",ExpressionUUID->"f79e4481-a495-484d-8012-e7385c3bf969"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
