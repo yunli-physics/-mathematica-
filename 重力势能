@@ -1,0 +1,30 @@
+g = 9.8;
+m = 1;
+Manipulate[
+    Column[{
+        Row[{
+            Graphics[
+                {
+                    Red,
+                    Disk[{x, y}, 0.25]
+                },
+                Axes -> True,
+                AxesLabel -> {"x", "y"},
+                PlotRange -> {{-5, 5}, {0, 5}}
+            ],
+            Graphics[
+                {
+                    Red,
+                    Point[{y, m * g * y}],
+                    Blue,
+                    Plot[m * g * z, {z, 0, 5}]
+                },
+                Axes -> True,
+                AxesLabel -> {"y", "Gravitational Potential Energy"},
+                PlotRange -> {{0, 5}, {0, m * g * 5}}
+            ]
+        }]
+    }],
+    {{x, 0}, -5, 5},
+    {{y, 0}, 0, 5}
+]
