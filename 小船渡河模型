@@ -1,0 +1,212 @@
+*小船渡河模型\[CenterDot]交互式可视化教学*) Manipulate[
+  Module[{(*基本参数*)riverWidth = 200,(*河宽 (米)*)
+    boatSpeed = vBoat,(*船在静水中的速度*)
+    waterSpeed = vWater,(*水流速度*)(*最短时间渡河参数*)timeMin,(*最短时间*)
+    displacementMinTime,(*最短时间对应的位移*)
+    driftMinTime,(*最短时间对应的漂流距离*)(*最短位移渡河参数*)canCrossDirectly,(*能否垂直渡河*)
+    bestAngle,(*最佳船头角度 (弧度)*)bestAngleDeg,(*最佳船头角度 (度)*)
+    timeShortestDisp,(*最短位移对应的时间*)displacementShortest,(*最短位移*)
+    driftShortestDisp,(*最短位移对应的漂流距离*)(*当前模式下的显示参数*)
+    currentAngle,(*当前船头角度*)currentTime,(*当前渡河时间*)
+    currentDrift,(*当前漂流距离*)boatPos,(*船的位置 {x,y}*)boatPath,(*船的轨迹*)
+    velBoatVec,(*船速矢量*)velWaterVec,(*水流速度矢量*)
+    velTotalVec,(*合速度矢量*)(*圆辅助线参数 (v船<v水 时)*)circleCenter, 
+    circleRadius, tangentPoint, tangentAngle, 
+    plotRange = {{-20, 250}, {-10, 220}}, shoreTop = 200, 
+    shoreBottom = 0},(*----计算最短时间渡河参数----*)
+   timeMin = riverWidth/boatSpeed;
+   driftMinTime = waterSpeed*timeMin;
+   displacementMinTime = Sqrt[driftMinTime^2 + riverWidth^2];
+   (*----判断能否垂直渡河----*)canCrossDirectly = boatSpeed >= waterSpeed;
+   (*----计算最短位移渡河参数----*)
+   If[canCrossDirectly,(*v船\[GreaterEqual]v水：船头斜向上游，合速度垂直河岸*)
+    bestAngle = ArcSin[waterSpeed/boatSpeed];
+    timeShortestDisp = riverWidth/(boatSpeed*Cos[bestAngle]);
+    driftShortestDisp = 0;
+    displacementShortest = riverWidth,(*v船<
+    v水：以v水末端为圆心、v船为半径作圆，合速度与圆相切*)
+    bestAngle = ArcCos[boatSpeed/waterSpeed];(*船头与上游河岸夹角*)
+    tangentAngle = ArcSin[boatSpeed/waterSpeed];(*合速度与河岸夹角*)
+    timeShortestDisp = riverWidth/(waterSpeed*Sin[tangentAngle]);
+    driftShortestDisp = riverWidth/Tan[tangentAngle];
+    displacementShortest = Sqrt[driftShortestDisp^2 + riverWidth^2]];
+   bestAngleDeg = bestAngle*180/Pi;
+   (*----当前模式下的计算----*)
+   currentAngle = 
+    If[mode == 1, Pi/2,(*最短时间：船头垂直河岸*)bestAngle      (*最短位移：最佳角度*)];
+   (*船速矢量分量*)
+   velBoatVec = boatSpeed*{Cos[currentAngle], Sin[currentAngle]};
+   velWaterVec = {waterSpeed, 0};
+   velTotalVec = velBoatVec + velWaterVec;
+   (*当前渡河时间*)
+   currentTime = 
+    If[velTotalVec[[2]] > 0.001, riverWidth/velTotalVec[[2]], 999];
+   (*当前漂流距离*)
+   currentDrift = 
+    If[velTotalVec[[2]] > 0.001, velTotalVec[[1]]*currentTime, 
+     velTotalVec[[1]]*10  (*无法过河的情况*)];
+   (*船的当前位置*)
+   boatPos = 
+    If[currentTime < 999, {velTotalVec[[1]]*tProgress*currentTime, 
+      velTotalVec[[2]]*tProgress*currentTime}, {velTotalVec[[1]]*
+       tProgress*10, 0}];
+   (*确保船在河内*)
+   If[boatPos[[2]] > riverWidth, boatPos = {currentDrift, riverWidth}];
+   If[boatPos[[2]] < 0, boatPos = {currentDrift*0.5, 0}];
+   (*轨迹点 (过去时刻)*)
+   boatPath = 
+    Table[If[
+      velTotalVec[[2]] > 0.001, {velTotalVec[[1]]*\[Tau], 
+       velTotalVec[[2]]*\[Tau]}, {velTotalVec[[1]]*\[Tau], 
+       0}], {\[Tau], 0, Min[tProgress*currentTime, currentTime], 
+      0.15}];
+   (*----v船<v水 时的辅助圆----*)circleCenter = {waterSpeed, 0};(*以水速矢量末端为圆心*)
+   circleRadius = boatSpeed;(*以船速为半径*)(*切点计算*)
+   tangentPoint = 
+    If[! canCrossDirectly, {waterSpeed - boatSpeed*Cos[tangentAngle], 
+      boatSpeed*Sin[tangentAngle]}, {0, 0}];
+   (*----绘制----*)
+   Graphics[{(*河流背景*){RGBColor[0.65, 0.85, 0.95], Opacity[0.4], 
+      Rectangle[{0, shoreBottom}, {250, shoreTop}]},(*河岸*){Brown, 
+      Thickness[0.015], 
+      Line[{{-20, shoreBottom}, {250, shoreBottom}}], 
+      Line[{{-20, shoreTop}, {250, shoreTop}}]},(*河岸标注*)
+     Text[Style["河岸", 14, Brown, Bold], {-10, shoreBottom - 8}], 
+     Text[Style["对岸", 14, Brown, Bold], {-10, 
+       shoreTop + 8}],(*河宽标注*){GrayLevel[0.3], Thickness[0.005], 
+      Dashed, Line[{{-10, shoreBottom}, {-10, shoreTop}}]}, 
+     Text[Style[Row[{"河宽 d = ", riverWidth, " m"}], 13, 
+       GrayLevel[0.3]], {-16, (shoreBottom + shoreTop)/2}, {0, 0}, {0,
+        1}],(*水流箭头*){RGBColor[0.2, 0.5, 1.0], Thickness[0.006], 
+      Table[Arrow[{{x, y}, {x + 12, y}}], {x, 30, 220, 40}, {y, 20, 
+        180, 40}]}, 
+     Text[Style[Row[{"水流 v水 = ", waterSpeed, " m/s"}], 14, 
+       RGBColor[0.2, 0.4, 0.9], Bold], {120, 
+       shoreTop + 15}],(*船的轨迹*){RGBColor[0.9, 0.3, 0.2], 
+      Thickness[0.008], Dashed, 
+      Line[boatPath]},(*船的位置*){RGBColor[0.9, 0.3, 0.2], 
+      Disk[boatPos, 4]}, {White, Disk[boatPos, 2.5]}, 
+     Text[Style["船", 13, RGBColor[0.9, 0.3, 0.2], Bold], 
+      boatPos + {6, 6}],(*起点标记*){Gray, Disk[{0, 0}, 3]}, 
+     Text[Style["起点", 12, Gray], {0, -10}],(*目的地标记*)
+     If[showDestination, 
+      Module[{dest}, 
+       dest = If[
+         mode == 2 && canCrossDirectly, {0, riverWidth},(*垂直过河*)
+         If[mode == 1, {driftMinTime, 
+           riverWidth},(*最短时间对应的到达点*){driftShortestDisp, 
+           riverWidth}  (*最短位移对应的到达点*)]];
+       {RGBColor[0.1, 0.7, 0.1], Disk[dest, 5]}, {White, 
+        Disk[dest, 3]}, 
+       Text[Style["到达", 13, RGBColor[0.1, 0.7, 0.1], Bold], 
+        dest + {8, 6}]]],(*----速度矢量图 (右上角)----*){White, Opacity[0.9], 
+      Rectangle[{145, 145}, {245, 215}], 
+      Rectangle[{145, 145}, {245, 215}]}, 
+     Text[Style["速度矢量图", 13, Bold, GrayLevel[0.2]], {195, 
+       208}],(*水速矢量*){RGBColor[0.2, 0.5, 1.0], Thickness[0.01], 
+      Arrowheads[0.08], 
+      Arrow[{{155, 160}, {155 + 30*waterSpeed, 160}}]}, 
+     Text[Style["v水", 12, 
+       RGBColor[0.2, 0.4, 0.9]], {155 + 15*waterSpeed, 
+       155}],(*船速矢量*){RGBColor[0.9, 0.3, 0.2], Thickness[0.01], 
+      Arrowheads[0.08], 
+      Arrow[{{155, 160}, {155 + 25*Cos[currentAngle], 
+         160 + 25*Sin[currentAngle]}}]}, 
+     Text[Style["v船", 12, 
+       RGBColor[0.9, 0.3, 0.2]], {155 + 20*Cos[currentAngle] + 5, 
+       160 + 20*Sin[currentAngle]}],(*合速度矢量*){Purple, 
+      Thickness[0.012], Arrowheads[0.08], 
+      Arrow[{{155, 160}, {155 + 25*velTotalVec[[1]], 
+         160 + 25*velTotalVec[[2]]}}]}, 
+     Text[Style["v合", 12, Purple], {155 + 20*velTotalVec[[1]] + 5, 
+       160 + 20*velTotalVec[[2]] + 5}],(*----v船<v水 时显示辅助圆----*)
+     If[mode == 2 && ! canCrossDirectly && 
+       showCircle, {{GrayLevel[0.6], Thickness[0.005], Dashed, 
+        Opacity[0.7], 
+        Circle[{155 + 25*waterSpeed, 160}, 25*boatSpeed]}, 
+       Text[Style["v船半径", 10, 
+         GrayLevel[0.5]], {155 + 25*waterSpeed + 13, 
+         160 + 13*boatSpeed}], {PointSize[0.03], Red, 
+        Point[{155 + 25*waterSpeed - 25*boatSpeed*Cos[tangentAngle], 
+          160 + 25*boatSpeed*Sin[tangentAngle]}]}, 
+       Text[Style["切点", 10, 
+         Red], {155 + 25*waterSpeed - 
+          25*boatSpeed*Cos[tangentAngle] + 8, 
+         160 + 25*boatSpeed*Sin[tangentAngle] + 8}]}],(*----信息面板----*)
+     Text[Style[
+       Framed[Column[{Style[If[mode == 1, "【最短时间渡河】", "【最短位移渡河】"], 15,
+            Bold, If[mode == 1, RGBColor[0.2, 0.5, 0.9], 
+            RGBColor[0.9, 0.4, 0.2]]], "", 
+          Row[{"船头角度: ", 
+            Style[Round[currentAngle*180/Pi, 1] <> "\[Degree]", 
+             Bold]}], 
+          Row[{"渡河时间: ", Style[NumberForm[currentTime, {3, 1}], Bold],
+             " s"}], 
+          Row[{"漂流距离: ", 
+            Style[NumberForm[currentDrift, {4, 1}], Bold], " m"}], 
+          Row[{"合位移: ", 
+            Style[NumberForm[
+              Sqrt[currentDrift^2 + riverWidth^2], {4, 1}], Bold], 
+            " m"}], "", 
+          If[mode == 1, 
+           Column[{Style["策略: 船头垂直河岸", 12, RGBColor[0.2, 0.5, 0.9]], 
+             Style["时间最短: t = d/v船", 12, Gray]}], 
+           If[canCrossDirectly, 
+            Column[{Style["v船 \[GreaterEqual] v水，可垂直过河", 12, 
+               RGBColor[0.1, 0.6, 0.1]], 
+              
+              Style["位移 = 河宽 (" <> ToString[riverWidth] <> " m)", 12, 
+               Gray]}], 
+            Column[{Style["v船 < v水，无法垂直过河", 12, 
+               RGBColor[0.9, 0.2, 0.2]], 
+              Style["合速度与圆相切时位移最短", 12, Gray], 
+              Style[Row[{"船头角: ", Round[bestAngleDeg, 1], 
+                 "\[Degree]"}], 12, Gray]}]]]}, Alignment -> Left, 
+         Spacings -> 0.3], 
+        Background -> Directive[White, Opacity[0.88]], 
+        FrameMargins -> 10, RoundingRadius -> 8], 14, 
+       FontFamily -> "Microsoft YaHei"], 
+      Scaled[{0.19, 0.78}]],(*实时船头方向指示*)
+     If[showArrow, {RGBColor[0.9, 0.3, 0.2], Thickness[0.008], 
+       Arrowheads[0.06], 
+       Arrow[{boatPos, 
+         boatPos + 20*{Cos[currentAngle], Sin[currentAngle]}}]}]}, 
+    PlotRange -> plotRange, ImageSize -> 700, AspectRatio -> 0.85, 
+    Background -> 
+     RGBColor[0.96, 0.96, 0.9]]],(* ===\[Equal]控制面板===\[Equal]*)
+  Style["\|01f6a3 小船渡河模型", Bold, 22], 
+  Delimiter,(*----模式选择----*){{mode, 1, "渡河模式"}, {1 -> "最短时间渡河", 
+    2 -> "最短位移渡河"}, ControlType -> RadioButtonBar, 
+   Appearance -> "Vertical"}, Delimiter,(*----参数调节----*)
+  Style["河流参数", Bold, 15], {{vWater, 1.5, "水流速度 v水 (m/s)"}, 0.3, 3.5, 
+   0.1, ControlType -> Slider, Appearance -> "Labeled"}, 
+  Style["小船参数", Bold, 15], {{vBoat, 2.0, "船速 v船 (m/s)"}, 0.5, 4.0, 
+   0.1, ControlType -> Slider, Appearance -> "Labeled"}, 
+  Delimiter,(*----时间/
+  进度----*){{tProgress, 0.5, "航行进度"}, 0.0, 1.0, 0.02, 
+   ControlType -> Animator, Appearance -> "Labeled", 
+   AnimationRunning -> False}, 
+  Delimiter,(*----显示选项----*){{showDestination, True, "显示到达点"}, {True, 
+    False}}, {{showArrow, True, "显示船头方向"}, {True, 
+    False}}, {{showCircle, True, "显示辅助圆 (v船<v水时)"}, {True, 
+    False}},(*----预设场景按钮----*)Style["快速预设", Bold, 14], 
+  Row[{Button["v船 > v水 (可垂直过河)", vBoat = 2.5; vWater = 1.2; mode = 2; 
+     tProgress = 0.3, ImageSize -> Automatic, 
+     Appearance -> "Palette"], 
+    Button["v船 < v水 (需辅助圆)", vBoat = 1.2; vWater = 2.5; mode = 2; 
+     tProgress = 0.3, ImageSize -> Automatic, 
+     Appearance -> "Palette"], 
+    Button["最短时间模式", vBoat = 2.0; vWater = 1.5; mode = 1; 
+     tProgress = 0.5, ImageSize -> Automatic, 
+     Appearance -> "Palette"]}], 
+  Row[{Button["平缓水流", vWater = 0.8; vBoat = 2.0; mode = 2; 
+     tProgress = 0.4, ImageSize -> Automatic, 
+     Appearance -> "Palette"], 
+    Button["急流", vWater = 3.0; vBoat = 1.5; mode = 2; tProgress = 0.3,
+      ImageSize -> Automatic, Appearance -> "Palette"], 
+    Button["重置", vWater = 1.5; vBoat = 2.0; mode = 1; tProgress = 0.5;
+     showDestination = True; showArrow = True; showCircle = True, 
+     ImageSize -> Automatic, Appearance -> "Palette"]}], 
+  TrackedSymbols :> {mode, vWater, vBoat, tProgress, showDestination, 
+    showArrow, showCircle}, ControlPlacement -> Left, Paneled -> True,
+   SaveDefinitions -> True]
