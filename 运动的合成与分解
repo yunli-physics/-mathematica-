@@ -1,0 +1,155 @@
+(*运动的合成与分解\[CenterDot]交互式可视化教学*)Manipulate[
+ Module[{(*分运动1：可调节的匀速/匀变速直线运动*)(*分运动2：可调节的匀速/匀变速直线运动*)v1, v2, a1, a2,
+    s1Vec, s2Vec, sTotal, v1Vec, v2Vec, vTotal, a1Vec, a2Vec, aTotal, 
+   motionType, plotRange = {{-3, 5}, {-2, 5}}, 
+   timeMax = 3.0},(*----分运动1 的速度和加速度----*)v1 = {v1x, v1y};
+  a1 = If[
+    motion1Type == 1, {0, 0}, {a1x, 
+     a1y}];(*匀速时加速度为0*)(*----分运动2 的速度和加速度----*)v2 = {v2x, v2y};
+  a2 = If[motion2Type == 1, {0, 0}, {a2x, a2y}];
+  (*----合运动参数----*)vTotal = v1 + v2;
+  aTotal = a1 + a2;
+  (*----各时刻的位移矢量 (相对于原点)----*)s1Vec = v1*t + 0.5*a1*t^2;
+  s2Vec = v2*t + 0.5*a2*t^2;
+  sTotal = s1Vec + s2Vec;
+  (*----判断合运动性质----*)
+  motionType = 
+   Which[(*两个匀速*)motion1Type == 1 && motion2Type == 1, 
+    "匀速直线运动",(*一个匀速一个匀变速*)(motion1Type == 1 && 
+       motion2Type == 2) || (motion1Type == 2 && motion2Type == 1), 
+    Module[{vConst, aVar}, 
+     If[motion1Type == 1, vConst = v1; aVar = a2, vConst = v2; 
+      aVar = a1];
+     If[Cross[vConst, aVar] == 0, "匀变速直线运动", "匀变速曲线运动"]],(*两个匀变速*)
+    motion1Type == 2 && motion2Type == 2, 
+    If[Cross[vTotal, aTotal] == 0, "匀变速直线运动", "匀变速曲线运动"]];
+  (*----轨迹点计算----*)
+  trajectoryPoints = 
+   Table[v1*\[Tau] + 0.5*a1*\[Tau]^2 + v2*\[Tau] + 
+     0.5*a2*\[Tau]^2, {\[Tau], 0, timeMax, 0.03}];
+  (*----绘制----*)
+  Graphics[{(*背景网格*){GrayLevel[0.88], Thin, 
+     Table[Line[{{x, -3}, {x, 6}}], {x, -3, 6, 1}], 
+     Table[Line[{{-3, y}, {6, y}}], {y, -3, 6, 1}]},(*坐标轴*){GrayLevel[
+      0.4], Thickness[0.004], Line[{{-3, 0}, {6, 0}}], 
+     Line[{{0, -3}, {0, 6}}]},(*----合运动轨迹 (虚线背景)----*){RGBColor[0.2, 
+      0.2, 0.7], Thickness[0.006], Opacity[0.3], Dashed, 
+     Line[trajectoryPoints]},(*----分运动1 的位移矢量 (橙色)----*){RGBColor[1.0,
+       0.55, 0.1], Thickness[0.01], Arrowheads[0.06], 
+     Arrow[{{0, 0}, s1Vec}]},(*----分运动2 的位移矢量 (绿色)----*){RGBColor[
+      0.15, 0.72, 0.15], Thickness[0.01], Arrowheads[0.06], 
+     Arrow[{{0, 0}, 
+       s2Vec}]},(*----合运动位移矢量 (蓝色)-由平行四边形法则构建----*){RGBColor[0.8, 0.1,
+       0.1], Thickness[0.012], Arrowheads[0.07], 
+     Arrow[{{0, 0}, sTotal}]},(*----平行四边形辅助线 (虚线)----*){GrayLevel[
+      0.55], Thickness[0.004], Dashed, Opacity[0.7], 
+     Line[{s1Vec, sTotal}], 
+     Line[{s2Vec, sTotal}]},(*----平行四边形顶点标记----*){PointSize[0.025], 
+     RGBColor[0.8, 0.1, 0.1], Point[sTotal]}, {PointSize[0.02], 
+     RGBColor[1.0, 0.55, 0.1], Point[s1Vec]}, {PointSize[0.02], 
+     RGBColor[0.15, 0.72, 0.15], Point[s2Vec]},(*----标注文字----*)
+    If[showLabels, {Text[
+       Style["分运动1", 13, RGBColor[1.0, 0.55, 0.1], Bold], 
+       s1Vec + {0.2, 0.25}], 
+      Text[Style["分运动2", 13, RGBColor[0.15, 0.72, 0.15], Bold], 
+       s2Vec + {0.2, 0.25}], 
+      Text[Style["合运动 (实际运动)", 14, RGBColor[0.8, 0.1, 0.1], Bold], 
+       sTotal + {0.25, 0.3}], 
+      Text[Style["平行四边形定则", 12, 
+        GrayLevel[0.35]], (s1Vec + s2Vec)/
+         2 + {0.3, -0.2}]}],(*----信息面板----*)
+    Text[Style[
+      Framed[Column[{Row[{"⏱ 时间 t = ", 
+           Style[NumberForm[t, {2, 1}], Bold], " s  (等时性)"}], 
+         Row[{"\|01f4d0 合运动性质: ", 
+           Style[motionType, Bold, 
+            If[StringContainsQ[motionType, "曲线"], RGBColor[1, 0.3, 0],
+              RGBColor[0.2, 0.5, 0.8]]]}], "", 
+         Style["分运动参数:", Bold, 12], 
+         Row[{"  分运动1: ", 
+           If[motion1Type == 1, Style["匀速", RGBColor[1, 0.55, 0.1]], 
+            Style["匀变速", RGBColor[1, 0.55, 0.1]]], "  v₁=(", v1x, ",",
+            v1y, ")", 
+           If[motion1Type == 2, Row[{"  a₁=(", a1x, ",", a1y, ")"}], 
+            ""]}], Row[{"  分运动2: ", 
+           If[motion2Type == 1, 
+            Style["匀速", RGBColor[0.15, 0.72, 0.15]], 
+            Style["匀变速", RGBColor[0.15, 0.72, 0.15]]], "  v₂=(", v2x, 
+           ",", v2y, ")", 
+           If[motion2Type == 2, Row[{"  a₂=(", a2x, ",", a2y, ")"}], 
+            ""]}], "", Style["合运动参数:", Bold, 12], 
+         Row[{"  v合=(", NumberForm[vTotal[[1]], {2, 1}], ",", 
+           NumberForm[vTotal[[2]], {2, 1}], ")"}], 
+         Row[{"  a合=(", NumberForm[aTotal[[1]], {2, 1}], ",", 
+           NumberForm[aTotal[[2]], {2, 1}], ")"}], 
+         If[StringContainsQ[motionType, "曲线"], 
+          Style["\|01f4a1 合力(加速度)与速度不共线 \[RightArrow] 曲线运动", 11, 
+           RGBColor[0.9, 0.3, 0.1]], ""]}, Alignment -> Left, 
+        Spacings -> 0.3], 
+       Background -> Directive[White, Opacity[0.85]], 
+       FrameMargins -> 10, RoundingRadius -> 8], 14, 
+      FontFamily -> "Microsoft YaHei"], Scaled[{0.78, 0.78}]]}, 
+   PlotRange -> plotRange, ImageSize -> 650, AspectRatio -> 0.9, 
+   Frame -> True, FrameTicks -> Automatic, 
+   FrameStyle -> GrayLevel[0.5], GridLines -> Automatic, 
+   GridLinesStyle -> LightGray]],(* ===\[Equal]控制面板===\[Equal]*)
+ Style["运动的合成与分解", Bold, 22], Delimiter,(*----分运动1 设置----*)
+ Style["分运动1 (橙色)", Bold, 15, 
+  RGBColor[1.0, 0.45, 0.1]], {{motion1Type, 1, "运动类型"}, {1 -> "匀速直线", 
+   2 -> "匀变速直线"}, ControlType -> RadioButtonBar, 
+  Appearance -> "Vertical"}, {{v1x, 1.2, "初速度 v₁x (m/s)"}, -2, 2, 0.1,
+   ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{v1y, 0.6, "初速度 v₁y (m/s)"}, -2, 2, 0.1, 
+  ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{a1x, 0.0, "加速度 a₁x (m/s\.b2)"}, -1.5, 
+  1.5, 0.1, ControlType -> Slider, Appearance -> "Labeled", 
+  Enabled -> Dynamic[motion1Type == 2]}, {{a1y, 0.3, 
+   "加速度 a₁y (m/s\.b2)"}, -1.5, 1.5, 0.1, ControlType -> Slider, 
+  Appearance -> "Labeled", 
+  Enabled -> Dynamic[motion1Type == 2]}, Delimiter,(*----分运动2 设置----*)
+ Style["分运动2 (绿色)", Bold, 15, 
+  RGBColor[0.15, 0.72, 0.15]], {{motion2Type, 2, 
+   "运动类型"}, {1 -> "匀速直线", 2 -> "匀变速直线"}, 
+  ControlType -> RadioButtonBar, 
+  Appearance -> "Vertical"}, {{v2x, 0.3, "初速度 v₂x (m/s)"}, -2, 2, 0.1,
+   ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{v2y, 1.0, "初速度 v₂y (m/s)"}, -2, 2, 0.1, 
+  ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{a2x, 0.0, "加速度 a₂x (m/s\.b2)"}, -1.5, 
+  1.5, 0.1, ControlType -> Slider, Appearance -> "Labeled", 
+  Enabled -> Dynamic[motion2Type == 2]}, {{a2y, -0.4, 
+   "加速度 a₂y (m/s\.b2)"}, -1.5, 1.5, 0.1, ControlType -> Slider, 
+  Appearance -> "Labeled", 
+  Enabled -> 
+   Dynamic[motion2Type == 2]}, Delimiter,(*----时间与显示----*){{t, 1.5, 
+   "运动时间 t (s)"}, 0, 3.0, 0.05, ControlType -> Animator, 
+  Appearance -> "Labeled", 
+  AnimationRunning -> False}, {{showLabels, True, "显示标注"}, {True, 
+   False}},(*----预设场景按钮----*)Style["快速预设场景", Bold, 14], 
+ Row[{Button["平抛 (水平匀速+竖直自由落体)", v1x = 1.5; v1y = 0; a1x = 0; a1y = 0;
+     motion1Type = 1;
+    v2x = 0; v2y = 0; a2x = 0; a2y = -0.8; motion2Type = 2;
+    t = 1.0, ImageSize -> Automatic, Appearance -> "Palette"], 
+   Button["斜抛 (匀速+重力)", v1x = 1.0; v1y = 1.5; a1x = 0; a1y = 0; 
+    motion1Type = 1;
+    v2x = 0; v2y = 0; a2x = 0; a2y = -0.7; motion2Type = 2;
+    t = 1.2, ImageSize -> Automatic, Appearance -> "Palette"], 
+   Button["两匀速 (匀速直线)", v1x = 1.0; v1y = 0.5; a1x = 0; a1y = 0; 
+    motion1Type = 1;
+    v2x = 0.8; v2y = 1.0; a2x = 0; a2y = 0; motion2Type = 2;
+    t = 2.0, ImageSize -> Automatic, Appearance -> "Palette"]}], 
+ Row[{Button["两匀变速直线 (共线)", v1x = 1.0; v1y = 0; a1x = 0.3; a1y = 0; 
+    motion1Type = 2;
+    v2x = 0.5; v2y = 0; a2x = 0.5; a2y = 0; motion2Type = 2;
+    t = 2.0, ImageSize -> Automatic, Appearance -> "Palette"], 
+   Button["两匀变速曲线 (不共线)", v1x = 1.0; v1y = 0.3; a1x = 0; a1y = 0.4; 
+    motion1Type = 2;
+    v2x = 0.5; v2y = 0.8; a2x = 0.3; a2y = 0; motion2Type = 2;
+    t = 1.5, ImageSize -> Automatic, Appearance -> "Palette"], 
+   Button["重置默认", v1x = 1.2; v1y = 0.6; a1x = 0; a1y = 0.3; 
+    motion1Type = 1;
+    v2x = 0.3; v2y = 1.0; a2x = 0; a2y = -0.4; motion2Type = 2;
+    t = 1.5, ImageSize -> Automatic, Appearance -> "Palette"]}], 
+ TrackedSymbols :> {t, v1x, v1y, v2x, v2y, a1x, a1y, a2x, a2y, 
+   motion1Type, motion2Type, showLabels}, ControlPlacement -> Left, 
+ Paneled -> True, SaveDefinitions -> True]
