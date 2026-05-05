@@ -1,0 +1,411 @@
+(* 实验：探究平抛运动的特点 · 虚拟仿真实验 *)
+
+Manipulate[
+ Module[{
+   (* 物理常量与实验参数 *)
+   g = 9.8,
+   v0 = initialSpeed,
+   height = dropHeight,
+   timeMax = Sqrt[2*height/g],
+   
+   (* 实验器材位置 *)
+   chuteStart = {-1.2, 0.35},
+   chuteEnd = {0, 0},
+   ballRadius = 0.06,
+   
+   (* 频闪数据 *)
+   T = flashInterval,
+   flashTimes,
+   idealPoints,
+   measuredPoints,
+   
+   (* 数据处理 *)
+   horizontalDisplacements,
+   verticalDisplacements,
+   deltaYvalues,
+   calculatedV0,
+   calculatedG,
+   
+   (* 验证结果 *)
+   horizontalUniform,
+   verticalFreeFall,
+   
+   (* 坐标系 *)
+   plotRange = {{-0.5, v0*timeMax + 0.8}, {-0.3, height + 0.3}}
+   },
+  
+  (* ============ 理论频闪点计算 ============ *)
+  flashTimes = Table[i*T, {i, 0, Floor[timeMax/T]}];
+  idealPoints = Table[
+    {v0*t, 0.5*g*t^2},
+    {t, flashTimes}
+  ];
+  
+  (* 添加测量误差 *)
+  measuredPoints = If[includeError,
+    Table[
+      {idealPoints[[i, 1]] + errorX*(2*RandomReal[] - 1),
+       idealPoints[[i, 2]] + errorY*(2*RandomReal[] - 1)},
+      {i, Length[idealPoints]}
+    ],
+    idealPoints
+  ];
+  
+  (* ============ 数据处理 ============ *)
+  (* 水平方向数据 *)
+  horizontalDisplacements = Differences[measuredPoints[[All, 1]]];
+  horizontalUniform = If[Length[horizontalDisplacements] >= 2,
+    StandardDeviation[horizontalDisplacements] < 0.06*Mean[horizontalDisplacements],
+    True
+  ];
+  
+  (* 竖直方向数据 *)
+  verticalDisplacements = Differences[measuredPoints[[All, 2]]];
+  deltaYvalues = Differences[verticalDisplacements]; (* Δy = y_{n+1} - y_n 的差值 *)
+  
+  verticalFreeFall = If[Length[deltaYvalues] >= 2,
+    Module[{meanDeltaY, expectedDeltaY},
+      meanDeltaY = Mean[deltaYvalues];
+      expectedDeltaY = g*T^2;
+      Abs[meanDeltaY - expectedDeltaY] < 0.2*expectedDeltaY
+    ],
+    True
+  ];
+  
+  (* 计算初速度 *)
+  calculatedV0 = If[Length[horizontalDisplacements] >= 1,
+    Mean[horizontalDisplacements]/T,
+    0
+  ];
+  
+  (* 计算重力加速度 *)
+  calculatedG = If[Length[deltaYvalues] >= 2,
+    Mean[deltaYvalues]/T^2,
+    0
+  ];
+  
+  (* ============ 绘制实验场景 ============ *)
+  Graphics[{
+    (* 背景 - 实验台 *)
+    {RGBColor[0.95, 0.93, 0.88], Rectangle[{-1.5, -0.5}, {plotRange[[2, 2]] + 0.5, plotRange[[2, 2]] + 0.3}]},
+    
+    (* 实验桌面 *)
+    {RGBColor[0.7, 0.55, 0.4], Rectangle[{-1.5, -0.08}, {plotRange[[2, 2]] + 0.5, 0}]},
+    
+    (* 白纸/木板 *)
+    {RGBColor[0.98, 0.98, 0.96], 
+     Rectangle[{0, 0}, {v0*timeMax + 0.3, height + 0.15}]},
+    Text[Style["白纸 / 木板", 11, GrayLevel[0.5], Italic],
+     {v0*timeMax/2, height + 0.08}],
+    
+    (* 坐标轴 *)
+    {Black, Thickness[0.005],
+     Arrow[{{-0.15, 0}, {v0*timeMax + 0.6, 0}}],
+     Arrow[{{0, -0.15}, {0, height + 0.25}}]
+    },
+    Text[Style["x (水平方向)", 13, Bold, Darker[Blue]], 
+     {v0*timeMax/2, -0.18}],
+    Text[Style["y (竖直向下)", 13, Bold, Darker[Blue]], 
+     {-0.22, height/2}, {0, 0}, {0, 1}],
+    
+    (* 原点标记 *)
+    {Red, Disk[{0, 0}, 0.04]},
+    Text[Style["O (球心投影)", 12, Bold, Red], {0.15, -0.12}],
+    
+    (* 铅垂线 *)
+    {GrayLevel[0.3], Thickness[0.004], Dashed,
+     Line[{{0, -0.2}, {0, height + 0.2}}]},
+    Text[Style["铅垂线", 11, GrayLevel[0.4]], {-0.15, height/2}, {0, 0}, {0, 1}],
+    
+    (* ============ 斜槽 ============ *)
+    (* 斜槽主体 *)
+    {GrayLevel[0.5], Thickness[0.03],
+     BSplineCurve[{{chuteStart[[1]], chuteStart[[2]]},
+       {-0.6, 0.12}, {-0.25, 0.02}, chuteEnd}]},
+    
+    (* 斜槽末端水平段 *)
+    {GrayLevel[0.45], Thickness[0.025],
+     Line[{{-0.4, 0.02}, {0, 0.0}}]},
+    
+    (* 水平仪标志 *)
+    {RGBColor[0.2, 0.7, 0.3], Rectangle[{-0.3, 0.06}, {-0.1, 0.1}]},
+    Text[Style["水平 ✓", 10, Darker[Green], Bold], {-0.2, 0.16}],
+    
+    (* 释放位置标记 *)
+    If[showReleaseMark,
+      {{RGBColor[0.9, 0.3, 0.2], PointSize[0.035], 
+        Point[releasePosition]},
+       Text[Style["释放点", 11, RGBColor[0.9, 0.3, 0.2], Bold],
+        releasePosition + {-0.2, 0.08}]}
+    ],
+    
+    (* ============ 小球轨迹 ============ *)
+    (* 理论抛物线 *)
+    {RGBColor[0.2, 0.5, 0.9], Thickness[0.005], Opacity[0.45], Dashed,
+     Line[Table[{v0*t, 0.5*g*t^2}, {t, 0, timeMax, 0.005}]]},
+    Text[Style["理论轨迹", 10, RGBColor[0.2, 0.5, 0.9], Italic],
+     {v0*timeMax*0.6, 0.5*g*(timeMax*0.6)^2 + 0.1}],
+    
+    (* 频闪点 - 实测数据 *)
+    {RGBColor[0.9, 0.2, 0.15], PointSize[0.035],
+     Point[measuredPoints]},
+    
+    (* 频闪点误差连线 *)
+    If[includeError && showErrorBars,
+      Table[
+        {GrayLevel[0.5], Thickness[0.003], Dotted,
+         Line[{idealPoints[[i]], measuredPoints[[i]]}]},
+        {i, Length[measuredPoints]}
+      ]
+    ],
+    
+    (* 小球当前位置 *)
+    If[currentBallIndex > 0 && currentBallIndex <= Length[measuredPoints],
+      {RGBColor[0.9, 0.2, 0.15], Disk[measuredPoints[[currentBallIndex]], ballRadius],
+       White, Disk[measuredPoints[[currentBallIndex]], ballRadius*0.5]}
+    ],
+    
+    (* 频闪点序号 *)
+    If[showPointNumbers,
+      Table[
+        Text[Style[i-1, 9, Bold, RGBColor[0.8, 0.2, 0.2]],
+         measuredPoints[[i]] + {0.06, 0.06}],
+        {i, Min[Length[measuredPoints], 15]}
+      ]
+    ],
+    
+    (* ============ 水平位移验证 ============ *)
+    If[showHorizontalAnalysis && Length[horizontalDisplacements] >= 1,
+      {
+        (* 水平投影虚线 *)
+        {RGBColor[0.2, 0.6, 0.2], Thickness[0.004], Dashed, Opacity[0.5],
+         Table[Line[{{p[[1]], 0}, p}], {p, measuredPoints}]},
+        
+        (* 水平位移标注 *)
+        Table[
+          Module[{x1, x2, midX, gap},
+            x1 = measuredPoints[[i, 1]];
+            x2 = measuredPoints[[i+1, 1]];
+            midX = (x1 + x2)/2;
+            gap = horizontalDisplacements[[i]];
+            {RGBColor[0.2, 0.6, 0.2], Thickness[0.006],
+             Arrow[{{x1, -0.06 - 0.02*i}, {x2, -0.06 - 0.02*i}}],
+             Text[Style[NumberForm[gap, {2, 3}], 9, RGBColor[0.2, 0.6, 0.2]],
+              {midX, -0.12 - 0.02*i}]}
+          ],
+          {i, Min[Length[horizontalDisplacements], 10]}
+        ]
+      }
+    ],
+    
+    (* ============ 竖直位移验证 ============ *)
+    If[showVerticalAnalysis && Length[verticalDisplacements] >= 1,
+      {
+        (* 竖直投影虚线 *)
+        {RGBColor[0.6, 0.2, 0.6], Thickness[0.004], Dashed, Opacity[0.5],
+         Table[Line[{{0, p[[2]]}, p}], {p, measuredPoints}]},
+        
+        (* 竖直位移标注 *)
+        Table[
+          Module[{y1, y2, midY, gap},
+            y1 = measuredPoints[[i, 2]];
+            y2 = measuredPoints[[i+1, 2]];
+            midY = (y1 + y2)/2;
+            gap = verticalDisplacements[[i]];
+            {RGBColor[0.6, 0.2, 0.6], Thickness[0.006],
+             Arrow[{{-0.06 - 0.02*i, y1}, {-0.06 - 0.02*i, y2}}],
+             Text[Style[NumberForm[gap, {2, 3}], 9, RGBColor[0.6, 0.2, 0.6]],
+              {-0.14 - 0.03*i, midY}, {1, 0}]}
+          ],
+          {i, Min[Length[verticalDisplacements], 10]}
+        ]
+      }
+    ],
+    
+    (* ============ 实验器材标签 ============ *)
+    If[showEquipmentLabels,
+      {
+        Text[Style["斜槽", 12, GrayLevel[0.3]], {-0.6, 0.25}],
+        Text[Style["小球", 11, GrayLevel[0.3]], {-0.3, 0.3}],
+        Text[Style["铅垂线", 11, GrayLevel[0.3]], {-0.2, height*0.7}, {0, 0}, {0, 1}],
+        Text[Style["刻度尺", 11, GrayLevel[0.3]], {v0*timeMax + 0.15, height/2}, {0, 0}, {0, 1}]
+      }
+    ],
+    
+    (* ============ 数据处理结果面板 ============ *)
+    Text[Style[
+      Framed[
+       Column[{
+         Style["📊 实验数据处理报告", 15, Bold, Darker[Blue]],
+         "",
+         Style["▶ 水平方向分析:", 13, Bold],
+         Grid[{
+           {"相邻位移范围:", 
+            If[Length[horizontalDisplacements] >= 2,
+              Style[NumberForm[Min[horizontalDisplacements], {2, 3}] <> 
+                " ~ " <> NumberForm[Max[horizontalDisplacements], {2, 3}] <> " m",
+                Bold],
+              "数据不足"]},
+           {"位移标准差:", 
+            If[Length[horizontalDisplacements] >= 2,
+              Style[NumberForm[StandardDeviation[horizontalDisplacements], {2, 4}] <> " m",
+                If[horizontalUniform, Darker[Green], Red]],
+              ""]},
+           {"验证结论:", 
+            Style[If[horizontalUniform, "✓ 水平方向为匀速直线运动", 
+              "✗ 水平位移不均匀，需检查操作"], 
+              If[horizontalUniform, Darker[Green], Red], Bold]}
+           }, Alignment -> Left, Spacings -> {1, 0.3}],
+         
+         "",
+         Style["▶ 竖直方向分析:", 13, Bold],
+         Grid[{
+           {"Δy = y_{n+2} - 2y_{n+1} + y_n:", 
+            If[Length[deltaYvalues] >= 1,
+              Style[NumberForm[Mean[deltaYvalues], {2, 4}] <> " m", Bold],
+              "数据不足"]},
+           {"期望值 gT² = " <> NumberForm[g*T^2, {2, 4}] <> " m:", 
+            Style["(逐差法)", Gray]},
+           {"验证结论:", 
+            Style[If[verticalFreeFall, "✓ 竖直方向为自由落体运动", 
+              "✗ 竖直位移不符合自由落体规律"], 
+              If[verticalFreeFall, Darker[Green], Red], Bold]}
+           }, Alignment -> Left, Spacings -> {1, 0.3}],
+         
+         "",
+         Style["▶ 计算结果:", 13, Bold],
+         Grid[{
+           {"初速度 v₀ = Δx̅ / T:", 
+            Style["v₀ = " <> NumberForm[calculatedV0, {3, 2}] <> " m/s", 
+              Bold, RGBColor[0.2, 0.4, 0.8]]},
+           {"实际初速度:", 
+            Style[NumberForm[v0, {3, 2}] <> " m/s", Gray]},
+           {"相对误差:", 
+            Style[NumberForm[Abs[calculatedV0 - v0]/Max[v0, 0.01]*100, {2, 1}] <> "%",
+              If[Abs[calculatedV0 - v0]/Max[v0, 0.01] < 0.05, Darker[Green], 
+                RGBColor[0.9, 0.3, 0.2]], Bold]},
+           {"计算重力加速度:", 
+            Style["g = " <> NumberForm[calculatedG, {3, 2}] <> " m/s²", 
+              Bold, RGBColor[0.3, 0.3, 0.7]]}
+           }, Alignment -> Left, Spacings -> {1, 0.3}],
+         
+         "",
+         If[includeError,
+           Style["⚠ 注意：已添加随机测量误差", 11, RGBColor[0.9, 0.3, 0.2]],
+           Style["✓ 理想实验数据（无误差）", 11, Darker[Green]]]
+         }, Alignment -> Left, Spacings -> {0, 0.3}],
+       Background -> Directive[White, Opacity[0.92]],
+       FrameMargins -> 12, RoundingRadius -> 10,
+       FrameStyle -> GrayLevel[0.6]],
+      13, FontFamily -> "Microsoft YaHei"],
+     Scaled[{0.78, 0.68}]]
+    
+    }, PlotRange -> plotRange, ImageSize -> 800,
+   AspectRatio -> 0.9, Background -> RGBColor[0.95, 0.93, 0.88]]
+  ],
+  
+  (* ================================================================ *)
+  (* ======================== 控制面板 ============================== *)
+  (* ================================================================ *)
+  
+  Style["🔬 实验：探究平抛运动的特点", Bold, 24, Darker[Blue]],
+  Delimiter,
+  
+  (* ---- 实验操作区 ---- *)
+  Style["⚙ 实验操作参数", Bold, 16, Darker[Blue]],
+  
+  {{initialSpeed, 1.8, "平抛初速度 v₀ (m/s)"}, 0.8, 3.2, 0.05,
+   ControlType -> Slider, Appearance -> "Labeled"},
+  {{dropHeight, 0.85, "下落高度 h (m)"}, 0.3, 1.5, 0.05,
+   ControlType -> Slider, Appearance -> "Labeled"},
+  {{flashInterval, 0.08, "频闪时间间隔 T (s)"}, 0.04, 0.2, 0.01,
+   ControlType -> Slider, Appearance -> "Labeled"},
+  
+  Delimiter,
+  
+  (* ---- 释放位置 ---- *)
+  Style["📍 释放位置标记", Bold, 14],
+  {{showReleaseMark, True, "显示释放点"}, {True, False}},
+  {{releasePosition, {-0.8, 0.25}, "释放点坐标"}, {-1.2, 0.15}, {-0.3, 0.35},
+   ControlType -> Slider2D, Appearance -> "Labeled"},
+  
+  Delimiter,
+  
+  (* ---- 数据采集选项 ---- *)
+  Style["📷 数据采集与显示", Bold, 14],
+  {{includeError, False, "添加测量误差"}, {True, False}},
+  {{errorX, 0.01, "水平误差幅度 (m)"}, 0.002, 0.04, 0.002,
+   ControlType -> Slider, Appearance -> "Labeled", Enabled -> Dynamic[includeError]},
+  {{errorY, 0.008, "竖直误差幅度 (m)"}, 0.002, 0.04, 0.002,
+   ControlType -> Slider, Appearance -> "Labeled", Enabled -> Dynamic[includeError]},
+  
+  Delimiter,
+  
+  (* ---- 显示选项 ---- *)
+  Style["👁 显示选项", Bold, 14],
+  {{showHorizontalAnalysis, True, "水平位移分析"}, {True, False}},
+  {{showVerticalAnalysis, True, "竖直位移分析"}, {True, False}},
+  {{showPointNumbers, False, "显示频闪点序号"}, {True, False}},
+  {{showErrorBars, True, "显示误差连线"}, {True, False}},
+  {{showEquipmentLabels, True, "显示器材标签"}, {True, False}},
+  {{currentBallIndex, 0, "高亮小球位置 (0=无)"}, 0, 20, 1,
+   ControlType -> Slider, Appearance -> "Labeled"},
+  
+  Delimiter,
+  
+  (* ---- 快速预设 ---- *)
+  Style("⚡ 快速预设场景", Bold, 16),
+  Row[{
+    Button["标准实验",
+      initialSpeed = 1.8; dropHeight = 0.85; flashInterval = 0.08;
+      includeError = False; showHorizontalAnalysis = True; 
+      showVerticalAnalysis = True; currentBallIndex = 0,
+      ImageSize -> Automatic, Appearance -> "Palette"],
+    Button["带误差实验",
+      initialSpeed = 1.8; dropHeight = 0.85; flashInterval = 0.08;
+      includeError = True; errorX = 0.012; errorY = 0.01,
+      ImageSize -> Automatic, Appearance -> "Palette"]
+    }],
+  Row[{
+    Button["快速平抛",
+      initialSpeed = 3.0; dropHeight = 0.6; flashInterval = 0.06;
+      includeError = False,
+      ImageSize -> Automatic, Appearance -> "Palette"],
+    Button["慢速平抛",
+      initialSpeed = 1.0; dropHeight = 1.2; flashInterval = 0.12;
+      includeError = False,
+      ImageSize -> Automatic, Appearance -> "Palette"]
+    }],
+  Row[{
+    Button["大采样间隔",
+      initialSpeed = 2.0; dropHeight = 1.0; flashInterval = 0.15;
+      includeError = False,
+      ImageSize -> Automatic, Appearance -> "Palette"],
+    Button["重置默认",
+      initialSpeed = 1.8; dropHeight = 0.85; flashInterval = 0.08;
+      includeError = False; showHorizontalAnalysis = True;
+      showVerticalAnalysis = True; showReleaseMark = True;
+      showPointNumbers = False; showErrorBars = True;
+      showEquipmentLabels = True; currentBallIndex = 0,
+      ImageSize -> Automatic, Appearance -> "Palette"]
+    }],
+  
+  (* ---- 错误操作警告 ---- *)
+  Dynamic[
+    If[!includeError && Abs[initialSpeed - 1.8] < 0.01 && dropHeight > 1.3,
+      Panel[Style["⚠ 提示：高度较大时建议增加采样频率（减小T）", 
+        12, RGBColor[0.9, 0.3, 0.2]], 
+        Background -> RGBColor[1, 0.95, 0.95], ImageSize -> {200, 40}],
+      ""
+    ]
+  ],
+  
+  TrackedSymbols :> {initialSpeed, dropHeight, flashInterval, includeError,
+    errorX, errorY, showHorizontalAnalysis, showVerticalAnalysis,
+    showPointNumbers, showErrorBars, showEquipmentLabels, 
+    showReleaseMark, releasePosition, currentBallIndex},
+  
+  ControlPlacement -> Left,
+  Paneled -> True,
+  SaveDefinitions -> True
+]
