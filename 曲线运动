@@ -1,0 +1,115 @@
+(*曲线运动核心规律\[CenterDot]交互式可视化教学*)Manipulate[
+ Module[{points, tangents, forceArrows, velArrows, 
+   curveColor = RGBColor[0.2, 0.6, 1.0], 
+   forceColor = RGBColor[1.0, 0.25, 0.3], 
+   velColor = RGBColor[0.1, 0.8, 0.3], 
+   plotRange = {{-2.5, 2.5}, {-2.5, 2.5}}},(*生成曲线上的点*)
+  points = Table[{curveX[t], curveY[t]}, {t, tStart, tEnd, 0.02}];
+  (*当前展示点的位置*)currentPoint = {curveX[tShow], curveY[tShow]};
+  (*计算速度方向 (切线方向) 导数*)dxdt = Derivative[1][curveX][tShow];
+  dydt = Derivative[1][curveY][tShow];
+  speedNorm = Sqrt[dxdt^2 + dydt^2];
+  (*速度单位向量*)
+  velUnit = If[speedNorm > 0.001, {dxdt, dydt}/speedNorm, {1, 0}];
+  (*合力方向-用户可调节*)forceDir = {Cos[forceAngle], Sin[forceAngle]};
+  (*判断是否曲线运动:合力与速度不共线*)
+  crossProduct = 
+   velUnit[[1]]*forceDir[[2]] - velUnit[[2]]*forceDir[[1]];
+  isCurved = Abs[crossProduct] > 0.05;
+  (*轨迹弯曲方向判断-合力指向凹侧*)(*用叉积符号判断合力在速度的哪一侧*)
+  bendSide = If[crossProduct > 0, "左", "右"];
+  Graphics[{(*背景网格*){GrayLevel[0.85], Thin, 
+     Table[Line[{{x, -3}, {x, 3}}], {x, -3, 3, 0.5}], 
+     Table[Line[{{-3, y}, {3, y}}], {y, -3, 3, 
+       0.5}]},(*坐标轴*){GrayLevel[0.4], Thickness[0.003], 
+     Line[{{-3, 0}, {3, 0}}], 
+     Line[{{0, -3}, {0, 3}}]},(*运动轨迹-虚线显示完整曲线*){curveColor, 
+     Thickness[0.008], Opacity[0.35], Dashed, 
+     Line[Table[{curveX[t], curveY[t]}, {t, tStart, tEnd, 
+        0.05}]]},(*已走过的轨迹-实线*){curveColor, Thickness[0.01], 
+     Opacity[0.9], 
+     Line[Table[{curveX[t], curveY[t]}, {t, tStart, tShow, 
+        0.02}]]},(*当前位置点*){curveColor, PointSize[0.035], 
+     Point[currentPoint]}, {White, PointSize[0.02], 
+     Point[currentPoint]},(*速度方向箭头-切线方向*){velColor, Thickness[0.012], 
+     Arrowheads[0.08], 
+     Arrow[{currentPoint, 
+       currentPoint + velUnit*arrowScale}]},(*合力方向箭头*){forceColor, 
+     Thickness[0.012], Arrowheads[0.08], 
+     Arrow[{currentPoint, 
+       currentPoint + forceDir*arrowScale}]},(*凹侧指示-标注合力指向轨迹弯曲的一侧*)
+    If[isCurved && 
+      showAnnotations, {Text[
+       Style["凹侧", 16, forceColor, Bold, 
+        Background -> Directive[White, Opacity[0.7]]], 
+       currentPoint + forceDir*0.75, Background -> None]}],(*标注文字*)
+    If[showAnnotations, {Text[Style["速度方向 (切线)", 14, velColor, Bold], 
+       currentPoint + velUnit*(arrowScale + 0.5)], 
+      Text[Style["合力方向", 14, forceColor, Bold], 
+       currentPoint + forceDir*(arrowScale + 0.5)], 
+      Text[Style["当前位置", 13, curveColor, Bold], 
+       currentPoint + {0.25, 0.25}]}],(*夹角指示弧线*)
+    If[showAnnotations && speedNorm > 0.001, 
+     With[{arcRadius = 0.4}, 
+      Module[{startAngle = ArcTan @@ velUnit, 
+        endAngle = ArcTan @@ forceDir, angleDiff}, 
+       angleDiff = Mod[endAngle - startAngle, 2*Pi];
+       If[angleDiff > Pi, angleDiff = angleDiff - 2*Pi];
+       {Opacity[0.5], GrayLevel[0.3], Thickness[0.005], 
+        Circle[currentPoint, 
+         arcRadius, {startAngle, startAngle + angleDiff}], 
+        Text[Style[Round[Abs[angleDiff]*180/Pi, 1] <> "\[Degree]", 12,
+           Darker[Gray], Bold], 
+         currentPoint + 
+          1.5*arcRadius*{Cos[startAngle + angleDiff/2], 
+            Sin[startAngle + angleDiff/2]}]}]]],(*运动性质判断显示*)
+    If[showAnnotations, 
+     Text[Style[
+       Column[{Row[{"运动类型: ", 
+           If[isCurved, Style["曲线运动", Bold, RGBColor[1, 0.4, 0]], 
+            Style["直线运动 (合力与速度共线)", Bold, Gray]]}], 
+         Row[{"速度方向时刻变化: ", 
+           If[isCurved, Style["是 \[Checkmark]", Darker[Green]], 
+            Style["否", Gray]]}], 
+         Row[{"轨迹弯曲方向: ", 
+           If[isCurved, 
+            Style["合力指向" <> bendSide <> "侧 (凹侧)", forceColor], 
+            Style["无弯曲", Gray]]}], 
+         Row[{"匀变速可能: ", Style["可能 (若合力恒定)", Darker[Orange]]}], 
+         If[! isCurved && speedNorm > 0.001, 
+          Row[{"注意: ", 
+            Style["变速直线运动 \[NotEqual] 曲线运动", 
+             RGBColor[0.8, 0.2, 0.2]]}], ""]}, Alignment -> Left, 
+        Spacings -> 0.4], 14, FontFamily -> "Microsoft YaHei"], 
+      Scaled[{0.78, 0.85}], 
+      Background -> Directive[White, Opacity[0.75]], 
+      FrameMargins -> 8, RoundingRadius -> 6]]}, 
+   PlotRange -> plotRange, ImageSize -> 600, AspectRatio -> 1, 
+   Frame -> True, FrameTicks -> Automatic, 
+   FrameStyle -> GrayLevel[0.5], GridLines -> Automatic, 
+   GridLinesStyle -> LightGray]],(*控制面板*)
+ Style["曲线运动核心规律", Bold, 
+  20], Delimiter,(*曲线类型选择*){{curveType, 1, 
+   "轨迹类型"}, {1 -> "摆线 (匀变速曲线)", 2 -> "抛物线 (平抛类)", 3 -> "正弦曲线", 
+   4 -> "圆弧"}, ControlType -> SetterBar, 
+  Appearance -> "Palette"}, Delimiter,(*时间滑块-沿曲线运动的位置*){{tShow, 0.5, 
+   "运动位置 (t)"}, 0.01, 3.99, 0.01, ControlType -> Animator, 
+  Appearance -> "Labeled", 
+  AnimationRunning -> False}, Delimiter,(*合力方向调节*){{forceAngle, 
+   135*Pi/180, "合力方向 (角度)"}, 0, 2*Pi, Pi/36, ControlType -> Slider, 
+  Appearance -> "Labeled"}, Delimiter,(*箭头缩放*){{arrowScale, 0.9, 
+   "箭头长度"}, 0.3, 2.0, 0.1, ControlType -> Slider, 
+  Appearance -> "Labeled"}, Delimiter,(*显示选项*){{showAnnotations, True,
+    "显示标注"}, {True, False}}, {{tStart, 0.01, "轨迹起点 t"}, 0.01, 1, 
+  0.1}, {{tEnd, 3.99, "轨迹终点 t"}, 3, 4, 0.1},(*曲线定义-根据选择动态切换*)
+ Initialization :> (curveX[t_] := 
+    Which[curveType == 1, t - Sin[t],(*摆线 x*)curveType == 2, 
+     t,(*抛物线 x*)curveType == 3, t,(*正弦 x*)curveType == 4, 
+     Cos[t]           (*圆 x*)];
+   curveY[t_] := 
+    Which[curveType == 1, 1 - Cos[t],(*摆线 y*)
+     curveType == 2, (t - 2)^2 - 1,(*抛物线 y*)curveType == 3, 
+     Sin[t],(*正弦 y*)curveType == 4, Sin[t]           (*圆 y*)];), 
+ TrackedSymbols :> {tShow, forceAngle, arrowScale, showAnnotations, 
+   tStart, tEnd, curveType}, ControlPlacement -> Left, 
+ Paneled -> True, AppearanceElements -> All, SaveDefinitions -> True]
