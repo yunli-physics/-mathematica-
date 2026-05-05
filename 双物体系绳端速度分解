@@ -1,0 +1,74 @@
+(*双物体系绳端速度分解\[CenterDot]可视化教学*)Manipulate[
+ Module[{(*固定滑轮位置*)pulley = {2.5, 4.5},(*物体1-悬挂重物*)
+   obj1Pos = {2.5, 4.5 - h1},(*物体2-水平面上的物体*)
+   obj2Pos = {x2, 0.3},(*绳段方向*)rope1Dir, rope1Unit, rope2Dir, 
+   rope2Unit,(*速度分解*)vel1 = {0, -v1},(*物体1向下为正*)
+   vel2 = {v2, 0},(*物体2水平*)vel1AlongRope, vel2AlongRope, 
+   plotRange = {{-0.5, 6}, {-0.5, 5.5}}},(*绳段1方向:从物体1到滑轮*)
+  rope1Dir = pulley - obj1Pos;
+  rope1Unit = 
+   If[Norm[rope1Dir] > 0.001, rope1Dir/Norm[rope1Dir], {0, 1}];
+  (*绳段2方向:从物体2到滑轮*)rope2Dir = pulley - obj2Pos;
+  rope2Unit = 
+   If[Norm[rope2Dir] > 0.001, rope2Dir/Norm[rope2Dir], {1, 0}];
+  (*沿绳分速度*)vel1AlongRope = (vel1.rope1Unit)*rope1Unit;
+  vel2AlongRope = (vel2.rope2Unit)*rope2Unit;
+  vel1AlongMag = vel1.rope1Unit;
+  vel2AlongMag = vel2.rope2Unit;
+  (*判断是否满足沿绳速度相等*)
+  speedMatch = Abs[vel1AlongMag + vel2AlongMag] < 0.15;(*考虑方向相反*)
+  Graphics[{(*背景*){GrayLevel[0.95], 
+     Rectangle[{-1, -1}, {7, 6}]},(*水平面*){Brown, Thickness[0.02], 
+     Line[{{0, 0.3}, {6, 0.3}}]}, 
+    Text[Style["水平面", 12, Brown], {5.5, 0.05}],(*滑轮*){GrayLevel[0.3], 
+     Disk[pulley, 0.2]}, {GrayLevel[0.1], Disk[pulley, 0.12]}, 
+    Text[Style["定滑轮", 12, Bold], 
+     pulley + {0.35, 0.2}],(*绳子*){RGBColor[0.6, 0.35, 0.1], 
+     Thickness[0.012], 
+     Line[{obj1Pos, pulley, obj2Pos}]},(*物体1*){RGBColor[0.9, 0.2, 
+      0.2], Rectangle[{obj1Pos[[1]] - 0.25, 
+       obj1Pos[[2]] - 0.25}, {obj1Pos[[1]] + 0.25, 
+       obj1Pos[[2]] + 0.25}]}, 
+    Text[Style["物体1", 12, Bold, RGBColor[0.9, 0.2, 0.2]], 
+     obj1Pos + {0.4, 0}],(*物体2*){RGBColor[0.2, 0.5, 0.9], 
+     Disk[obj2Pos, 0.22]}, 
+    Text[Style["物体2", 12, Bold, RGBColor[0.2, 0.5, 0.9]], 
+     obj2Pos + {0, 0.4}],(*速度箭头*){RGBColor[0.9, 0.15, 0.15], 
+     Thickness[0.012], Arrowheads[0.07], 
+     Arrow[{obj1Pos, obj1Pos + 0.8*vel1}]}, {RGBColor[0.9, 0.15, 
+      0.15], Thickness[0.012], Arrowheads[0.07], 
+     Arrow[{obj2Pos, obj2Pos + 0.8*vel2}]},(*沿绳分速度箭头*){RGBColor[0.15, 
+      0.6, 0.2], Thickness[0.01], Arrowheads[0.06], 
+     Arrow[{obj1Pos, obj1Pos + vel1AlongRope}]}, {RGBColor[0.15, 0.6, 
+      0.2], Thickness[0.01], Arrowheads[0.06], 
+     Arrow[{obj2Pos, obj2Pos + vel2AlongRope}]},(*信息显示*)
+    Text[Style[
+      Framed[Column[{Style["沿绳速度相等验证", 14, Bold], 
+         Row[{"物体1沿绳: ", 
+           Style[NumberForm[vel1AlongMag, {2, 2}], Bold, 
+            If[speedMatch, Darker[Green], Red]]}], 
+         Row[{"物体2沿绳: ", 
+           Style[NumberForm[-vel2AlongMag, {2, 2}], Bold, 
+            If[speedMatch, Darker[Green], Red]]}], 
+         If[speedMatch, 
+          Style["✅ 沿绳分速度大小相等!", 13, Darker[Green], Bold], 
+          Style["❌ 请调整速度使沿绳分量相等", 13, Red, Bold]]}, 
+        Alignment -> Left], Background -> White, FrameMargins -> 8], 
+      14], Scaled[{0.78, 0.25}]]}, PlotRange -> plotRange, 
+   ImageSize -> 600]], 
+ Style["双物体绳连接 - 沿绳速度相等", Bold, 
+  18], Delimiter, {{h1, 1.8, "物体1 下落深度 (m)"}, 0.3, 3.0, 0.1, 
+  ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{x2, 3.5, "物体2 水平位置 (m)"}, 0.5, 5.0, 0.1,
+   ControlType -> Slider, 
+  Appearance -> "Labeled"}, Delimiter, {{v1, 1.5, "物体1 速度 v₁ (m/s)"}, 
+  0.1, 3.0, 0.1, ControlType -> Slider, 
+  Appearance -> "Labeled"}, {{v2, 1.2, "物体2 速度 v₂ (m/s)"}, 0.1, 3.0, 
+  0.1, ControlType -> Slider, Appearance -> "Labeled"}, Delimiter, 
+ Button["预设: 速度匹配", h1 = 1.8; x2 = 3.5; v1 = 1.5;
+  (*计算匹配的v2:v1沿绳1=v2沿绳2*)
+  Module[{r1u, r2u}, r1u = Normalize[{2.5, 4.5} - {2.5, 4.5 - h1}];
+   r2u = Normalize[{2.5, 4.5} - {x2, 0.3}];
+   v2 = v1*r1u[[2]]/r2u[[1]];], ImageSize -> Automatic, 
+  Appearance -> "Palette"], TrackedSymbols :> {h1, x2, v1, v2}, 
+ ControlPlacement -> Left, Paneled -> True, SaveDefinitions -> True]
