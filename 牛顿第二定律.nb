@@ -1,0 +1,578 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     24228,        568]
+NotebookOptionsPosition[     23722,        550]
+NotebookOutlinePosition[     24140,        567]
+CellTagsIndexPosition[     24097,        564]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"\:725b\:987f\:7b2c\:4e8c\:5b9a\:5f8b", " ", "F"}], "=", "ma"}], 
+   "*)"}], 
+  RowBox[{"DynamicModule", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"t", "=", "0"}], ",", 
+      RowBox[{"m", "=", "1.0"}], ",", 
+      RowBox[{"F", "=", "5.0"}]}], "}"}], ",", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"--", 
+        RowBox[{"-", 
+         RowBox[{
+         "\:6838\:5fc3\:7269\:7406\:4e0e\:52a8\:753b\:903b\:8f91", "--"}]}]}],
+        "-"}], "*)"}], 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "\:91c7\:7528\:5b98\:65b9\:6700\:7a33\:5b9a\:7684", " ", "Clock", " ", 
+        "\:65b9\:6848\:9a71\:52a8\:65f6\:95f4\:8f74"}], "\:ff0c", 
+       "\:4e25\:683c\:9650\:5236\:57285\:79d2\:5185"}], "*)"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"t", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{"running", ",", 
+          RowBox[{"Refresh", "[", 
+           RowBox[{
+            RowBox[{"Clock", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "5", ",", "0.02"}], "}"}], ",", "5", ",", 
+              "1"}], "]"}], ",", 
+            RowBox[{"TrackedSymbols", ":>", 
+             RowBox[{"{", "}"}]}]}], "]"}], ",", "t"}], " ", 
+         RowBox[{
+         "(*", "\:6682\:505c\:65f6\:4fdd\:6301\:5f53\:524d\:65f6\:95f4\:4e0d\
+\:53d8", "*)"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+       "(*", "\:5b9e\:65f6\:7269\:7406\:53c2\:6570\:8ba1\:7b97", "*)"}], 
+       RowBox[{"a", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"m", ">", "0"}], ",", 
+          RowBox[{"F", "/", "m"}], ",", "0"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"x", "=", 
+        RowBox[{"0.5", "*", "a", "*", 
+         RowBox[{"t", "^", "2"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"v", "=", 
+        RowBox[{"a", "*", "t"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "\:89c6\:89c9\:81ea\:9002\:5e94\:7f29\:653e", "\:ff1a", 
+         "\:9632\:6b62\:52a0\:901f\:5ea6\:8fc7\:5927\:65f6\:5c0f\:8f66\:51b2\
+\:51fa\:753b\:9762"}], "*)"}], 
+       RowBox[{"maxDist", "=", 
+        RowBox[{"0.5", "*", "a", "*", "25"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"scale", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"maxDist", ">", "50"}], ",", 
+          RowBox[{"50", "/", "maxDist"}], ",", "1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"--", 
+          RowBox[{"-", 
+           RowBox[{"\:754c\:9762\:5e03\:5c40\:4e0e\:7ed8\:56fe", "--"}]}]}], 
+         "-"}], "*)"}], 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"\:3010", "\:7f6e\:9876", "\:3011"}], 
+           "\:4ea4\:4e92\:63a7\:5236\:5668"}], "*)"}], 
+         RowBox[{
+          RowBox[{"Panel", "@", 
+           RowBox[{"Grid", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"\"\<\:8d28\:91cf m (kg):\>\"", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "m", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0.1", ",", "10", ",", "0.1"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "->", "300"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "m", "]"}], ",", "Number", ",", 
+                    RowBox[{"FieldSize", "->", "5"}], ",", 
+                    RowBox[{"ContinuousAction", "->", "True"}]}], "]"}]}], 
+                   "}"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<\:5916\:529b F (N):\>\"", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "F", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "20", ",", "0.1"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "->", "300"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "F", "]"}], ",", "Number", ",", 
+                    RowBox[{"FieldSize", "->", "5"}], ",", 
+                    RowBox[{"ContinuousAction", "->", "True"}]}], "]"}]}], 
+                   "}"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"\"\<\:63a7\:5236\:53f0:\>\"", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Button", "[", 
+                    RowBox[{
+                    "\"\<\[FilledRightTriangle]\:fe0f \:5f00\:59cb\>\"", ",", 
+                    RowBox[{
+                    RowBox[{"running", "=", "True"}], ";", 
+                    RowBox[{"t", "=", "0"}], ";"}], ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "40"}], "}"}]}], ",", 
+                    RowBox[{"BaseStyle", "->", "14"}]}], "]"}], ",", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<\:23f9\:fe0f \:6682\:505c\>\"", ",", 
+                    RowBox[{
+                    RowBox[{"running", "=", "False"}], ";"}], ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "40"}], "}"}]}], ",", 
+                    RowBox[{"BaseStyle", "->", "14"}]}], "]"}], ",", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<\|01f504 \:91cd\:7f6e\>\"", ",", 
+                    RowBox[{
+                    RowBox[{"running", "=", "False"}], ";", 
+                    RowBox[{"t", "=", "0"}], ";"}], ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "40"}], "}"}]}], ",", 
+                    RowBox[{"BaseStyle", "->", "14"}]}], "]"}]}], "}"}], 
+                  "]"}]}], "}"}]}], "}"}], ",", 
+             RowBox[{"Alignment", "->", "Left"}], ",", 
+             RowBox[{"Spacings", "->", 
+              RowBox[{"{", 
+               RowBox[{"2", ",", "1"}], "}"}]}]}], "]"}]}], ",", 
+          RowBox[{"Spacer", "[", "10", "]"}], ",", 
+          RowBox[{"(*", "\:5b9e\:65f6\:6570\:636e\:9762\:677f", "*)"}], 
+          RowBox[{"Panel", "[", 
+           RowBox[{
+            RowBox[{"Grid", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                 "\"\<\:23f1\:fe0f \:65f6\:95f4 (s)\>\"", ",", 
+                  "\"\<\|01f4cf \:5b9e\:9645\:4f4d\:79fb (m)\>\"", ",", 
+                  "\"\<\|01f4a8 \:77ac\:65f6\:901f\:5ea6 (m/s)\>\"", ",", 
+                  "\"\<\:26a1 \:52a0\:901f\:5ea6 (m/s\\u00B2)\>\""}], "}"}], 
+                ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"NumberForm", "[", 
+                   RowBox[{"t", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}], ",", 
+                  RowBox[{"NumberForm", "[", 
+                   RowBox[{"x", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "2"}], "}"}]}], "]"}], ",", 
+                  RowBox[{"NumberForm", "[", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "2"}], "}"}]}], "]"}], ",", 
+                  RowBox[{"NumberForm", "[", 
+                   RowBox[{"a", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "2"}], "}"}]}], "]"}]}], "}"}]}], "}"}],
+               ",", 
+              RowBox[{"Frame", "->", "All"}], ",", 
+              RowBox[{"Background", "->", 
+               RowBox[{"{", 
+                RowBox[{"None", ",", 
+                 RowBox[{"{", "LightCyan", "}"}]}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"ImageSize", "->", "Full"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "10", "]"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "\:4e3b\:753b\:9762", "\:ff1a", 
+            "\:8f68\:9053\:4e0e\:5e26\:901f\:5ea6\:7bad\:5934\:7684\:5c0f\
+\:8f66"}], "*)"}], 
+          RowBox[{"Graphics", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+             "(*", "\:5730\:9762\:8f68\:9053\:4e0e\:523b\:5ea6", "*)"}], 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Gray", ",", 
+                RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+                RowBox[{"Line", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"51", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}], 
+              ",", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Text", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"i", ",", "Bold", ",", "11"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"-", "0.6"}]}], "}"}]}], "]"}], ",", 
+                  RowBox[{"Line", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"-", "0.3"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "0.3"}], "}"}]}], "}"}], "]"}]}], "}"}],
+                 ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "0", ",", "50", ",", "5"}], "}"}]}], "]"}],
+               ",", 
+              RowBox[{"(*", "\:52a8\:6001\:5c0f\:8f66\:7ec4", "*)"}], 
+              RowBox[{"Translate", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Opacity", "[", "0.15", "]"}], ",", "Blue", ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"scale", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                  RowBox[{
+                  "(*", "\:771f\:5b9e\:6bd4\:4f8b\:6b8b\:5f71", "*)"}], 
+                  RowBox[{"{", 
+                   RowBox[{"Blue", ",", 
+                    RowBox[{"EdgeForm", "[", "Black", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.2"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "1.2"}], "}"}]}], "]"}]}], "}"}], ",", 
+                  RowBox[{"(*", "\:8f66\:53a2", "*)"}], 
+                  RowBox[{"{", 
+                   RowBox[{"Black", ",", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0.5", ",", "0.2"}], "}"}], ",", "0.3"}], "]"}]}],
+                    "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"Black", ",", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1.5", ",", "0.2"}], "}"}], ",", "0.3"}], "]"}]}],
+                    "}"}], ",", 
+                  RowBox[{"(*", "\:8f66\:8f6e", "*)"}], 
+                  RowBox[{"(*", 
+                   RowBox[{"\:901f\:5ea6\:7bad\:5934", "\:ff1a", 
+                    RowBox[{
+                    "\:957f\:5ea6\:968f\:77ac\:65f6\:901f\:5ea6", " ", "v", 
+                    " ", "\:52a8\:6001\:53d8\:5316"}]}], "*)"}], 
+                  RowBox[{"{", 
+                   RowBox[{"Red", ",", 
+                    RowBox[{"Thickness", "[", "0.015", "]"}], ",", 
+                    RowBox[{"Arrowheads", "[", "0.05", "]"}], ",", 
+                    RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"2.2", ",", "0.7"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"2.2", "+", 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"v", "/", "2"}], ",", "6"}], "]"}]}], ",", 
+                    "0.7"}], "}"}]}], "}"}], "]"}]}], "}"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"x", "*", "scale"}], ",", "0"}], "}"}]}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"PlotRange", "->", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "51"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "3"}], "}"}]}], "}"}]}], ",", 
+            RowBox[{"AspectRatio", "->", 
+             RowBox[{"1", "/", "8"}]}], ",", 
+            RowBox[{"Frame", "->", "True"}], ",", 
+            RowBox[{"FrameLabel", "->", 
+             RowBox[{"{", 
+              RowBox[{
+              "\"\<\:8f68\:9053\:4f4d\:7f6e (m)\>\"", ",", 
+               "\"\<\:4fef\:89c6\:56fe\>\""}], "}"}]}], ",", 
+            RowBox[{"ImageSize", "->", "800"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "10", "]"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{"\:8f85\:52a9\:56fe\:8868", "\:ff1a", 
+            RowBox[{"\:4f4d\:79fb", "-", 
+             RowBox[{"\:65f6\:95f4", " ", 
+              RowBox[{"(", 
+               RowBox[{"x", "-", "t"}], ")"}], " ", "\:56fe\:50cf"}]}]}], 
+           "*)"}], 
+          RowBox[{"Dynamic", "@", 
+           RowBox[{"Plot", "[", 
+            RowBox[{
+             RowBox[{"0.5", "*", "a", "*", 
+              RowBox[{"tt", "^", "2"}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{"tt", ",", "0", ",", "5"}], "}"}], ",", 
+             RowBox[{"PlotRange", "->", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "5"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", 
+                  RowBox[{"Max", "[", 
+                   RowBox[{"100", ",", 
+                    RowBox[{"0.5", "*", "a", "*", "25"}]}], "]"}]}], "}"}]}], 
+               "}"}]}], ",", 
+             RowBox[{"GridLines", "->", "Automatic"}], ",", 
+             RowBox[{"AxesLabel", "->", 
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<\:65f6\:95f4 t (s)\>\"", ",", 
+                "\"\<\:4f4d\:79fb x (m)\>\""}], "}"}]}], ",", 
+             RowBox[{"PlotLabel", "->", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+               "\"\<\:4f4d\:79fb-\:65f6\:95f4 (x-t) \
+\:8f68\:8ff9\:8ffd\:8e2a\>\"", ",", "14", ",", "Bold"}], "]"}]}], ",", 
+             RowBox[{"PlotStyle", "->", 
+              RowBox[{"{", 
+               RowBox[{"Thick", ",", 
+                RowBox[{"Darker", "@", "Green"}]}], "}"}]}], ",", 
+             RowBox[{"Filling", "->", "Axis"}], ",", 
+             RowBox[{"FillingStyle", "->", 
+              RowBox[{"Opacity", "[", "0.2", "]"}]}], ",", 
+             RowBox[{"Epilog", "->", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"PointSize", "[", "0.02", "]"}], ",", "Red", ",", 
+                RowBox[{"Point", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", "x"}], "}"}], "]"}]}], "}"}]}], ",", 
+             RowBox[{"ImageSize", "->", "800"}]}], "]"}]}]}], "}"}], "]"}]}], 
+      ",", 
+      RowBox[{"(*", "\:9690\:85cf\:53d8\:91cf\:521d\:59cb\:5316", "*)"}], 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"running", ",", "False"}], "}"}], ",", 
+        RowBox[{"ControlType", "->", "None"}]}], "}"}], ",", 
+      RowBox[{"SaveDefinitions", "->", "True"}]}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9886178579473953`*^9, 3.9886178776825867`*^9}},
+ EmphasizeSyntaxErrors->True,
+ CellLabel->"In[1]:=",ExpressionUUID->"c631730d-d130-084e-bf9e-ebadc3345800"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`t$$ = 0, $CellContext`m$$ = 
+  1., $CellContext`F$$ = 5.}, 
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{$CellContext`running$$ = False, Typeset`show$$ = True, 
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+     "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+        Hold[$CellContext`running$$], False}, ControlType -> None}}, 
+     Typeset`size$$ = {1117., {428.4461911724489, 434.1781247661989}}, 
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, "Variables" :> {$CellContext`running$$ = False}, 
+       "ControllerVariables" :> {}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$}, 
+       "Body" :> ($CellContext`t$$ = If[$CellContext`running$$, 
+           Refresh[
+            Clock[{0, 5, 0.02}, 5, 1], 
+            TrackedSymbols :> {}], $CellContext`t$$]; $CellContext`a = 
+         If[$CellContext`m$$ > 0, $CellContext`F$$/$CellContext`m$$, 
+           0]; $CellContext`x = 
+         0.5 $CellContext`a $CellContext`t$$^2; $CellContext`v = \
+$CellContext`a $CellContext`t$$; $CellContext`maxDist = 
+         0.5 $CellContext`a 25; $CellContext`scale = 
+         If[$CellContext`maxDist > 50, 50/$CellContext`maxDist, 1]; Column[{
+           Panel[
+            Grid[{{"\:8d28\:91cf m (kg):", 
+               Row[{
+                 Slider[
+                  Dynamic[$CellContext`m$$], {0.1, 10, 0.1}, ImageSize -> 
+                  300], 
+                 Spacer[10], 
+                 InputField[
+                  Dynamic[$CellContext`m$$], Number, FieldSize -> 5, 
+                  ContinuousAction -> True]}]}, {"\:5916\:529b F (N):", 
+               Row[{
+                 Slider[
+                  Dynamic[$CellContext`F$$], {0, 20, 0.1}, ImageSize -> 300], 
+                 Spacer[10], 
+                 InputField[
+                  Dynamic[$CellContext`F$$], Number, FieldSize -> 5, 
+                  ContinuousAction -> True]}]}, {"\:63a7\:5236\:53f0:", 
+               Row[{
+                 Button[
+                 "\[FilledRightTriangle]\:fe0f \:5f00\:59cb", \
+$CellContext`running$$ = True; $CellContext`t$$ = 0; Null, 
+                  ImageSize -> {100, 40}, BaseStyle -> 14], 
+                 Button[
+                 "\:23f9\:fe0f \:6682\:505c", $CellContext`running$$ = False; 
+                  Null, ImageSize -> {100, 40}, BaseStyle -> 14], 
+                 Button[
+                 "\|01f504 \:91cd\:7f6e", $CellContext`running$$ = 
+                   False; $CellContext`t$$ = 0; Null, ImageSize -> {100, 40}, 
+                  BaseStyle -> 14]}]}}, Alignment -> Left, 
+             Spacings -> {2, 1}]], 
+           Spacer[10], 
+           Panel[
+            
+            Grid[{{"\:23f1\:fe0f \:65f6\:95f4 (s)", 
+               "\|01f4cf \:5b9e\:9645\:4f4d\:79fb (m)", 
+               "\|01f4a8 \:77ac\:65f6\:901f\:5ea6 (m/s)", 
+               "\:26a1 \:52a0\:901f\:5ea6 (m/s\\u00B2)"}, {
+               NumberForm[$CellContext`t$$, {4, 2}], 
+               NumberForm[$CellContext`x, {6, 2}], 
+               NumberForm[$CellContext`v, {6, 2}], 
+               NumberForm[$CellContext`a, {6, 2}]}}, Frame -> All, 
+             Background -> {None, {LightCyan}}], ImageSize -> Full], 
+           Spacer[10], 
+           Graphics[{{Gray, 
+              Thickness[0.008], 
+              Line[{{-1, 0}, {51, 0}}]}, 
+             Table[{
+               Text[
+                Style[$CellContext`i, Bold, 11], {$CellContext`i, -0.6}], 
+               
+               Line[{{$CellContext`i, -0.3}, {$CellContext`i, 
+                  0.3}}]}, {$CellContext`i, 0, 50, 5}], 
+             Translate[{{
+                Opacity[0.15], Blue, 
+                Rectangle[{0, 0}, {$CellContext`scale, 1}]}, {Blue, 
+                EdgeForm[Black], 
+                Rectangle[{0, 0.2}, {2, 1.2}]}, {Black, 
+                Disk[{0.5, 0.2}, 0.3]}, {Black, 
+                Disk[{1.5, 0.2}, 0.3]}, {Red, 
+                Thickness[0.015], 
+                Arrowheads[0.05], 
+                
+                Arrow[{{2.2, 0.7}, {
+                  2.2 + Min[$CellContext`v/2, 6], 
+                   0.7}}]}}, {$CellContext`x $CellContext`scale, 0}]}, 
+            PlotRange -> {{-1, 51}, {-1, 3}}, AspectRatio -> 1/8, Frame -> 
+            True, FrameLabel -> {
+             "\:8f68\:9053\:4f4d\:7f6e (m)", "\:4fef\:89c6\:56fe"}, ImageSize -> 
+            800], 
+           Spacer[10], 
+           Dynamic[
+            Plot[
+            0.5 $CellContext`a $CellContext`tt^2, {$CellContext`tt, 0, 5}, 
+             PlotRange -> {{0, 5}, {0, 
+                Max[100, 0.5 $CellContext`a 25]}}, GridLines -> Automatic, 
+             AxesLabel -> {"\:65f6\:95f4 t (s)", "\:4f4d\:79fb x (m)"}, 
+             PlotLabel -> 
+             Style["\:4f4d\:79fb-\:65f6\:95f4 (x-t) \:8f68\:8ff9\:8ffd\:8e2a",
+                14, Bold], PlotStyle -> {Thick, 
+               Darker[Green]}, Filling -> Axis, FillingStyle -> Opacity[0.2], 
+             Epilog -> {
+               PointSize[0.02], Red, 
+               Point[{$CellContext`t$$, $CellContext`x}]}, ImageSize -> 
+             800]]}]), 
+       "Specifications" :> {{{$CellContext`running$$, False}, ControlType -> 
+          None}}, "Options" :> {}, "DefaultOptions" :> {}],
+      ImageSizeCache->{1163., {458.634033203125, 464.365966796875}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  DynamicModuleValues:>{}]], "Output",
+ CellChangeTimes->{3.9886178819732227`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"e31f5564-fc22-2c48-9523-1b4943019223"]
+}, Open  ]]
+},
+WindowSize->{1280, 732},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"7ad254f5-e10e-c34f-96e5-7f2b701177d1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 16896, 394, 1058, "Input",ExpressionUUID->"c631730d-d130-084e-bf9e-ebadc3345800"],
+Cell[17479, 418, 6227, 129, 942, "Output",ExpressionUUID->"e31f5564-fc22-2c48-9523-1b4943019223"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
