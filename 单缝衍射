@@ -1,0 +1,87 @@
+mathematica
+Manipulate[
+ Module[{
+   (* 固定几何与显示参数 *)
+   xSlit = 3.0,
+   yRange = 22,
+   xMin = 0, xMax = 70,
+   maxRedLen = 18,
+   step = 0.04,
+   
+   (* 物理参数 *)
+   bPhy = b, λPhy = λ, LPhy = L,
+   
+   yDark1, yDark2, screenX,
+   yTop, yBottom, yCenter,
+   screenCenter, screenDark1, screenDark2,
+   intensity
+   },
+  
+  yDark1 = (λPhy * LPhy)/bPhy;
+  yDark2 = (2 λPhy * LPhy)/bPhy;
+  screenX = xSlit + LPhy;
+  
+  yTop = bPhy/2; yBottom = -bPhy/2; yCenter = 0;
+  screenCenter = {screenX, 0};
+  screenDark1 = {screenX, yDark1};
+  screenDark2 = {screenX, yDark2};
+  
+  intensity[y_] := Module[{β}, β = Pi * bPhy * y/(λPhy * LPhy);
+    If[β == 0, 1, (Sin[β]/β)^2]];
+  
+  Graphics[{
+    White, Rectangle[{xMin - 2, -yRange - 2}, {xMax + 2, yRange + 2}],
+    
+    (* 入射光 *)
+    {Red, Thin, Arrowheads[Medium], Arrow[{{0.5, 0}, {xSlit - 0.1, 0}}]},
+    
+    (* 单缝挡板：粗黑线 *)
+    {Black, Thickness[0.02], Line[{{xSlit, -yRange}, {xSlit, yRange}}]},
+    {White, Rectangle[{xSlit - 0.08, yBottom}, {xSlit + 0.08, yTop}]},
+    
+    (* 9条衍射光线 *)
+    {Red, Thin, Opacity[0.7], 
+     Line[{{xSlit, yTop}, screenCenter}],
+     Line[{{xSlit, yCenter}, screenCenter}],
+     Line[{{xSlit, yBottom}, screenCenter}]},
+    {Blue, Thin, Opacity[0.7],
+     Line[{{xSlit, yTop}, screenDark1}],
+     Line[{{xSlit, yCenter}, screenDark1}],
+     Line[{{xSlit, yBottom}, screenDark1}]},
+    {RGBColor[1, 0.8, 0], Thin, Opacity[0.7],
+     Line[{{xSlit, yTop}, screenDark2}],
+     Line[{{xSlit, yCenter}, screenDark2}],
+     Line[{{xSlit, yBottom}, screenDark2}]},
+    
+    (* 接收屏：极细黑线 *)
+    {Black, Thickness[0.001], Line[{{screenX, -yRange}, {screenX, yRange}}]},
+    
+    (* 光强红线 *)
+    {Red, Thin, 
+     Table[
+      yVal = y;
+      iVal = intensity[yVal];
+      lineLen = iVal * maxRedLen;
+      If[lineLen > 0.002, Line[{{screenX, yVal}, {screenX + lineLen, yVal}}]],
+      {y, -yRange, yRange, step}]},
+    
+    (* 文字标注：说明移至右上角 *)
+    {Black, Text[Style["红线长度 = 光强大小", 13, Bold], {xMax - 3.5, yRange - 1.2}, {1, 0}]},
+    {Black, Text[Style[
+       "缝宽 b = " <> ToString[NumberForm[b, {3, 2}]] <>
+       "    波长 λ = " <> ToString[NumberForm[λ, {3, 2}]] <>
+       "    屏距 L = " <> ToString[NumberForm[L, {4, 1}]],
+       12, Bold], {xMax/2, yRange - 0.8}, {0, 0}]}
+    },
+   PlotRange -> {{xMin, xMax}, {-yRange, yRange}},
+   ImageSize -> {1000, 600},
+   Background -> White,
+   Axes -> False, Frame -> False
+   ]],
+  
+  {{b, 2.0, "缝宽 b"}, 1.0, 3.0, 0.01, Appearance -> "Labeled"},
+  {{λ, 0.55, "波长 λ"}, 0.40, 0.70, 0.005, Appearance -> "Labeled"},
+  {{L, 20.0, "屏距 L"}, 15.0, 25.0, 0.1, Appearance -> "Labeled"},
+  TrackedSymbols :> {b, λ, L},
+  ControlPlacement -> Bottom
+]
