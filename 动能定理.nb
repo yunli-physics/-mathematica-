@@ -1,0 +1,224 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8385,        214]
+NotebookOptionsPosition[      7872,        196]
+NotebookOutlinePosition[      8300,        213]
+CellTagsIndexPosition[      8257,        210]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"m", "=", "1"}], ";"}], " ", 
+  RowBox[{"(*", "\:7269\:4f53\:8d28\:91cf", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Row", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"(*", 
+        RowBox[{"\:5de6\:4fa7", "\:ff1a", "\:53c2\:6570\:8c03\:8282"}], 
+        "*)"}], 
+       RowBox[{
+        RowBox[{"Column", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Slider", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "F", "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "10"}], "}"}], ",", 
+              RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<Force F = \>\"", "<>", 
+              RowBox[{"ToString", "[", "F", "]"}]}], "]"}], ",", 
+            RowBox[{"Slider", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "s", "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "10"}], "}"}], ",", 
+              RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<Displacement s = \>\"", "<>", 
+              RowBox[{"ToString", "[", "s", "]"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Spacings", "->", "3"}]}], "]"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{"\:53f3\:4fa7", "\:ff1a", 
+          RowBox[{"\:52a8\:70b9\:56fe", 
+           RowBox[{
+           "\:ff08", "\:8865\:5168\:6240\:6709\:62ec\:53f7", "\:ff09"}]}]}], 
+         "*)"}], 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Dynamic", "[", 
+            RowBox[{"Module", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"v", "=", 
+                 RowBox[{"Sqrt", "[", 
+                  RowBox[{"2", "*", "F", "*", 
+                   RowBox[{"s", "/", "m"}]}], "]"}]}], ",", 
+                RowBox[{"ek", "=", 
+                 RowBox[{"F", "*", "s"}]}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"Red", ",", 
+                RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+                RowBox[{"Point", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"v", ",", "ek"}], "}"}], "]"}], ",", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"\"\<v=\>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{"v", ",", "0.1"}], "]"}], "]"}], "<>", 
+                    "\"\<\\nE_k=\>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{"ek", ",", "0.1"}], "]"}], "]"}]}], ",", "12"}], 
+                   "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"ek", "+", "2"}]}], "}"}]}], "]"}]}], "}"}]}], 
+             "]"}], "]"}], "}"}], ",", 
+          RowBox[{"Axes", "->", "True"}], ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<v\>\"", ",", "\"\<E_k\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "5"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "30"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], " ", 
+       RowBox[{"(*", 
+        RowBox[{"Graphics\:7684\:95ed\:5408", "]"}], "*)"}], "}"}], ",", 
+      RowBox[{"Spacings", "->", "10"}]}], "]"}], ",", 
+    RowBox[{"(*", 
+     RowBox[{"Row\:7684\:95ed\:5408", "]"}], "*)"}], 
+    RowBox[{"(*", "\:521d\:59cb\:503c", "*)"}], 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"F", ",", "5"}], "}"}], ",", "0", ",", "10"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"s", ",", "5"}], "}"}], ",", "0", ",", "10"}], "}"}]}], "]"}], 
+  " ", 
+  RowBox[{"(*", 
+   RowBox[{"Manipulate\:7684\:95ed\:5408", "]"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.989833404616205*^9, 3.9898334046172047`*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"3b24a990-a3bd-cf43-b313-2bd27a29b883"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`F$$ = 5, $CellContext`s$$ = 5, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`F$$], 5}, 0, 10, ControlType -> Manipulator}, {{
+       Hold[$CellContext`s$$], 5}, 0, 10, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {300.5, {1788.7733920198632`, 95.45649412258062}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`F$$ = 5, $CellContext`s$$ = 5}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Row[{
+         Column[{
+           Slider[
+            Dynamic[$CellContext`F$$], {0, 10}, Appearance -> "Labeled"], 
+           Text["Force F = " <> ToString[$CellContext`F$$]], 
+           Slider[
+            Dynamic[$CellContext`s$$], {0, 10}, Appearance -> "Labeled"], 
+           Text["Displacement s = " <> ToString[$CellContext`s$$]]}, Spacings -> 
+          3], 
+         Graphics[{
+           Dynamic[
+            
+            Module[{$CellContext`v = 
+              Sqrt[2 $CellContext`F$$ ($CellContext`s$$/$CellContext`m)], \
+$CellContext`ek = $CellContext`F$$ $CellContext`s$$}, {Red, 
+              PointSize[0.05], 
+              Point[{$CellContext`v, $CellContext`ek}], 
+              Text[
+               Style["v=" <> ToString[
+                  Round[$CellContext`v, 0.1]] <> "\nE_k=" <> ToString[
+                  Round[$CellContext`ek, 0.1]], 
+                12], {$CellContext`v, $CellContext`ek + 2}]}]]}, Axes -> True,
+           AxesLabel -> {"v", "E_k"}, PlotRange -> {{0, 5}, {0, 30}}, 
+          ImageSize -> 300]}, Spacings -> 10], 
+      "Specifications" :> {{{$CellContext`F$$, 5}, 0, 
+         10}, {{$CellContext`s$$, 5}, 0, 10}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{567., {968.634033098002, 974.365966901998}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.9898334058140125`*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"6a3b15c7-8178-3745-8773-448b140e7aac"]
+}, Open  ]]
+},
+WindowSize->{573.75, 541.875},
+WindowMargins->{{248.25, Automatic}, {10.125, Automatic}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1f09631b-f308-5d43-81e2-40843777bb01"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 4418, 111, 593, "Input",ExpressionUUID->"3b24a990-a3bd-cf43-b313-2bd27a29b883"],
+Cell[5001, 135, 2855, 58, 1984, "Output",ExpressionUUID->"6a3b15c7-8178-3745-8773-448b140e7aac"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
