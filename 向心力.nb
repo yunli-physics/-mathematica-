@@ -1,0 +1,391 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14391,        381]
+NotebookOptionsPosition[     14078,        367]
+NotebookOutlinePosition[     14435,        383]
+CellTagsIndexPosition[     14392,        380]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Theta]", "=", 
+        RowBox[{
+         RowBox[{"\[Omega]0", " ", "t"}], "+", 
+         RowBox[{"0.5", " ", "\[Alpha]", " ", 
+          RowBox[{"t", "^", "2"}]}]}]}], ",", 
+       RowBox[{"\[Omega]", "=", 
+        RowBox[{"\[Omega]0", "+", 
+         RowBox[{"\[Alpha]", " ", "t"}]}]}], ",", "v", ",", "aN", ",", "aT", 
+       ",", "Fn", ",", "Ft", ",", "Ftotal", ",", "pos", ",", "velVec", ",", 
+       "fnVec", ",", "ftVec", ",", "fTotalVec"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"v", "=", 
+       RowBox[{"\[Omega]", " ", "r"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"aN", "=", 
+       RowBox[{
+        RowBox[{"\[Omega]", "^", "2"}], " ", "r"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"aT", "=", 
+       RowBox[{"\[Alpha]", " ", "r"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Fn", "=", 
+       RowBox[{"m", " ", "aN"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Ft", "=", 
+       RowBox[{"m", " ", "aT"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pos", "=", 
+       RowBox[{"r", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+          RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"velVec", "=", 
+       RowBox[{"v", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"fnVec", "=", 
+       RowBox[{
+        RowBox[{"-", "Fn"}], " ", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+           RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}], "/", "m"}]}]}], 
+      ";", 
+      RowBox[{"(*", "\:65b9\:5411\:6307\:5411\:5706\:5fc3", "*)"}], 
+      RowBox[{"ftVec", "=", 
+       RowBox[{"Ft", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}]}], ";", 
+      RowBox[{"(*", "\:5207\:5411\:65b9\:5411", "*)"}], 
+      RowBox[{"fTotalVec", "=", 
+       RowBox[{"fnVec", "+", "ftVec"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Gray", ",", "Dashed", ",", 
+            RowBox[{"Circle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", "r"}], "]"}]}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "pos"}], "}"}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", 
+            RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{"showVel", ",", 
+              RowBox[{"Arrow", "[", 
+               RowBox[{"{", 
+                RowBox[{"pos", ",", 
+                 RowBox[{"pos", "+", 
+                  RowBox[{"velVec", "/", "2"}]}]}], "}"}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", 
+            RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{"showFn", ",", 
+              RowBox[{"Arrow", "[", 
+               RowBox[{"{", 
+                RowBox[{"pos", ",", 
+                 RowBox[{"pos", "+", 
+                  RowBox[{"fnVec", "/", "2"}]}]}], "}"}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Green", ",", 
+            RowBox[{"Thickness", "[", "0.006", "]"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"showFt", "&&", 
+               RowBox[{"\[Alpha]", "\[NotEqual]", "0"}]}], ",", 
+              RowBox[{"Arrow", "[", 
+               RowBox[{"{", 
+                RowBox[{"pos", ",", 
+                 RowBox[{"pos", "+", 
+                  RowBox[{"ftVec", "/", "2"}]}]}], "}"}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Purple", ",", 
+            RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"showFtotal", "&&", 
+               RowBox[{"\[Alpha]", "\[NotEqual]", "0"}]}], ",", 
+              RowBox[{"Arrow", "[", 
+               RowBox[{"{", 
+                RowBox[{"pos", ",", 
+                 RowBox[{"pos", "+", 
+                  RowBox[{"fTotalVec", "/", "2"}]}]}], "}"}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{"pos", ",", 
+              RowBox[{"0.08", " ", "r"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<\:5411\:5fc3\:529b\:516c\:5f0f\>\"", ",", "14", ",", 
+              "Bold"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.95"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<Fn = m \[Omega]\.b2 r = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"Fn", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< N\>\""}], ",", "12"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.9"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<v = \[Omega] r = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"v", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< m/s\>\""}], ",", "12"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.84"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<\[Omega] = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"\[Omega]", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< rad/s\>\""}], ",", "12"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.78"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"\[Alpha]", "\[NotEqual]", "0"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Text", "[", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"\"\<\:5207\:5411\:529b Ft = m \[Alpha] r = \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"NumberForm", "[", 
+                    RowBox[{"Ft", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+                   "\"\< N\>\""}], ",", "12"}], "]"}], ",", 
+                RowBox[{"Scaled", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"0.78", ",", "0.72"}], "}"}], "]"}]}], "]"}], ",", 
+              RowBox[{"Text", "[", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"\"\<\:5408\:529b F\:5408 = \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"NumberForm", "[", 
+                    RowBox[{
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"Fn", "^", "2"}], "+", 
+                    RowBox[{"Ft", "^", "2"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+                   "\"\< N\>\""}], ",", "12"}], "]"}], ",", 
+                RowBox[{"Scaled", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"0.78", ",", "0.66"}], "}"}], "]"}]}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"1.3", " ", "r"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "550"}], ",", 
+        RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+    "\"\<\:5411\:5fc3\:529b \[CenterDot] \:5706\:5468\:8fd0\:52a8\>\"", ",", 
+     "20", ",", "Bold"}], "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", ",", "1", ",", "\"\<\:534a\:5f84 r (m)\>\""}], "}"}], ",", 
+     "0.2", ",", "2", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "1", ",", "\"\<\:8d28\:91cf m (kg)\>\""}], "}"}], ",",
+      "0.1", ",", "5", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Omega]0", ",", "3", ",", 
+       "\"\<\:521d\:89d2\:901f\:5ea6 \[Omega]\:2080 (rad/s)\>\""}], "}"}], 
+     ",", "0.5", ",", "10", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Alpha]", ",", "0", ",", 
+       "\"\<\:89d2\:52a0\:901f\:5ea6 \[Alpha] (rad/s\.b2)\>\""}], "}"}], ",", 
+     "0", ",", "3", ",", "0.05"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "\"\<\:65f6\:95f4 t (s)\>\""}], "}"}], ",", 
+     "0", ",", "5", ",", "0.02", ",", "Animator", ",", 
+     RowBox[{"AnimationRunning", "\[Rule]", "True"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showVel", ",", "True", ",", "\"\<\:901f\:5ea6\:77e2\:91cf\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showFn", ",", "True", ",", "\"\<\:5411\:5fc3\:529b\:77e2\:91cf\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showFt", ",", "True", ",", "\"\<\:5207\:5411\:529b\:77e2\:91cf\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}], ",", 
+     RowBox[{"Enabled", "\[Rule]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"\[Alpha]", "\[NotEqual]", "0"}], "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showFtotal", ",", "True", ",", "\"\<\:5408\:529b\:77e2\:91cf\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}], ",", 
+     RowBox[{"Enabled", "\[Rule]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"\[Alpha]", "\[NotEqual]", "0"}], "]"}]}]}], "}"}], ",", 
+   "Delimiter", ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<\:5300\:901f\:6a21\:5f0f\>\"", ",", 
+        RowBox[{
+         RowBox[{"\[Alpha]", "=", "0"}], ";", 
+         RowBox[{"t", "=", "0"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<\:52a0\:901f\:6a21\:5f0f\>\"", ",", 
+        RowBox[{
+         RowBox[{"\[Alpha]", "=", "1.5"}], ";", 
+         RowBox[{"\[Omega]0", "=", "2"}], ";", 
+         RowBox[{"t", "=", "0"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<\:91cd\:7f6e\>\"", ",", 
+        RowBox[{
+         RowBox[{"r", "=", "1"}], ";", 
+         RowBox[{"m", "=", "1"}], ";", 
+         RowBox[{"\[Omega]0", "=", "3"}], ";", 
+         RowBox[{"\[Alpha]", "=", "0"}], ";", 
+         RowBox[{"t", "=", "0"}], ";", 
+         RowBox[{"showVel", "=", "True"}], ";", 
+         RowBox[{"showFn", "=", "True"}], ";", 
+         RowBox[{"showFt", "=", "True"}], ";", 
+         RowBox[{"showFtotal", "=", "True"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Automatic"}]}], "]"}]}], "}"}], 
+    "]"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{
+     "r", ",", "m", ",", "\[Omega]0", ",", "\[Alpha]", ",", "t", ",", 
+      "showVel", ",", "showFn", ",", "showFt", ",", "showFtotal"}], "}"}]}]}],
+   "]"}]], "Input",
+ CellChangeTimes->{{3.9898347751499033`*^9, 
+  3.989834775152963*^9}},ExpressionUUID->"b72f0f7b-3864-430b-8091-\
+a57802403297"]
+},
+WindowSize->{759, 733},
+WindowMargins->{{Automatic, 332}, {16, Automatic}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (2019\:5e745\:670818\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 13516, 345, 1624, "Input",ExpressionUUID->"b72f0f7b-3864-430b-8091-a57802403297"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
