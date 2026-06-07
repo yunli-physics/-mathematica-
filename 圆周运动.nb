@@ -1,0 +1,231 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8018,        221]
+NotebookOptionsPosition[      7707,        207]
+NotebookOutlinePosition[      8064,        223]
+CellTagsIndexPosition[      8021,        220]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Theta]", "=", 
+        RowBox[{"\[Omega]", " ", "t"}]}], ",", 
+       RowBox[{"v", "=", 
+        RowBox[{"\[Omega]", " ", "r"}]}], ",", 
+       RowBox[{"T", "=", 
+        RowBox[{"2", " ", 
+         RowBox[{"\[Pi]", "/", "\[Omega]"}]}]}], ",", 
+       RowBox[{"f", "=", 
+        RowBox[{"1", "/", "T"}]}], ",", 
+       RowBox[{"n", "=", "f"}], ",", "pos", ",", "vel"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"pos", "=", 
+       RowBox[{"r", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+          RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"vel", "=", 
+       RowBox[{"v", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Gray", ",", "Dashed", ",", 
+            RowBox[{"Circle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", "r"}], "]"}]}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "pos"}], "}"}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Thick", ",", 
+            RowBox[{"If", "[", 
+             RowBox[{"showVel", ",", 
+              RowBox[{"Arrow", "[", 
+               RowBox[{"{", 
+                RowBox[{"pos", ",", 
+                 RowBox[{"pos", "+", 
+                  RowBox[{"vel", "/", "\[Omega]"}]}]}], "}"}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{"pos", ",", 
+              RowBox[{"0.1", " ", "r"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<v = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"v", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< m/s\>\""}], ",", "13"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.9"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<\[Omega] = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"\[Omega]", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< rad/s\>\""}], ",", "13"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.84"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<T = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"T", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< s\>\""}], ",", "13"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.78"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<f = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"f", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< Hz\>\""}], ",", "13"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.72"}], "}"}], "]"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"\"\<n = \>\"", "<>", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"n", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], "<>", 
+               "\"\< r/s\>\""}], ",", "13"}], "]"}], ",", 
+            RowBox[{"Scaled", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.78", ",", "0.66"}], "}"}], "]"}]}], "]"}]}], "}"}], 
+        ",", 
+        RowBox[{"PlotRange", "\[Rule]", "1.5"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+        RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+    "\"\<\:5300\:901f\:5706\:5468\:8fd0\:52a8 \[CenterDot] \:7269\:7406\:91cf\
+\:5173\:7cfb\>\"", ",", "18", ",", "Bold"}], "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", ",", "1", ",", "\"\<\:534a\:5f84 r (m)\>\""}], "}"}], ",", 
+     "0.2", ",", "1.5", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Omega]", ",", "2", ",", 
+       "\"\<\:89d2\:901f\:5ea6 \[Omega] (rad/s)\>\""}], "}"}], ",", "0.5", 
+     ",", "10", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "\"\<\:65f6\:95f4 t\>\""}], "}"}], ",", "0",
+      ",", 
+     RowBox[{"2", " ", 
+      RowBox[{"\[Pi]", "/", "\[Omega]"}]}], ",", "0.01", ",", "Animator", ",", 
+     RowBox[{"AnimationRunning", "\[Rule]", "True"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showVel", ",", "True", ",", 
+       "\"\<\:663e\:793a\:901f\:5ea6\:77e2\:91cf\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"Button", "[", 
+    RowBox[{"\"\<\:91cd\:7f6e\:65f6\:95f4\>\"", ",", 
+     RowBox[{"t", "=", "0"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{"r", ",", "\[Omega]", ",", "t", ",", "showVel"}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.9898342244971685`*^9, 
+  3.9898342244986215`*^9}},ExpressionUUID->"eedf08b6-26bc-4f45-bff8-\
+8e6eadf6c9c4"]
+},
+WindowSize->{759, 713},
+WindowMargins->{{Automatic, 332}, {16, Automatic}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (2019\:5e745\:670818\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7145, 185, 656, "Input",ExpressionUUID->"eedf08b6-26bc-4f45-bff8-8e6eadf6c9c4"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
