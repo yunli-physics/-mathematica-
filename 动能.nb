@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6541,        177]
+NotebookOptionsPosition[      6030,        159]
+NotebookOutlinePosition[      6458,        176]
+CellTagsIndexPosition[      6415,        173]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"m", "=", "1"}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Column", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"RowBox", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Velocity v = \>\"", ",", 
+         RowBox[{"Dynamic", "[", "v", "]"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Red", ",", 
+          RowBox[{"Disk", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "0.25"}], "]"}], ",", 
+          RowBox[{"Arrow", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"v", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<v\>\"", ",", 
+              RowBox[{"FontSize", "->", "12"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"v", "/", "2"}], ",", "0.25"}], "}"}]}], "]"}]}], "}"}],
+         ",", 
+        RowBox[{"Axes", "->", "True"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<x\>\"", ",", "\"\<\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "5"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Red", ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{"v", ",", 
+             RowBox[{"0.5", "*", "m", "*", 
+              RowBox[{"v", "^", "2"}]}]}], "}"}], "]"}], ",", "Blue", ",", 
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{"0.5", "*", "m", "*", 
+             RowBox[{"u", "^", "2"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"u", ",", "0", ",", "5"}], "}"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"Axes", "->", "True"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<v\>\"", ",", "\"\<Kinetic Energy\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "5"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"0.5", "*", "m", "*", 
+              RowBox[{"5", "^", "2"}]}]}], "}"}]}], "}"}]}]}], "]"}]}], "}"}],
+     "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"v", ",", "0"}], "}"}], ",", "0", ",", "5"}], "}"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.989558814479606*^9, 3.989558814479606*^9}, {
+  3.989835122658928*^9, 3.9898351281112843`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"278a73ea-8666-4048-afa5-ec1dfda5a853"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`v$$ = 3.71, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`v$$], 0}, 0, 5, ControlType -> Manipulator}}, 
+    Typeset`size$$ = {197., {167.6890869877534, 173.42102079174947`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`v$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         RowBox[{"Velocity v = ", 
+           Dynamic[$CellContext`v$$]}], 
+         Graphics[{Red, 
+           Disk[{0, 0}, 0.25], 
+           Arrow[{{0, 0}, {$CellContext`v$$, 0}}], 
+           Text[
+            Style["v", FontSize -> 12], {$CellContext`v$$/2, 0.25}]}, Axes -> 
+          True, AxesLabel -> {"x", ""}, PlotRange -> {{0, 5}, {-1, 1}}], 
+         Graphics[{Red, 
+           Point[{$CellContext`v$$, 0.5 $CellContext`m $CellContext`v$$^2}], 
+           Blue, 
+           Plot[0.5 $CellContext`m $CellContext`u^2, {$CellContext`u, 0, 5}]},
+           Axes -> True, AxesLabel -> {"v", "Kinetic Energy"}, 
+          PlotRange -> {{0, 5}, {0, 0.5 $CellContext`m 5^2}}]}], 
+      "Specifications" :> {{{$CellContext`v$$, 0}, 0, 5}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{461., {197.13403309800196`, 202.86596690199804`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.989558815685543*^9, {3.98983503335178*^9, 3.9898350374637127`*^9}, 
+   3.989835129482445*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"55c377ef-3084-474e-af47-eebd72dcb06e"]
+}, Open  ]]
+},
+WindowSize->{573.75, 541.875},
+WindowMargins->{{248.25, Automatic}, {10.125, Automatic}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"706375f3-57dc-ef40-aeae-58bf2d0a5d3b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3035, 84, 380, "Input",ExpressionUUID->"278a73ea-8666-4048-afa5-ec1dfda5a853"],
+Cell[3618, 108, 2396, 48, 441, "Output",ExpressionUUID->"55c377ef-3084-474e-af47-eebd72dcb06e"]
+}, Open  ]]
+}
+]
+*)
+
