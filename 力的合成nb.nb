@@ -1,0 +1,526 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     21511,        516]
+NotebookOptionsPosition[     20910,        497]
+NotebookOutlinePosition[     21328,        514]
+CellTagsIndexPosition[     21285,        511]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "\:529b\:7684\:77e2\:91cf\:5408\:6210\:53ef\:89c6\:5316\:7cfb\:7edf", 
+   "*)"}], 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"DynamicModule", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "components", ",", "resultant", ",", "resultMag", ",", "resultDir"}], 
+       "}"}], ",", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "forces", "]"}], "==", "0"}], ",", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+            RowBox[{"Point", "[", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}], "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<\:8bf7\:6dfb\:52a0\:529b\:5411\:91cf\>\"", ",", "16", ",", 
+              "Red"}], "]"}]}], "}"}], ",", 
+          RowBox[{"PlotRange", "->", "150"}], ",", 
+          RowBox[{"Axes", "->", "True"}], ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], ",", 
+          RowBox[{"AspectRatio", "->", "1"}], ",", 
+          RowBox[{"ImageSize", "->", "500"}]}], "]"}], ",", 
+        RowBox[{"(*", "\:8ba1\:7b97\:5408\:529b", "*)"}], 
+        RowBox[{
+         RowBox[{"components", "=", 
+          RowBox[{"Total", "[", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"forces", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                RowBox[{"Cos", "[", 
+                 RowBox[{"forces", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}], ",", 
+               RowBox[{
+                RowBox[{"forces", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                RowBox[{"Sin", "[", 
+                 RowBox[{"forces", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}]}], "}"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", 
+               RowBox[{"Length", "[", "forces", "]"}]}], "}"}]}], "]"}], 
+           "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"resultant", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"components", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{"components", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "}"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"resultMag", "=", 
+          RowBox[{"Norm", "[", "resultant", "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"resultDir", "=", 
+          RowBox[{"ArcTan", "[", 
+           RowBox[{
+            RowBox[{"resultant", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{"resultant", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", "\:7ed8\:5236\:5411\:91cf\:56fe", "*)"}], 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"(*", "\:5750\:6807\:8f74", "*)"}], 
+            RowBox[{"Gray", ",", "Dashed", ",", 
+             RowBox[{"Line", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "150"}], ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"150", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+             RowBox[{"Line", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", 
+                  RowBox[{"-", "150"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "150"}], "}"}]}], "}"}], "]"}], ",", 
+             RowBox[{"(*", "\:539f\:70b9", "*)"}], "Black", ",", 
+             RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+             RowBox[{"Point", "[", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], "]"}], ",", 
+             RowBox[{"(*", 
+              RowBox[{"\:5206\:529b", "-", "\:84dd\:8272"}], "*)"}], "Blue", 
+             ",", 
+             RowBox[{"Thickness", "[", "0.005", "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Arrowheads", "[", "0.03", "]"}], ",", 
+                 RowBox[{"Arrow", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}]}], "}"}]}],
+                    "}"}], "]"}], ",", 
+                 RowBox[{"Text", "[", 
+                  RowBox[{
+                   RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Subscript", "[", 
+                    RowBox[{"\"\<F\>\"", ",", "i"}], "]"}], ",", "12"}], 
+                    "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"0.5", "*", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{"forces", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}]}]}], "}"}]}],
+                     "+", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "5"}], "}"}]}]}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", 
+                 RowBox[{"Length", "[", "forces", "]"}]}], "}"}]}], "]"}], 
+             ",", 
+             RowBox[{"(*", 
+              RowBox[{"\:5408\:529b", "-", "\:7ea2\:8272"}], "*)"}], "Red", 
+             ",", 
+             RowBox[{"Thickness", "[", "0.008", "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Arrowheads", "[", "0.04", "]"}], ",", 
+               RowBox[{"Arrow", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"0", ",", "0"}], "}"}], ",", "resultant"}], "}"}], 
+                "]"}]}], "}"}], ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<R (\:5408\:529b)\>\"", ",", "14", ",", "Red"}], 
+                "]"}], ",", 
+               RowBox[{
+                RowBox[{"0.5", "*", "resultant"}], "+", 
+                RowBox[{"{", 
+                 RowBox[{"5", ",", "5"}], "}"}]}]}], "]"}], ",", 
+             RowBox[{"(*", "\:6570\:503c\:663e\:793a", "*)"}], "Black", ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"\"\<\:5408\:529b\:5927\:5c0f: \>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"N", "[", 
+                    RowBox[{"resultMag", ",", "3"}], "]"}], "]"}]}], ",", 
+                 "12"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "140"}], ",", "130"}], "}"}]}], "]"}], ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"\"\<\:5408\:529b\:65b9\:5411: \>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"N", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"resultDir", ">=", "0"}], ",", "resultDir", ",", 
+                    RowBox[{"resultDir", "+", 
+                    RowBox[{"2", "*", "Pi"}]}]}], "]"}], "*", 
+                    RowBox[{"180", "/", "Pi"}]}], ",", "3"}], "]"}], "]"}], 
+                  "<>", "\"\<\[Degree]\>\""}], ",", "12"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "140"}], ",", "110"}], "}"}]}], "]"}]}], "}"}], 
+           ",", 
+           RowBox[{"PlotRange", "->", "150"}], ",", 
+           RowBox[{"Axes", "->", "True"}], ",", 
+           RowBox[{"AxesLabel", "->", 
+            RowBox[{"{", 
+             RowBox[{"\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], ",", 
+           RowBox[{"AspectRatio", "->", "1"}], ",", 
+           RowBox[{"ImageSize", "->", "500"}]}], "]"}]}]}], "]"}]}], "]"}], 
+    ",", 
+    RowBox[{"(*", "\:63a7\:5236\:53d8\:91cf", "*)"}], 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"forces", ",", 
+        RowBox[{"{", "}"}]}], "}"}], ",", 
+      RowBox[{"ControlType", "->", "None"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "newMagnitude", ",", "50", ",", "\"\<\:529b\:7684\:5927\:5c0f\>\""}], 
+       "}"}], ",", "1", ",", "200", ",", "1", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "newAngle", ",", "0", ",", 
+        "\"\<\:529b\:7684\:65b9\:5411 (\:5ea6)\>\""}], "}"}], ",", "0", ",", 
+      "360", ",", "1", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"(*", "\:63a7\:5236\:6309\:94ae", "*)"}], 
+    RowBox[{"Row", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<\:6dfb\:52a0\:529b\>\"", ",", 
+         RowBox[{
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"forces", ",", 
+            RowBox[{"{", 
+             RowBox[{"newMagnitude", ",", 
+              RowBox[{"newAngle", "*", "Degree"}]}], "}"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"newMagnitude", "=", "50"}], ";", 
+          RowBox[{"newAngle", "=", "0"}]}]}], "]"}], ",", 
+       RowBox[{"Spacer", "[", "10", "]"}], ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<\:6e05\:7a7a\:6240\:6709\:529b\>\"", ",", 
+         RowBox[{"forces", "=", 
+          RowBox[{"{", "}"}]}]}], "]"}], ",", 
+       RowBox[{"Spacer", "[", "10", "]"}], ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<\:793a\:4f8b1: \:4e24\:5782\:76f4\:529b\>\"", ",", 
+         RowBox[{"forces", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"60", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"80", ",", 
+              RowBox[{"Pi", "/", "2"}]}], "}"}]}], "}"}]}]}], "]"}], ",", 
+       RowBox[{"Spacer", "[", "10", "]"}], ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<\:793a\:4f8b2: \:4e09\:529b\:5e73\:8861\>\"", ",", 
+         RowBox[{"forces", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"50", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"50", ",", 
+              RowBox[{"2", "*", 
+               RowBox[{"Pi", "/", "3"}]}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"50", ",", 
+              RowBox[{"4", "*", 
+               RowBox[{"Pi", "/", "3"}]}]}], "}"}]}], "}"}]}]}], "]"}]}], 
+      "}"}], "]"}], ",", 
+    RowBox[{"ControlPlacement", "->", "Top"}], ",", 
+    RowBox[{"TrackedSymbols", ":>", 
+     RowBox[{"{", 
+      RowBox[{"forces", ",", "newMagnitude", ",", "newAngle"}], "}"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.9904438117610073`*^9, 3.9904438117610073`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"efd1cca8-c00e-3e40-9874-1e0b49e29646"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`forces$$ = {{50, 0}, {200, 360 Degree}, {
+     109, 115 Degree}}, $CellContext`newAngle$$ = 
+    0, $CellContext`newMagnitude$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`forces$$], {}}, ControlType -> None}, {{
+       Hold[$CellContext`newMagnitude$$], 50, "\:529b\:7684\:5927\:5c0f"}, 1, 
+      200, 1, ControlType -> Manipulator}, {{
+       Hold[$CellContext`newAngle$$], 0, "\:529b\:7684\:65b9\:5411 (\:5ea6)"},
+       0, 360, 1, ControlType -> Manipulator}, {
+      Hold[
+       Row[{
+         Button[
+         "\:6dfb\:52a0\:529b", 
+          AppendTo[$CellContext`forces$$, {$CellContext`newMagnitude$$, \
+$CellContext`newAngle$$ Degree}]; $CellContext`newMagnitude$$ = 
+           50; $CellContext`newAngle$$ = 0], 
+         Spacer[10], 
+         Button["\:6e05\:7a7a\:6240\:6709\:529b", $CellContext`forces$$ = {}], 
+         Spacer[10], 
+         Button[
+         "\:793a\:4f8b1: \:4e24\:5782\:76f4\:529b", $CellContext`forces$$ = {{
+            60, 0}, {80, Pi/2}}], 
+         Spacer[10], 
+         Button[
+         "\:793a\:4f8b2: \:4e09\:529b\:5e73\:8861", $CellContext`forces$$ = {{
+            50, 0}, {50, 2 (Pi/3)}, {50, 4 (Pi/3)}}]}]], 
+      Manipulate`Dump`ThisIsNotAControl, ControlType -> None}}, 
+    Typeset`size$$ = {500., {247., 251.49560546875}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`forces$$ = {}, $CellContext`newAngle$$ = 
+        0, $CellContext`newMagnitude$$ = 50}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      DynamicModule[{$CellContext`components, $CellContext`resultant, \
+$CellContext`resultMag, $CellContext`resultDir}, 
+        If[Length[$CellContext`forces$$] == 0, 
+         Graphics[{Black, 
+           PointSize[Large], 
+           Point[{0, 0}], 
+           Style["\:8bf7\:6dfb\:52a0\:529b\:5411\:91cf", 16, Red]}, PlotRange -> 
+          150, Axes -> True, AxesLabel -> {"x", "y"}, AspectRatio -> 1, 
+          ImageSize -> 500], $CellContext`components = Total[
+            Table[{Part[$CellContext`forces$$, $CellContext`i, 1] Cos[
+                Part[$CellContext`forces$$, $CellContext`i, 2]], 
+              Part[$CellContext`forces$$, $CellContext`i, 1] Sin[
+                
+                Part[$CellContext`forces$$, $CellContext`i, 
+                 2]]}, {$CellContext`i, 
+              Length[$CellContext`forces$$]}]]; $CellContext`resultant = {
+            Part[$CellContext`components, 1], 
+            Part[$CellContext`components, 2]}; $CellContext`resultMag = 
+          Norm[$CellContext`resultant]; $CellContext`resultDir = ArcTan[
+            Part[$CellContext`resultant, 1], 
+            Part[$CellContext`resultant, 2]]; Graphics[{Gray, Dashed, 
+            Line[{{-150, 0}, {150, 0}}], 
+            Line[{{0, -150}, {0, 150}}], Black, 
+            PointSize[Large], 
+            Point[{0, 0}], Blue, 
+            Thickness[0.005], 
+            Table[{
+              Arrowheads[0.03], 
+              
+              Arrow[{{0, 0}, {
+                Part[$CellContext`forces$$, $CellContext`i, 1] Cos[
+                   Part[$CellContext`forces$$, $CellContext`i, 2]], 
+                 Part[$CellContext`forces$$, $CellContext`i, 1] Sin[
+                   Part[$CellContext`forces$$, $CellContext`i, 2]]}}], 
+              Text[
+               Style[
+                Subscript["F", $CellContext`i], 12], 
+               0.5 {Part[$CellContext`forces$$, $CellContext`i, 1] Cos[
+                    Part[$CellContext`forces$$, $CellContext`i, 2]], 
+                  Part[$CellContext`forces$$, $CellContext`i, 1] Sin[
+                    Part[$CellContext`forces$$, $CellContext`i, 2]]} + {5, 
+                5}]}, {$CellContext`i, 
+              Length[$CellContext`forces$$]}], Red, 
+            Thickness[0.008], {
+             Arrowheads[0.04], 
+             Arrow[{{0, 0}, $CellContext`resultant}]}, 
+            Text[
+             Style["R (\:5408\:529b)", 14, Red], 
+             0.5 $CellContext`resultant + {5, 5}], Black, 
+            Text[
+             Style["\:5408\:529b\:5927\:5c0f: " <> ToString[
+                N[$CellContext`resultMag, 3]], 12], {-140, 130}], 
+            Text[
+             Style["\:5408\:529b\:65b9\:5411: " <> ToString[
+                N[
+                If[$CellContext`resultDir >= 
+                   0, $CellContext`resultDir, $CellContext`resultDir + 2 Pi] (
+                  180/Pi), 3]] <> "\[Degree]", 12], {-140, 110}]}, PlotRange -> 
+           150, Axes -> True, AxesLabel -> {"x", "y"}, AspectRatio -> 1, 
+           ImageSize -> 500]]], 
+      "Specifications" :> {{{$CellContext`forces$$, {}}, ControlType -> 
+         None}, {{$CellContext`newMagnitude$$, 50, 
+          "\:529b\:7684\:5927\:5c0f"}, 1, 200, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`newAngle$$, 0, 
+          "\:529b\:7684\:65b9\:5411 (\:5ea6)"}, 0, 360, 1, Appearance -> 
+         "Labeled"}, 
+        Row[{
+          Button[
+          "\:6dfb\:52a0\:529b", 
+           AppendTo[$CellContext`forces$$, {$CellContext`newMagnitude$$, \
+$CellContext`newAngle$$ Degree}]; $CellContext`newMagnitude$$ = 
+            50; $CellContext`newAngle$$ = 0], 
+          Spacer[10], 
+          Button[
+          "\:6e05\:7a7a\:6240\:6709\:529b", $CellContext`forces$$ = {}], 
+          Spacer[10], 
+          Button[
+          "\:793a\:4f8b1: \:4e24\:5782\:76f4\:529b", $CellContext`forces$$ = \
+{{60, 0}, {80, Pi/2}}], 
+          Spacer[10], 
+          Button[
+          "\:793a\:4f8b2: \:4e09\:529b\:5e73\:8861", $CellContext`forces$$ = \
+{{50, 0}, {50, 2 (Pi/3)}, {50, 4 (Pi/3)}}]}]}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        TrackedSymbols :> {$CellContext`forces$$, \
+$CellContext`newMagnitude$$, $CellContext`newAngle$$}}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{546., {314.134033203125, 319.865966796875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.9904438132868557`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"9aaded36-d022-7140-bc61-2f6685cf221d"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ArcTan", "indet", 
+   "\"\:78b0\:5230\:4e0d\:5b9a\:8868\:8fbe\:5f0f \
+\\!\\(\\*RowBox[{\\\"ArcTan\\\", \\\"[\\\", RowBox[{\\\"0\\\", \\\",\\\", \
+\\\"0\\\"}], \\\"]\\\"}]\\).\"", 2, 2, 3, 32362842492156530811, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.990443819952097*^9},
+ CellLabel->"",ExpressionUUID->"ed914d89-78ba-144b-925b-0039599e25f4"]
+}, Open  ]]
+},
+WindowSize->{1280, 732},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2ae8fb6e-3b10-fb40-b69c-61eab93be458"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 12968, 317, 732, "Input",ExpressionUUID->"efd1cca8-c00e-3e40-9874-1e0b49e29646"],
+Cell[13551, 341, 6935, 143, 653, "Output",ExpressionUUID->"9aaded36-d022-7140-bc61-2f6685cf221d"],
+Cell[20489, 486, 405, 8, 28, "Message",ExpressionUUID->"ed914d89-78ba-144b-925b-0039599e25f4"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
