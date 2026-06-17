@@ -1,0 +1,1154 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     49333,       1133]
+NotebookOptionsPosition[     49728,       1128]
+NotebookOutlinePosition[     50145,       1145]
+CellTagsIndexPosition[     50102,       1142]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"rVec", "=", 
+        RowBox[{"{", 
+         RowBox[{"x0", ",", "y0"}], "}"}]}], ",", "eField", ",", "pot", ",", 
+       RowBox[{"maxArrow", "=", "0.7"}], ",", "eFieldNorm", ",", 
+       "contoursList", ",", "numContours", ",", "chargeColor", ",", 
+       "chargeSign", ",", "testChargeColor", ",", "forceMagnitude", ",", 
+       "fieldDir", ",", "fieldLines", ",", "startR", ",", "boundaryR", ",", 
+       "forceDir", ",", "forceVec", ",", "scaledForce", ",", "eFieldDisplay", 
+       ",", "potDisplay", ",", "forceDisplay", ",", "dist", ",", "numLines"}],
+       "}"}], ",", 
+     RowBox[{
+     "(*", "\:8ba1\:7b97\:7535\:573a\:5f3a\:5ea6\:548c\:7535\:52bf", "*)"}], 
+     RowBox[{
+      RowBox[{"dist", "=", 
+       RowBox[{"Norm", "[", "rVec", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"eField", "=", 
+       RowBox[{"q", " ", 
+        RowBox[{"rVec", "/", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"rVec", ".", "rVec"}], "+", "0.001"}], ")"}], "^", 
+          RowBox[{"(", 
+           RowBox[{"3", "/", "2"}], ")"}]}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"pot", "=", 
+       RowBox[{"q", "/", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{"x0", "^", "2"}], "+", 
+          RowBox[{"y0", "^", "2"}], "+", "0.001"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"eFieldNorm", "=", 
+       RowBox[{"Norm", "[", "eField", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"\:8bd5\:63a2\:7535\:8377\:53d7\:529b", " ", "F"}], "=", 
+        RowBox[{"q_test", "*", "E"}]}], "*)"}], 
+      RowBox[{"forceMagnitude", "=", 
+       RowBox[{
+        RowBox[{"Abs", "[", "qTest", "]"}], "*", "eFieldNorm"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"forceDir", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"qTest", ">=", "0"}], ",", "1", ",", 
+         RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"forceVec", "=", 
+       RowBox[{"forceDir", "*", "eField"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+      "(*", "\:53d7\:529b\:7bad\:5934\:957f\:5ea6\:4e0e\:529b\:7684\:5927\
+\:5c0f\:6210\:6b63\:6bd4", "*)"}], 
+      RowBox[{"scaledForce", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"forceMagnitude", ">", "0.001"}], "&&", 
+          RowBox[{"eFieldNorm", ">", "0.001"}]}], ",", 
+         RowBox[{"Min", "[", 
+          RowBox[{
+           RowBox[{"0.6", "*", 
+            RowBox[{"forceMagnitude", "/", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Max", "[", 
+                 RowBox[{
+                  RowBox[{"Abs", "[", "q", "]"}], ",", "0.1"}], "]"}], "*", 
+                RowBox[{
+                 RowBox[{"Max", "[", 
+                  RowBox[{
+                   RowBox[{"Abs", "[", "qTest", "]"}], ",", "0.1"}], "]"}], "/",
+                  "50"}]}], "+", "0.01"}], ")"}]}]}], ",", "0.6"}], "]"}], ",",
+          "0"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+      "(*", "\:573a\:6e90\:7535\:8377\:989c\:8272\:548c\:7b26\:53f7", "*)"}], 
+      RowBox[{"chargeColor", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"q", ">=", "0"}], ",", "Red", ",", "Blue"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"chargeSign", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"q", ">=", "0"}], ",", "\"\<+q\>\"", ",", "\"\<-q\>\""}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", "\:8bd5\:63a2\:7535\:8377\:989c\:8272", "*)"}], 
+      RowBox[{"testChargeColor", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"qTest", ">=", "0"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", "0.3", ",", "0.7"}], "]"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0.3", ",", "0.5", ",", "1"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"===", 
+        RowBox[{"==", "\:7b49\:52bf\:7ebf\:81ea\:52a8\:751f\:6210"}], "===", 
+        "=="}], "*)"}], 
+      RowBox[{"numContours", "=", 
+       RowBox[{"Min", "[", 
+        RowBox[{"12", ",", 
+         RowBox[{"4", "+", 
+          RowBox[{"3", "*", 
+           RowBox[{"Log10", "[", 
+            RowBox[{
+             RowBox[{"Max", "[", 
+              RowBox[{
+               RowBox[{"Abs", "[", "q", "]"}], ",", "0.1"}], "]"}], "+", 
+             "1"}], "]"}]}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"contoursList", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Abs", "[", "q", "]"}], ">", "0.01"}], ",", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Sign", "[", "q", "]"}], "*", 
+               RowBox[{
+                RowBox[{"Abs", "[", "q", "]"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", 
+                  RowBox[{"0.25", "*", "i"}], "+", 
+                  RowBox[{"0.015", "*", 
+                   RowBox[{"i", "^", "2"}]}]}], ")"}]}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", "numContours"}], "}"}]}], "]"}], ",", 
+            RowBox[{"{", "}"}]}], "]"}], ",", 
+          RowBox[{"{", "0", "}"}]}], "}"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"===", 
+        RowBox[{
+        "==", "\:7535\:573a\:7ebf\:6570\:91cf\:968f\:7535\:8377\:5927\:5c0f\
+\:53d8\:5316"}], "===", "=="}], "*)"}], 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"|", "q", "|"}], " ", "=", 
+         RowBox[{"0.1", " ", "\:65f6\:7ea612\:6761"}]}], "\:ff0c", 
+        RowBox[{
+         RowBox[{"|", "q", "|"}], " ", "=", 
+         RowBox[{"1", " ", "\:65f6\:7ea624\:6761"}]}], "\:ff0c", 
+        RowBox[{
+         RowBox[{"|", "q", "|"}], " ", "=", 
+         RowBox[{"50", " ", "\:65f6\:7ea648\:6761"}]}]}], "*)"}], 
+      RowBox[{"numLines", "=", 
+       RowBox[{"Round", "[", 
+        RowBox[{"12", "+", 
+         RowBox[{"18", "*", 
+          RowBox[{"Log10", "[", 
+           RowBox[{
+            RowBox[{"Max", "[", 
+             RowBox[{
+              RowBox[{"Abs", "[", "q", "]"}], ",", "0.1"}], "]"}], "+", "1"}],
+            "]"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"numLines", "=", 
+       RowBox[{"Max", "[", 
+        RowBox[{"8", ",", 
+         RowBox[{"Min", "[", 
+          RowBox[{"56", ",", "numLines"}], "]"}]}], "]"}]}], ";", 
+      RowBox[{"(*", 
+       RowBox[{"\:9650\:5236\:57288", "-", 
+        RowBox[{"56", "\:6761\:4e4b\:95f4"}]}], "*)"}], 
+      RowBox[{"(*", 
+       RowBox[{
+       "\:7535\:573a\:65b9\:5411", "\:ff1a", "\:6b63\:7535\:8377\:5411\:5916",
+         "\:ff0c", "\:8d1f\:7535\:8377\:5411\:5185"}], "*)"}], 
+      RowBox[{"fieldDir", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"q", ">=", "0"}], ",", "1", ",", 
+         RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"===", 
+         RowBox[{"==", "\:751f\:6210\:7535\:573a\:7ebf"}]}], "\:ff1a", 
+        "\:4ece\:7535\:8377\:8868\:9762\:5747\:5300\:53d1\:5c04", "\:ff0c", 
+        RowBox[{"\:5ef6\:4f38\:5230\:8fb9\:754c", "===", "=="}]}], "*)"}], 
+      RowBox[{"startR", "=", "0.12"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"boundaryR", "=", "2.35"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"numPoints", "=", "60"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"fieldLines", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Module", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+              "theta", ",", "pointList", ",", "midIndex", ",", "midPoint", ",",
+                "arrowDir"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"theta", "=", "angle"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"pointList", "=", 
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"r", "*", 
+                    RowBox[{"Cos", "[", "theta", "]"}]}], ",", 
+                   RowBox[{"r", "*", 
+                    RowBox[{"Sin", "[", "theta", "]"}]}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"r", ",", "startR", ",", "boundaryR", ",", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"boundaryR", "-", "startR"}], ")"}], "/", 
+                    "numPoints"}]}], "}"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"midIndex", "=", 
+               RowBox[{"Floor", "[", 
+                RowBox[{
+                 RowBox[{"Length", "[", "pointList", "]"}], "*", "0.4"}], 
+                "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"midPoint", "=", 
+               RowBox[{"pointList", "[", 
+                RowBox[{"[", "midIndex", "]"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"arrowDir", "=", "fieldDir"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"Blue", ",", 
+                  RowBox[{"Thickness", "[", 
+                   RowBox[{"0.0015", "+", 
+                    RowBox[{"0.0005", "*", 
+                    RowBox[{"Log10", "[", 
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"Abs", "[", "q", "]"}], ",", "0.1"}], "]"}], "+", 
+                    "1"}], "]"}]}]}], "]"}], ",", 
+                  RowBox[{"Line", "[", "pointList", "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"Blue", ",", 
+                  RowBox[{"Arrowheads", "[", 
+                   RowBox[{"0.03", "+", 
+                    RowBox[{"0.005", "*", 
+                    RowBox[{"Log10", "[", 
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"Abs", "[", "q", "]"}], ",", "0.1"}], "]"}], "+", 
+                    "1"}], "]"}]}]}], "]"}], ",", 
+                  RowBox[{"Arrow", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"midPoint", ",", 
+                    RowBox[{"midPoint", "+", 
+                    RowBox[{"0.08", "*", "arrowDir", "*", 
+                    RowBox[{"Normalize", "[", "midPoint", "]"}]}]}]}], "}"}], 
+                   "]"}]}], "}"}]}], "}"}]}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"angle", ",", "0", ",", 
+             RowBox[{
+              RowBox[{"2", " ", "Pi"}], "-", 
+              RowBox[{"2", " ", 
+               RowBox[{"Pi", "/", "numLines"}]}]}], ",", 
+             RowBox[{"2", " ", 
+              RowBox[{"Pi", "/", "numLines"}]}]}], "}"}]}], "]"}], ",", "1"}],
+         "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"===", 
+         RowBox[{"==", "\:4fee\:590dNumberForm"}]}], "\:ff1a", 
+        RowBox[{"\:4f7f\:7528\:79d1\:5b66\:8ba1\:6570\:6cd5", "===", "=="}]}],
+        "*)"}], 
+      RowBox[{"eFieldDisplay", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"eFieldNorm", ">", "100"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"eFieldNorm", ",", 
+           RowBox[{"{", 
+            RowBox[{"3", ",", "1"}], "}"}], ",", 
+           RowBox[{"ExponentFunction", "->", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"#", "<", "3"}], ",", "Null", ",", "#"}], "]"}], 
+              "&"}], ")"}]}]}], "]"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"eFieldNorm", ",", 
+           RowBox[{"{", 
+            RowBox[{"4", ",", "2"}], "}"}]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"potDisplay", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", "pot", "]"}], ">", "100"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"pot", ",", 
+           RowBox[{"{", 
+            RowBox[{"3", ",", "1"}], "}"}], ",", 
+           RowBox[{"ExponentFunction", "->", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"#", "<", "3"}], ",", "Null", ",", "#"}], "]"}], 
+              "&"}], ")"}]}]}], "]"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"pot", ",", 
+           RowBox[{"{", 
+            RowBox[{"4", ",", "2"}], "}"}]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"forceDisplay", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"forceMagnitude", ">", "100"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"forceMagnitude", ",", 
+           RowBox[{"{", 
+            RowBox[{"3", ",", "1"}], "}"}], ",", 
+           RowBox[{"ExponentFunction", "->", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"#", "<", "3"}], ",", "Null", ",", "#"}], "]"}], 
+              "&"}], ")"}]}]}], "]"}], ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"forceMagnitude", ",", 
+           RowBox[{"{", 
+            RowBox[{"4", ",", "2"}], "}"}]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", 
+       RowBox[{"(*", " ", 
+        RowBox[{"===", 
+         RowBox[{"==", "\:7b49\:52bf\:7ebf"}], "===", "=="}], "*)"}], 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{"showEquipotential", ",", 
+          RowBox[{"ContourPlot", "[", 
+           RowBox[{
+            RowBox[{"q", "/", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"x", "^", "2"}], "+", 
+               RowBox[{"y", "^", "2"}], "+", "0.001"}], "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{"-", "2.4"}], ",", "2.4"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", 
+              RowBox[{"-", "2.4"}], ",", "2.4"}], "}"}], ",", 
+            RowBox[{"Contours", "->", "contoursList"}], ",", 
+            RowBox[{"ContourStyle", "->", 
+             RowBox[{"Directive", "[", 
+              RowBox[{"Orange", ",", "Dashed", ",", 
+               RowBox[{"Opacity", "[", "0.8", "]"}], ",", 
+               RowBox[{"Thickness", "[", "0.002", "]"}]}], "]"}]}], ",", 
+            RowBox[{"ContourShading", "->", "None"}], ",", 
+            RowBox[{"PlotLegends", "->", 
+             RowBox[{"Placed", "[", 
+              RowBox[{"Automatic", ",", "Right"}], "]"}]}]}], "]"}], ",", 
+          RowBox[{"Graphics", "[", 
+           RowBox[{"{", "}"}], "]"}]}], "]"}], ",", 
+        RowBox[{"(*", " ", 
+         RowBox[{"===", 
+          RowBox[{"==", "\:7535\:573a\:7ebf"}], "===", "=="}], "*)"}], 
+        RowBox[{"If", "[", 
+         RowBox[{"showFieldLines", ",", 
+          RowBox[{"Graphics", "[", "fieldLines", "]"}], ",", 
+          RowBox[{"Graphics", "[", 
+           RowBox[{"{", "}"}], "]"}]}], "]"}], ",", 
+        RowBox[{"(*", " ", 
+         RowBox[{"===", 
+          RowBox[{"==", "\:56fe\:5f62\:53e0\:52a0"}], "===", "=="}], "*)"}], 
+        RowBox[{"Graphics", "[", 
+         RowBox[{"{", 
+          RowBox[{"(*", "\:573a\:6e90\:7535\:8377", "*)"}], 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"chargeColor", ",", 
+             RowBox[{"Disk", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "0.12"}], "]"}]}], "}"}],
+            ",", 
+           RowBox[{"{", 
+            RowBox[{"White", ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"chargeSign", ",", "14", ",", "Bold"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}]}], "]"}]}], "}"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              
+              RowBox[{"\"\<\:573a\:6e90\:7535\:8377\>\"", ",", "9", ",", 
+               "chargeColor", ",", "Bold", ",", 
+               RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"-", "0.25"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"\"\<q = \>\"", "<>", 
+                RowBox[{"ToString", "@", 
+                 RowBox[{"NumberForm", "[", 
+                  RowBox[{"q", ",", 
+                   RowBox[{"{", 
+                    RowBox[{"4", ",", "1"}], "}"}]}], "]"}]}], 
+                "<>", "\"\< C\>\""}], ",", "9", ",", "chargeColor", ",", 
+               "Bold", ",", 
+               RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"-", "0.4"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{
+           "(*", "\:663e\:793a\:5f53\:524d\:7535\:573a\:7ebf\:6570\:91cf", 
+            "*)"}], 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"\"\<\:7535\:573a\:7ebf\:6570: \>\"", "<>", 
+                RowBox[{"ToString", "[", "numLines", "]"}]}], ",", "8", ",", 
+               "Blue", ",", 
+               RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"-", "0.55"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"(*", "\:8bd5\:63a2\:7535\:8377", "*)"}], 
+           RowBox[{"{", 
+            RowBox[{"testChargeColor", ",", 
+             RowBox[{"PointSize", "[", "0.03", "]"}], ",", 
+             RowBox[{"Point", "[", 
+              RowBox[{"{", 
+               RowBox[{"x0", ",", "y0"}], "}"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"testChargeColor", ",", "Dashed", ",", 
+             RowBox[{"Circle", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x0", ",", "y0"}], "}"}], ",", "0.06"}], "]"}]}], 
+            "}"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              
+              RowBox[{"\"\<\:8bd5\:63a2\:7535\:8377\>\"", ",", "9", ",", 
+               "testChargeColor", ",", "Bold", ",", 
+               RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"x0", "+", "0.15"}], ",", 
+               RowBox[{"y0", "-", "0.18"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"\"\<q\:2080 = \>\"", "<>", 
+                RowBox[{"ToString", "@", 
+                 RowBox[{"NumberForm", "[", 
+                  RowBox[{"qTest", ",", 
+                   RowBox[{"{", 
+                    RowBox[{"4", ",", "1"}], "}"}]}], "]"}]}], 
+                "<>", "\"\< C\>\""}], ",", "8", ",", "testChargeColor", ",", 
+               RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"x0", "+", "0.15"}], ",", 
+               RowBox[{"y0", "-", "0.33"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"(*", " ", 
+            RowBox[{"===", 
+             RowBox[{"==", "\:53d7\:529b\:7bad\:5934"}], "===", "=="}], 
+            "*)"}], 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"forceMagnitude", ">", "0.001"}], "&&", 
+              RowBox[{"eFieldNorm", ">", "0.001"}]}], ",", 
+             RowBox[{"Module", "[", 
+              RowBox[{
+               RowBox[{"{", "forceArrowEnd", "}"}], ",", 
+               RowBox[{
+                RowBox[{"forceArrowEnd", "=", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x0", "+", 
+                    RowBox[{"scaledForce", "*", 
+                    RowBox[{
+                    RowBox[{"Normalize", "[", "forceVec", "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ",", 
+                   RowBox[{"y0", "+", 
+                    RowBox[{"scaledForce", "*", 
+                    RowBox[{
+                    RowBox[{"Normalize", "[", "forceVec", "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}]}], "}"}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{"1", ",", "0.0", ",", "0"}], "]"}], ",", 
+                  RowBox[{"Thickness", "[", "0.006", "]"}], ",", 
+                  RowBox[{"Arrow", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"x0", ",", "y0"}], "}"}], ",", "forceArrowEnd"}], 
+                    "}"}], "]"}], ",", 
+                  RowBox[{"Text", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<F\>\"", ",", "14", ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", "0.0", ",", "0"}], "]"}], ",", "Bold", ",", 
+                    RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"x0", "+", 
+                    RowBox[{"1.1", "*", "scaledForce", "*", 
+                    RowBox[{
+                    RowBox[{"Normalize", "[", "forceVec", "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}]}], ",", 
+                    RowBox[{"y0", "+", 
+                    RowBox[{"1.1", "*", "scaledForce", "*", 
+                    RowBox[{
+                    RowBox[{"Normalize", "[", "forceVec", "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}]}], "}"}]}], "]"}], ",", 
+                  RowBox[{"Text", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<F = \>\"", "<>", 
+                    RowBox[{"ToString", "[", "forceDisplay", "]"}], 
+                    "<>", "\"\< N\>\""}], ",", "9", ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", "0.0", ",", "0"}], "]"}], ",", "Bold", ",", 
+                    RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"x0", "+", "0.35"}], ",", 
+                    RowBox[{"y0", "-", "0.50"}]}], "}"}]}], "]"}], ",", 
+                  RowBox[{"Text", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"qTest", ">", "0"}], 
+                    ",", "\"\<\:53d7\:529b\:6cbfE\:65b9\:5411\>\"", ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"qTest", "<", "0"}], 
+                    ",", "\"\<\:53d7\:529b\:4e0eE\:76f8\:53cd\>\"", 
+                    ",", "\"\<F=0\>\""}], "]"}]}], "]"}], ",", "8", ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", "0.0", ",", "0"}], "]"}], ",", "Bold", ",", 
+                    RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"x0", "+", "0.35"}], ",", 
+                    RowBox[{"y0", "-", "0.63"}]}], "}"}]}], "]"}]}], 
+                 "}"}]}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Text", "[", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{"\"\<F = 0 N\>\"", ",", "10", ",", "Gray", ",", 
+                  RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"x0", "+", "0.35"}], ",", 
+                  RowBox[{"y0", "-", "0.50"}]}], "}"}]}], "]"}], "}"}]}], 
+            "]"}], ",", 
+           RowBox[{"(*", " ", 
+            RowBox[{"===", 
+             RowBox[{"==", "\:4fe1\:606f\:6807\:7b7e"}], "===", "=="}], 
+            "*)"}], 
+           RowBox[{"If", "[", 
+            RowBox[{"showInfo", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"\"\<E = \>\"", "<>", 
+                    RowBox[{"ToString", "[", "eFieldDisplay", "]"}], 
+                    "<>", "\"\< N/C\>\""}], ",", "9", ",", "Black", ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x0", "+", "0.35"}], ",", 
+                   RowBox[{"y0", "+", "0.48"}]}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"\"\<V = \>\"", "<>", 
+                    RowBox[{"ToString", "[", "potDisplay", "]"}], 
+                    "<>", "\"\< V\>\""}], ",", "9", ",", "Black", ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x0", "+", "0.35"}], ",", 
+                   RowBox[{"y0", "+", "0.30"}]}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{"\"\<r = \>\"", "<>", 
+                    RowBox[{"ToString", "@", 
+                    RowBox[{"NumberForm", "[", 
+                    RowBox[{"dist", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}]}], 
+                    "<>", "\"\< m\>\""}], ",", "8", ",", "Gray", ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x0", "+", "0.35"}], ",", 
+                   RowBox[{"y0", "+", "0.12"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"(*", " ", 
+            RowBox[{"===", 
+             RowBox[{"==", "\:56fe\:4f8b\:8bf4\:660e"}], "===", "=="}], 
+            "*)"}], 
+           RowBox[{"If", "[", 
+            RowBox[{"showLegend", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  
+                  RowBox[{"\"\<\:7535\:573a\:7ebf \[RightArrow] \>\"", ",", 
+                   "9", ",", "Blue", ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2.1"}], ",", "2.1"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  
+                  RowBox[{"\"\<\:7b49\:52bf\:7ebf (\:865a\:7ebf)\>\"", ",", 
+                   "9", ",", "Orange", ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2.1"}], ",", "1.9"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  
+                  RowBox[{"\"\<\:8bd5\:63a2\:7535\:8377 \[FilledCircle]\>\"", 
+                   ",", "9", ",", 
+                   RowBox[{"RGBColor", "[", 
+                    RowBox[{"0.8", ",", "0.2", ",", "0.8"}], "]"}], ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2.1"}], ",", "1.7"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<\:53d7\:529b F \[RightArrow]\>\"", ",", "9", ",", 
+                   RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", "0.0", ",", "0"}], "]"}], ",", 
+                   RowBox[{"Background", "->", "White"}]}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "2.1"}], ",", "1.5"}], "}"}]}], "]"}]}], 
+              "}"}], ",", 
+             RowBox[{"{", "}"}]}], "]"}]}], "}"}], "]"}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "2.4"}], ",", "2.4"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "2.4"}], ",", "2.4"}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"Axes", "->", "True"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<x / m\>\"", ",", "\"\<y / m\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotLabel", "->", 
+         RowBox[{"Style", "[", 
+          
+          RowBox[{"\"\<\:70b9\:7535\:8377\:7535\:573a\:5206\:5e03\:4e0e\:8bd5\
+\:63a2\:7535\:8377\:53d7\:529b\>\"", ",", "14", ",", "Bold"}], "]"}]}], ",", 
+        RowBox[{"ImageSize", "->", "520"}], ",", 
+        RowBox[{"AspectRatio", "->", "1"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", "\:63a7\:5236\:53c2\:6570"}], "===", "=="}], "*)"}], 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"q", ",", "1", ",", "\"\<\:573a\:6e90\:7535\:8377 q / C\>\""}], 
+      "}"}], ",", 
+     RowBox[{"-", "50"}], ",", "50", ",", "0.5", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "qTest", ",", "1", 
+       ",", "\"\<\:8bd5\:63a2\:7535\:8377 q\:2080 / C\>\""}], "}"}], ",", 
+     RowBox[{"-", "50"}], ",", "50", ",", "0.5", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "x0", ",", "1", ",", "\"\<\:8bd5\:63a2\:7535\:8377 x\:2080 / m\>\""}], 
+      "}"}], ",", 
+     RowBox[{"-", "1.8"}], ",", "1.8", ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "y0", ",", "0.5", ",", "\"\<\:8bd5\:63a2\:7535\:8377 y\:2080 / m\>\""}],
+       "}"}], ",", 
+     RowBox[{"-", "1.8"}], ",", "1.8", ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"(*", " ", 
+    RowBox[{"===", 
+     RowBox[{"==", "\:663e\:793a\:5f00\:5173"}], "===", "=="}], "*)"}], 
+   "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<\:663e\:793a\:9009\:9879\>\"", ",", "12", ",", "Bold"}], 
+    "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showFieldLines", ",", "True", 
+       ",", "\"\<\:663e\:793a\:7535\:573a\:7ebf\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showEquipotential", ",", "True", 
+       ",", "\"\<\:663e\:793a\:7b49\:52bf\:7ebf\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showInfo", ",", "True", 
+       ",", "\"\<\:663e\:793a\:6570\:503c\:4fe1\:606f\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showLegend", ",", "True", ",", "\"\<\:663e\:793a\:56fe\:4f8b\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "->", "Left"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.9811446363846664`*^9, 3.9811446363846664`*^9}, {
+   3.981416747876356*^9, 3.981416761023525*^9}, 3.9814180617886868`*^9, 
+   3.9906975523989754`*^9, 3.9906992224076767`*^9, 3.9906992744083157`*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"13cbedd6-64f9-f740-ba53-55cf9ee08977"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`q$$ = 40., $CellContext`qTest$$ = 
+    15., $CellContext`showEquipotential$$ = 
+    True, $CellContext`showFieldLines$$ = True, $CellContext`showInfo$$ = 
+    True, $CellContext`showLegend$$ = True, $CellContext`x0$$ = 
+    1.8, $CellContext`y0$$ = 1.2500000000000002`, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`q$$], 1, "\:573a\:6e90\:7535\:8377 q / C"}, -50, 50, 
+      0.5, ControlType -> Manipulator}, {{
+       Hold[$CellContext`qTest$$], 1, 
+       "\:8bd5\:63a2\:7535\:8377 q\:2080 / C"}, -50, 50, 0.5, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`x0$$], 1, 
+       "\:8bd5\:63a2\:7535\:8377 x\:2080 / m"}, -1.8, 1.8, 0.05, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`y0$$], 0.5, 
+       "\:8bd5\:63a2\:7535\:8377 y\:2080 / m"}, -1.8, 1.8, 0.05, ControlType -> 
+      Manipulator}, {
+      Hold[
+       Style["\:663e\:793a\:9009\:9879", 12, Bold]], 
+      Manipulate`Dump`ThisIsNotAControl, ControlType -> None}, {{
+       Hold[$CellContext`showFieldLines$$], True, 
+       "\:663e\:793a\:7535\:573a\:7ebf"}, {True, False}, ControlType -> 
+      Checkbox}, {{
+       Hold[$CellContext`showEquipotential$$], True, 
+       "\:663e\:793a\:7b49\:52bf\:7ebf"}, {True, False}, ControlType -> 
+      Checkbox}, {{
+       Hold[$CellContext`showInfo$$], True, 
+       "\:663e\:793a\:6570\:503c\:4fe1\:606f"}, {True, False}, ControlType -> 
+      Checkbox}, {{
+       Hold[$CellContext`showLegend$$], True, "\:663e\:793a\:56fe\:4f8b"}, {
+      True, False}, ControlType -> Checkbox}}, Typeset`size$$ = {
+    520., {258.36162651909723`, 264.09356011284723`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`q$$ = 1, $CellContext`qTest$$ = 
+        1, $CellContext`showEquipotential$$ = 
+        True, $CellContext`showFieldLines$$ = True, $CellContext`showInfo$$ = 
+        True, $CellContext`showLegend$$ = True, $CellContext`x0$$ = 
+        1, $CellContext`y0$$ = 0.5}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`rVec$ = {$CellContext`x0$$, $CellContext`y0$$}, \
+$CellContext`eField$, $CellContext`pot$, $CellContext`maxArrow$ = 
+         0.7, $CellContext`eFieldNorm$, $CellContext`contoursList$, \
+$CellContext`numContours$, $CellContext`chargeColor$, \
+$CellContext`chargeSign$, $CellContext`testChargeColor$, \
+$CellContext`forceMagnitude$, $CellContext`fieldDir$, \
+$CellContext`fieldLines$, $CellContext`startR$, $CellContext`boundaryR$, \
+$CellContext`forceDir$, $CellContext`forceVec$, $CellContext`scaledForce$, \
+$CellContext`eFieldDisplay$, $CellContext`potDisplay$, \
+$CellContext`forceDisplay$, $CellContext`dist$, $CellContext`numLines$}, \
+$CellContext`dist$ = 
+         Norm[$CellContext`rVec$]; $CellContext`eField$ = $CellContext`q$$ \
+($CellContext`rVec$/(Dot[$CellContext`rVec$, $CellContext`rVec$] + 0.001)^(3/
+            2)); $CellContext`pot$ = $CellContext`q$$/
+          Sqrt[$CellContext`x0$$^2 + $CellContext`y0$$^2 + 
+           0.001]; $CellContext`eFieldNorm$ = 
+         Norm[$CellContext`eField$]; $CellContext`forceMagnitude$ = 
+         Abs[$CellContext`qTest$$] $CellContext`eFieldNorm$; \
+$CellContext`forceDir$ = 
+         If[$CellContext`qTest$$ >= 0, 
+           1, -1]; $CellContext`forceVec$ = $CellContext`forceDir$ \
+$CellContext`eField$; $CellContext`scaledForce$ = If[
+           
+           And[$CellContext`forceMagnitude$ > 0.001, $CellContext`eFieldNorm$ > 
+            0.001], 
+           Min[0.6 ($CellContext`forceMagnitude$/(Max[
+                Abs[$CellContext`q$$], 0.1] (Max[
+                 Abs[$CellContext`qTest$$], 0.1]/50) + 0.01)), 0.6], 
+           0]; $CellContext`chargeColor$ = 
+         If[$CellContext`q$$ >= 0, Red, Blue]; $CellContext`chargeSign$ = 
+         If[$CellContext`q$$ >= 0, "+q", "-q"]; $CellContext`testChargeColor$ = 
+         If[$CellContext`qTest$$ >= 0, 
+           RGBColor[1, 0.3, 0.7], 
+           RGBColor[0.3, 0.5, 1]]; $CellContext`numContours$ = 
+         Min[12, 4 + 3 Log10[Max[
+                Abs[$CellContext`q$$], 0.1] + 1]]; $CellContext`contoursList$ = 
+         Flatten[{
+            If[Abs[$CellContext`q$$] > 0.01, 
+             Table[
+             Sign[$CellContext`q$$] (Abs[$CellContext`q$$]/(1 + 
+               0.25 $CellContext`i + 
+               0.015 $CellContext`i^2)), {$CellContext`i, 
+               1, $CellContext`numContours$}], {}], {
+            0}}]; $CellContext`numLines$ = Round[12 + 18 Log10[Max[
+                Abs[$CellContext`q$$], 0.1] + 1]]; $CellContext`numLines$ = 
+         Max[8, 
+           Min[56, $CellContext`numLines$]]; $CellContext`fieldDir$ = 
+         If[$CellContext`q$$ >= 0, 1, -1]; $CellContext`startR$ = 
+         0.12; $CellContext`boundaryR$ = 2.35; $CellContext`numPoints = 
+         60; $CellContext`fieldLines$ = Flatten[
+           Table[
+            
+            Module[{$CellContext`theta$, $CellContext`pointList$, \
+$CellContext`midIndex$, $CellContext`midPoint$, $CellContext`arrowDir$}, \
+$CellContext`theta$ = $CellContext`angle; $CellContext`pointList$ = 
+              Table[{$CellContext`r Cos[$CellContext`theta$], $CellContext`r 
+                 Sin[$CellContext`theta$]}, {$CellContext`r, \
+$CellContext`startR$, $CellContext`boundaryR$, ($CellContext`boundaryR$ - \
+$CellContext`startR$)/$CellContext`numPoints}]; $CellContext`midIndex$ = 
+              Floor[Length[$CellContext`pointList$] 
+                0.4]; $CellContext`midPoint$ = 
+              Part[$CellContext`pointList$, $CellContext`midIndex$]; \
+$CellContext`arrowDir$ = $CellContext`fieldDir$; {{Blue, 
+                Thickness[0.0015 + 0.0005 Log10[Max[
+                    Abs[$CellContext`q$$], 0.1] + 1]], 
+                Line[$CellContext`pointList$]}, {Blue, 
+                Arrowheads[0.03 + 0.005 Log10[Max[
+                    Abs[$CellContext`q$$], 0.1] + 1]], 
+                
+                Arrow[{$CellContext`midPoint$, $CellContext`midPoint$ + 
+                  0.08 $CellContext`arrowDir$ 
+                   Normalize[$CellContext`midPoint$]}]}}], \
+{$CellContext`angle, 0, 2 Pi - 2 (Pi/$CellContext`numLines$), 
+             2 (Pi/$CellContext`numLines$)}], 1]; $CellContext`eFieldDisplay$ = 
+         If[$CellContext`eFieldNorm$ > 100, 
+           
+           NumberForm[$CellContext`eFieldNorm$, {3, 1}, 
+            ExponentFunction -> (If[# < 3, Null, #]& )], 
+           
+           NumberForm[$CellContext`eFieldNorm$, {4, 
+            2}]]; $CellContext`potDisplay$ = If[Abs[$CellContext`pot$] > 100, 
+           
+           NumberForm[$CellContext`pot$, {3, 1}, 
+            ExponentFunction -> (If[# < 3, Null, #]& )], 
+           NumberForm[$CellContext`pot$, {4, 2}]]; $CellContext`forceDisplay$ = 
+         If[$CellContext`forceMagnitude$ > 100, 
+           
+           NumberForm[$CellContext`forceMagnitude$, {3, 1}, 
+            ExponentFunction -> (If[# < 3, Null, #]& )], 
+           NumberForm[$CellContext`forceMagnitude$, {4, 2}]]; Show[
+          If[$CellContext`showEquipotential$$, 
+           
+           ContourPlot[$CellContext`q$$/
+            Sqrt[$CellContext`x^2 + $CellContext`y^2 + 
+             0.001], {$CellContext`x, -2.4, 2.4}, {$CellContext`y, -2.4, 2.4},
+             Contours -> $CellContext`contoursList$, ContourStyle -> 
+            Directive[Orange, Dashed, 
+              Opacity[0.8], 
+              Thickness[0.002]], ContourShading -> None, PlotLegends -> 
+            Placed[Automatic, Right]], 
+           Graphics[{}]], 
+          If[$CellContext`showFieldLines$$, 
+           Graphics[$CellContext`fieldLines$], 
+           Graphics[{}]], 
+          Graphics[{{$CellContext`chargeColor$, 
+             Disk[{0, 0}, 0.12]}, {White, 
+             Text[
+              Style[$CellContext`chargeSign$, 14, Bold], {0, 0}]}, 
+            Text[
+             Style[
+             "\:573a\:6e90\:7535\:8377", 9, $CellContext`chargeColor$, Bold, 
+              Background -> White], {0, -0.25}], 
+            Text[
+             Style["q = " <> ToString[
+                NumberForm[$CellContext`q$$, {4, 1}]] <> " C", 
+              9, $CellContext`chargeColor$, Bold, Background -> White], {
+             0, -0.4}], 
+            Text[
+             Style[
+             "\:7535\:573a\:7ebf\:6570: " <> ToString[$CellContext`numLines$],
+               8, Blue, Background -> White], {
+             0, -0.55}], {$CellContext`testChargeColor$, 
+             PointSize[0.03], 
+             
+             Point[{$CellContext`x0$$, $CellContext`y0$$}]}, \
+{$CellContext`testChargeColor$, Dashed, 
+             Circle[{$CellContext`x0$$, $CellContext`y0$$}, 0.06]}, 
+            Text[
+             Style[
+             "\:8bd5\:63a2\:7535\:8377", 9, $CellContext`testChargeColor$, 
+              Bold, Background -> White], {$CellContext`x0$$ + 
+              0.15, $CellContext`y0$$ - 0.18}], 
+            Text[
+             Style["q\:2080 = " <> ToString[
+                NumberForm[$CellContext`qTest$$, {4, 1}]] <> " C", 
+              8, $CellContext`testChargeColor$, Background -> 
+              White], {$CellContext`x0$$ + 0.15, $CellContext`y0$$ - 0.33}], 
+            If[
+             
+             And[$CellContext`forceMagnitude$ > 
+              0.001, $CellContext`eFieldNorm$ > 0.001], 
+             
+             Module[{$CellContext`forceArrowEnd$}, \
+$CellContext`forceArrowEnd$ = {$CellContext`x0$$ + $CellContext`scaledForce$ 
+                  Part[
+                    Normalize[$CellContext`forceVec$], 
+                    1], $CellContext`y0$$ + $CellContext`scaledForce$ Part[
+                    Normalize[$CellContext`forceVec$], 2]}; {
+                RGBColor[1, 0., 0], 
+                Thickness[0.006], 
+                
+                Arrow[{{$CellContext`x0$$, $CellContext`y0$$}, \
+$CellContext`forceArrowEnd$}], 
+                Text[
+                 Style["F", 14, 
+                  RGBColor[1, 0., 0], Bold, Background -> 
+                  White], {$CellContext`x0$$ + 
+                  1.1 $CellContext`scaledForce$ Part[
+                    Normalize[$CellContext`forceVec$], 1], $CellContext`y0$$ + 
+                  1.1 $CellContext`scaledForce$ Part[
+                    Normalize[$CellContext`forceVec$], 2]}], 
+                Text[
+                 Style[
+                 "F = " <> ToString[$CellContext`forceDisplay$] <> " N", 9, 
+                  RGBColor[1, 0., 0], Bold, Background -> 
+                  White], {$CellContext`x0$$ + 0.35, $CellContext`y0$$ - 
+                  0.5}], 
+                Text[
+                 Style[
+                  
+                  If[$CellContext`qTest$$ > 0, 
+                   "\:53d7\:529b\:6cbfE\:65b9\:5411", 
+                   
+                   If[$CellContext`qTest$$ < 0, 
+                    "\:53d7\:529b\:4e0eE\:76f8\:53cd", "F=0"]], 8, 
+                  RGBColor[1, 0., 0], Bold, Background -> 
+                  White], {$CellContext`x0$$ + 0.35, $CellContext`y0$$ - 
+                  0.63}]}], {
+              Text[
+               Style[
+               "F = 0 N", 10, Gray, Background -> White], {$CellContext`x0$$ + 
+                0.35, $CellContext`y0$$ - 0.5}]}], 
+            If[$CellContext`showInfo$$, {
+              Text[
+               Style[
+               "E = " <> ToString[$CellContext`eFieldDisplay$] <> " N/C", 9, 
+                Black, Background -> White], {$CellContext`x0$$ + 
+                0.35, $CellContext`y0$$ + 0.48}], 
+              Text[
+               Style[
+               "V = " <> ToString[$CellContext`potDisplay$] <> " V", 9, Black,
+                 Background -> White], {$CellContext`x0$$ + 
+                0.35, $CellContext`y0$$ + 0.3}], 
+              Text[
+               Style["r = " <> ToString[
+                  NumberForm[$CellContext`dist$, {4, 2}]] <> " m", 8, Gray, 
+                Background -> White], {$CellContext`x0$$ + 
+                0.35, $CellContext`y0$$ + 0.12}]}, {}], 
+            If[$CellContext`showLegend$$, {
+              Text[
+               Style[
+               "\:7535\:573a\:7ebf \[RightArrow] ", 9, Blue, Background -> 
+                White], {-2.1, 2.1}], 
+              Text[
+               Style[
+               "\:7b49\:52bf\:7ebf (\:865a\:7ebf)", 9, Orange, Background -> 
+                White], {-2.1, 1.9}], 
+              Text[
+               Style["\:8bd5\:63a2\:7535\:8377 \[FilledCircle]", 9, 
+                RGBColor[0.8, 0.2, 0.8], Background -> White], {-2.1, 1.7}], 
+              Text[
+               Style["\:53d7\:529b F \[RightArrow]", 9, 
+                RGBColor[1, 0., 0], Background -> White], {-2.1, 
+               1.5}]}, {}]}], PlotRange -> {{-2.4, 2.4}, {-2.4, 2.4}}, Axes -> 
+          True, AxesLabel -> {"x / m", "y / m"}, PlotLabel -> 
+          Style["\:70b9\:7535\:8377\:7535\:573a\:5206\:5e03\:4e0e\:8bd5\:63a2\
+\:7535\:8377\:53d7\:529b", 14, Bold], ImageSize -> 520, AspectRatio -> 1]], 
+      "Specifications" :> {{{$CellContext`q$$, 1, 
+          "\:573a\:6e90\:7535\:8377 q / C"}, -50, 50, 0.5, Appearance -> 
+         "Labeled"}, {{$CellContext`qTest$$, 1, 
+          "\:8bd5\:63a2\:7535\:8377 q\:2080 / C"}, -50, 50, 0.5, Appearance -> 
+         "Labeled"}, {{$CellContext`x0$$, 1, 
+          "\:8bd5\:63a2\:7535\:8377 x\:2080 / m"}, -1.8, 1.8, 0.05, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`y0$$, 0.5, 
+          "\:8bd5\:63a2\:7535\:8377 y\:2080 / m"}, -1.8, 1.8, 0.05, 
+         Appearance -> "Labeled"}, Delimiter, 
+        Style[
+        "\:663e\:793a\:9009\:9879", 12, 
+         Bold], {{$CellContext`showFieldLines$$, True, 
+          "\:663e\:793a\:7535\:573a\:7ebf"}, {
+         True, False}}, {{$CellContext`showEquipotential$$, True, 
+          "\:663e\:793a\:7b49\:52bf\:7ebf"}, {
+         True, False}}, {{$CellContext`showInfo$$, True, 
+          "\:663e\:793a\:6570\:503c\:4fe1\:606f"}, {
+         True, False}}, {{$CellContext`showLegend$$, True, 
+          "\:663e\:793a\:56fe\:4f8b"}, {True, False}}}, 
+      "Options" :> {ControlPlacement -> Left}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      873.95703125, {286.57246636284725`, 292.30439995659725`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.990699342754566*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"6bb5bc70-eb66-7f4d-bc0d-94422c95f10b"]
+}, Open  ]]
+},
+WindowSize->{1280, 732},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2025\:5e743\:670814\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5c81726a-e847-ce4f-bb73-5cfb1de9e1c4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 32920, 785, 2087, "Input",ExpressionUUID->"13cbedd6-64f9-f740-ba53-55cf9ee08977"],
+Cell[34405, 822, 15307, 303, 595, "Output",ExpressionUUID->"6bb5bc70-eb66-7f4d-bc0d-94422c95f10b"]
+}, Open  ]]
+}
+]
+*)
+
