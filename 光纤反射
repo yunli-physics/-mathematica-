@@ -1,0 +1,87 @@
+(* 固定光纤厚度与画布范围 *)
+d = 2;                      (* 上下边界垂直距离，固定 *)
+xMin = -1; xMax = 22;       (* 固定绘图水平范围 *)
+yMin = -0.5; yMax = 2.5;    (* 固定绘图垂直范围 *)
+Lmax = 20;                  (* 最大光纤长度，用于固定画布 *)
+
+Manipulate[
+ Module[{θrad, dx, dy, pts, x0, y0, t, tTop, tBottom, tEnd, yEnd, 
+   maxIter = 2000, iter = 0},
+  
+  θrad = θ Degree;
+  dx = Cos[θrad];          (* 水平分量，θ∈[-90°,90°] 非负 *)
+  dy = Sin[θrad];          (* 垂直分量：>0 向上，<0 向下 *)
+  
+  pts = {};
+  
+  (* 仅在入射方向不直接指向外部时绘制 *)
+  If[! ((X == 0 && dy > 0) || (X == d && dy < 0)),
+   pts = {{0, d - X}};
+   x0 = 0; y0 = d - X;
+   
+   While[iter < maxIter,
+    iter++;
+    
+    If[dx == 0,   (* 垂直入射：仅反射一次，无法到达右端 *)
+     tTop = If[dy > 0, (d - y0)/dy, Infinity];
+     tBottom = If[dy < 0, (0 - y0)/dy, Infinity];
+     t = Min[Select[{tTop, tBottom}, # > 1*^-10 &]];
+     If[t == Infinity, Break[]];
+     x = x0;
+     y = y0 + dy*t;
+     If[x <= L, AppendTo[pts, {x, y}]];
+     Break[];
+     ];
+    
+    (* 计算到上下边界的碰撞时间 *)
+    tTop = If[dy > 0, (d - y0)/dy, Infinity];
+    tBottom = If[dy < 0, (0 - y0)/dy, Infinity];
+    t = Min[Select[{tTop, tBottom}, # > 1*^-10 &]];
+    
+    If[t == Infinity,   (* 水平传播 *)
+     tEnd = (L - x0)/dx;
+     yEnd = y0 + dy*tEnd;
+     AppendTo[pts, {L, yEnd}];
+     Break[];
+     ];
+     
+    x = x0 + dx*t;
+    y = y0 + dy*t;
+    
+    If[x >= L - 1*^-6,   (* 到达右端 *)
+     tEnd = (L - x0)/dx;
+     yEnd = y0 + dy*tEnd;
+     AppendTo[pts, {L, yEnd}];
+     Break[];
+     ];
+     
+    AppendTo[pts, {x, y}];
+    x0 = x; y0 = y;
+    dy = -dy;   (* 全反射：垂直速度反向 *)
+    ];
+   ];
+  
+  Graphics[{
+    Thick, Black,
+    Line[{{0, 0}, {L, 0}}],    (* 下边界 *)
+    Line[{{0, d}, {L, d}}],    (* 上边界 *)
+    Text[Style["光纤", Bold, 14], {L/2, d/2}],
+    
+    Red, Thick,
+    If[Length[pts] >= 2, Line[pts], {}]
+    },
+   Axes -> True,
+   AxesLabel -> {"x", "y"},
+   PlotRange -> {{xMin, xMax}, {yMin, yMax}},   (* 固定画布 *)
+   AspectRatio -> Automatic,
+   ImageSize -> 500
+   ]
+  ],
+ 
+ (* 滑块控件 *)
+ {{L, 10, "光纤长度 L"}, 1, Lmax, 0.1, Appearance -> "Labeled"},
+ {{X, 1, "入射高度 X"}, 0, d, 0.01, Appearance -> "Labeled"},
+ {{θ, 30, "入射夹角 θ (度)"}, -90, 90, 0.5, Appearance -> "Labeled"},
+ {{d, 2}, ControlType -> None},  (* 隐藏固定参数 *)
+ TrackedSymbols :> {L, X, θ}   (* 仅跟踪这三个变量 *)
+ ]
