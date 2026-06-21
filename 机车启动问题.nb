@@ -1,0 +1,396 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15822,        386]
+NotebookOptionsPosition[     15313,        368]
+NotebookOutlinePosition[     15737,        385]
+CellTagsIndexPosition[     15694,        382]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], "\n", 
+  RowBox[{"(*", "\:8f66\:8f86\:53c2\:6570", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "=", "10000"}], ";", 
+  RowBox[{"f", "=", "200"}], ";", 
+  RowBox[{"m", "=", "500"}], ";", 
+  RowBox[{"a0", "=", "0.2"}], ";", 
+  RowBox[{"vMax", "=", 
+   RowBox[{"P", "/", "f"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"tMaxFixed", "=", "20"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "\:56fa\:5b9a\:6700\:5927\:65f6\:95f4\:4e0a\:9650", "\:ff0c", 
+    "\:907f\:514dDynamic\:5ef6\:8fdf\:95ee\:9898"}], "*)"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "vFunc", ",", "FFunc", ",", "aFunc", ",", "F1", ",", "t1", ",", "v1", 
+       ",", 
+       RowBox[{"tSafe", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"t", ",", "0.001"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{
+     "(*", "\:5206\:542f\:52a8\:6a21\:5f0f\:5b9a\:4e49\:51fd\:6570", "*)"}], 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+        "mode", "==", "\"\<\:6052\:5b9a\:529f\:7387\:542f\:52a8\>\""}], ",", 
+        RowBox[{"(*", 
+         RowBox[{"1.", " ", "\:6052\:5b9a\:529f\:7387\:542f\:52a8"}], "*)"}], 
+        RowBox[{
+         RowBox[{"vFunc", "=", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"2", " ", "P", " ", "tSafe"}], ")"}], "/", "m"}], 
+           "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"FFunc", "=", 
+          RowBox[{"P", "/", "vFunc"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"aFunc", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"FFunc", "-", "f"}], ")"}], "/", "m"}]}], ";"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"2.", " ", "\:6052\:5b9a\:52a0\:901f\:5ea6\:542f\:52a8"}], 
+         "*)"}], ",", 
+        RowBox[{
+         RowBox[{"F1", "=", 
+          RowBox[{"f", "+", 
+           RowBox[{"m", " ", "a0"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"t1", "=", 
+          RowBox[{"P", "/", 
+           RowBox[{"(", 
+            RowBox[{"F1", " ", "a0"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"v1", "=", 
+          RowBox[{"a0", " ", "t1"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"vFunc", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"t", "<=", "t1"}], ",", 
+            RowBox[{"a0", " ", "t"}], ",", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"v1", "^", "2"}], "+", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"2", " ", "P", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"t", "-", "t1"}], ")"}]}], ")"}], "/", "m"}]}], 
+             "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"FFunc", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"t", "<=", "t1"}], ",", "F1", ",", 
+            RowBox[{"P", "/", "vFunc"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"aFunc", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"t", "<=", "t1"}], ",", "a0", ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"FFunc", "-", "f"}], ")"}], "/", "m"}]}], "]"}]}], 
+         ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"\:7ed8\:5236\:4e09\:56fe", 
+        RowBox[{"\:ff08", 
+         RowBox[{
+          RowBox[{
+          "\:7b80\:5316\:4e3a\:5b9e\:65f6\:70b9", "+", 
+           "\:6570\:503c\:663e\:793a"}], "\:ff0c", 
+          "\:907f\:514dPlot\:7684\:533a\:95f4\:95ee\:9898"}], "\:ff09"}]}], 
+       "*)"}], 
+      RowBox[{"GraphicsGrid", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Graphics", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Blue", ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{"\"\<\:901f\:5ea6 v (m/s)\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "2"}], "}"}]}], "]"}], ",", "Red", ",", 
+               RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+               RowBox[{"Point", "[", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", "vFunc"}], "}"}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"ToString", "[", 
+                  RowBox[{"Round", "[", 
+                   RowBox[{"vFunc", ",", "0.1"}], "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", 
+                   RowBox[{"vFunc", "+", "0.5"}]}], "}"}]}], "]"}]}], "}"}], 
+             ",", 
+             RowBox[{"PlotRange", "->", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "tMaxFixed"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", 
+                  RowBox[{"vMax", "+", "5"}]}], "}"}]}], "}"}]}], ",", 
+             RowBox[{"Axes", "->", "True"}], ",", 
+             RowBox[{"AxesLabel", "->", 
+              RowBox[{"{", 
+               RowBox[{"\"\<\:65f6\:95f4 t (s)\>\"", ",", "\"\<v\>\""}], 
+               "}"}]}]}], "]"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Graphics", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Orange", ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{"\"\<\:7275\:5f15\:529b F (N)\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "2"}], "}"}]}], "]"}], ",", "Red", ",", 
+               RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+               RowBox[{"Point", "[", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", "FFunc"}], "}"}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"ToString", "[", 
+                  RowBox[{"Round", "[", 
+                   RowBox[{"FFunc", ",", "0.1"}], "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", 
+                   RowBox[{"FFunc", "+", "5"}]}], "}"}]}], "]"}]}], "}"}], 
+             ",", 
+             RowBox[{"PlotRange", "->", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "tMaxFixed"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"f", ",", "2000"}], "}"}]}], "}"}]}], ",", 
+             RowBox[{"Axes", "->", "True"}], ",", 
+             RowBox[{"AxesLabel", "->", 
+              RowBox[{"{", 
+               RowBox[{"\"\<\:65f6\:95f4 t (s)\>\"", ",", "\"\<F\>\""}], 
+               "}"}]}]}], "]"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Graphics", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Green", ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{"\"\<\:52a0\:901f\:5ea6 a (m/s\.b2)\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "2"}], "}"}]}], "]"}], ",", "Red", ",", 
+               RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+               RowBox[{"Point", "[", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", "aFunc"}], "}"}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{
+                 RowBox[{"ToString", "[", 
+                  RowBox[{"Round", "[", 
+                   RowBox[{"aFunc", ",", "0.01"}], "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", 
+                   RowBox[{"aFunc", "+", "0.05"}]}], "}"}]}], "]"}]}], "}"}], 
+             ",", 
+             RowBox[{"PlotRange", "->", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "tMaxFixed"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", 
+                  RowBox[{"a0", "+", "0.1"}]}], "}"}]}], "}"}]}], ",", 
+             RowBox[{"Axes", "->", "True"}], ",", 
+             RowBox[{"AxesLabel", "->", 
+              RowBox[{"{", 
+               RowBox[{"\"\<\:65f6\:95f4 t (s)\>\"", ",", "\"\<a\>\""}], 
+               "}"}]}]}], "]"}], "}"}]}], "}"}], ",", 
+        RowBox[{"Spacings", "->", "1"}], ",", 
+        RowBox[{"ImageSize", "->", "600"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"(*", 
+    RowBox[{"\:4ea4\:4e92\:63a7\:4ef6", 
+     RowBox[{"\:ff08", "\:56fa\:5b9a\:65f6\:95f4\:8303\:56f4", "\:ff09"}]}], 
+    "*)"}], 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "mode", ",", "\"\<\:6052\:5b9a\:529f\:7387\:542f\:52a8\>\"", ",", 
+       "\"\<\:542f\:52a8\:6a21\:5f0f\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<\:6052\:5b9a\:529f\:7387\:542f\:52a8\>\"", ",", 
+       "\"\<\:6052\:5b9a\:52a0\:901f\:5ea6\:542f\:52a8\>\""}], "}"}]}], "}"}],
+    ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0.001", ",", "\"\<\:65f6\:95f4 t (s)\>\""}], "}"}], 
+     ",", "0.001", ",", "tMaxFixed", ",", "0.1"}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.99104419912829*^9, 3.99104419912829*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"61fa3758-f0bb-d14b-af73-cfd87eb5467e"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mode$$ = 
+    "\:6052\:5b9a\:529f\:7387\:542f\:52a8", $CellContext`t$$ = 20., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mode$$], "\:6052\:5b9a\:529f\:7387\:542f\:52a8", 
+       "\:542f\:52a8\:6a21\:5f0f"}, {
+      "\:6052\:5b9a\:529f\:7387\:542f\:52a8", 
+       "\:6052\:5b9a\:52a0\:901f\:5ea6\:542f\:52a8"}, ControlType -> 
+      SetterBar}, {{
+       Hold[$CellContext`t$$], 0.001, "\:65f6\:95f4 t (s)"}, 0.001, 20, 0.1, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    128.25, {184., 188.0281501340483}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mode$$ = 
+        "\:6052\:5b9a\:529f\:7387\:542f\:52a8", $CellContext`t$$ = 0.001}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`vFunc$, $CellContext`FFunc$, $CellContext`aFunc$, \
+$CellContext`F1$, $CellContext`t1$, $CellContext`v1$, $CellContext`tSafe$ = 
+         Max[$CellContext`t$$, 0.001]}, 
+        If[$CellContext`mode$$ == 
+          "\:6052\:5b9a\:529f\:7387\:542f\:52a8", $CellContext`vFunc$ = 
+           Sqrt[(2 $CellContext`P $CellContext`tSafe$)/$CellContext`m]; \
+$CellContext`FFunc$ = $CellContext`P/$CellContext`vFunc$; $CellContext`aFunc$ = \
+($CellContext`FFunc$ - $CellContext`f)/$CellContext`m; 
+          Null, $CellContext`F1$ = $CellContext`f + $CellContext`m \
+$CellContext`a0; $CellContext`t1$ = $CellContext`P/($CellContext`F1$ \
+$CellContext`a0); $CellContext`v1$ = $CellContext`a0 $CellContext`t1$; \
+$CellContext`vFunc$ = 
+           If[$CellContext`t$$ <= $CellContext`t1$, $CellContext`a0 \
+$CellContext`t$$, 
+             
+             Sqrt[$CellContext`v1$^2 + (
+                2 $CellContext`P ($CellContext`t$$ - \
+$CellContext`t1$))/$CellContext`m]]; $CellContext`FFunc$ = 
+           If[$CellContext`t$$ <= $CellContext`t1$, $CellContext`F1$, \
+$CellContext`P/$CellContext`vFunc$]; $CellContext`aFunc$ = 
+           If[$CellContext`t$$ <= $CellContext`t1$, $CellContext`a0, \
+($CellContext`FFunc$ - $CellContext`f)/$CellContext`m]; Null]; GraphicsGrid[{{
+            Graphics[{Blue, 
+              Text["\:901f\:5ea6 v (m/s)", {0, 2}], Red, 
+              PointSize[0.05], 
+              Point[{$CellContext`t$$, $CellContext`vFunc$}], 
+              Text[
+               ToString[
+                
+                Round[$CellContext`vFunc$, 
+                 0.1]], {$CellContext`t$$, $CellContext`vFunc$ + 0.5}]}, 
+             PlotRange -> {{0, $CellContext`tMaxFixed}, {
+               0, $CellContext`vMax + 5}}, Axes -> True, 
+             AxesLabel -> {"\:65f6\:95f4 t (s)", "v"}]}, {
+            Graphics[{Orange, 
+              Text["\:7275\:5f15\:529b F (N)", {0, 2}], Red, 
+              PointSize[0.05], 
+              Point[{$CellContext`t$$, $CellContext`FFunc$}], 
+              Text[
+               ToString[
+                
+                Round[$CellContext`FFunc$, 
+                 0.1]], {$CellContext`t$$, $CellContext`FFunc$ + 5}]}, 
+             PlotRange -> {{
+               0, $CellContext`tMaxFixed}, {$CellContext`f, 2000}}, Axes -> 
+             True, AxesLabel -> {"\:65f6\:95f4 t (s)", "F"}]}, {
+            Graphics[{Green, 
+              Text["\:52a0\:901f\:5ea6 a (m/s\.b2)", {0, 2}], Red, 
+              PointSize[0.05], 
+              Point[{$CellContext`t$$, $CellContext`aFunc$}], 
+              Text[
+               ToString[
+                
+                Round[$CellContext`aFunc$, 
+                 0.01]], {$CellContext`t$$, $CellContext`aFunc$ + 0.05}]}, 
+             PlotRange -> {{0, $CellContext`tMaxFixed}, {
+               0, $CellContext`a0 + 0.1}}, Axes -> True, 
+             AxesLabel -> {"\:65f6\:95f4 t (s)", "a"}]}}, Spacings -> 1, 
+          ImageSize -> 600]], 
+      "Specifications" :> {{{$CellContext`mode$$, 
+          "\:6052\:5b9a\:529f\:7387\:542f\:52a8", 
+          "\:542f\:52a8\:6a21\:5f0f"}, {
+         "\:6052\:5b9a\:529f\:7387\:542f\:52a8", 
+          "\:6052\:5b9a\:52a0\:901f\:5ea6\:542f\:52a8"}}, {{$CellContext`t$$, 
+          0.001, "\:65f6\:95f4 t (s)"}, 0.001, 20, 0.1}}, 
+      "Options" :> {ControlPlacement -> Top}, "DefaultOptions" :> {}],
+     ImageSizeCache->{272., {237.13403309800196`, 242.86596690199804`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.991044200674124*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"bf947526-9f64-5642-9450-302fd52e7749"]
+}, Open  ]]
+},
+WindowSize->{1080, 607.5},
+WindowMargins->{{-4.875, Automatic}, {Automatic, -4.875}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"495143c6-feb9-0243-8484-6f28f0709555"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 9399, 236, 857, "Input",ExpressionUUID->"61fa3758-f0bb-d14b-af73-cfd87eb5467e"],
+Cell[9982, 260, 5315, 105, 499, "Output",ExpressionUUID->"bf947526-9f64-5642-9450-302fd52e7749"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
