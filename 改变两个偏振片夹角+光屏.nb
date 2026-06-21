@@ -1,0 +1,622 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     24487,        599]
+NotebookOptionsPosition[     24656,        591]
+NotebookOutlinePosition[     25107,        609]
+CellTagsIndexPosition[     25064,        606]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"I0", "=", "1"}], ",", "theta", ",", "transI", ",", 
+       RowBox[{"z1", "=", "1.5"}], ",", 
+       RowBox[{"z2", "=", "3"}], ",", 
+       RowBox[{"zScreen", "=", "4.5"}]}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"theta", "=", 
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"90", "-", "alpha"}], "]"}], " ", "Degree"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"transI", "=", 
+       RowBox[{"I0", "*", 
+        RowBox[{
+         RowBox[{"Cos", "[", "theta", "]"}], "^", "2"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"(*", "\:5149\:8f74\:53c2\:8003\:7ebf", "*)"}], 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Gray", ",", "Thin", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", 
+                 RowBox[{"-", "1.2"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"5", ",", 
+                 RowBox[{"-", "1.2"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", "\:6807\:7b7e", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:8d77\:504f\:5668\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{"z1", ",", "1.2"}], "}"}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:68c0\:504f\:5668\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{"z2", ",", "1.2"}], "}"}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:5149\:5c4f\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{"zScreen", ",", "1.2"}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "\:8d77\:504f\:5668", "-", "\:7ad6\:76f4\:900f\:5149\:8f74"}], 
+           "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"LightGray", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"z1", "-", "0.08"}], ",", 
+                RowBox[{"-", "1"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"z1", "+", "0.08"}], ",", "1"}], "}"}]}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Thick", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"z1", ",", 
+                 RowBox[{"-", "0.9"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"z1", ",", "0.9"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Dashed", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z1", "-", "0.3"}], ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z1", "+", "0.3"}], ",", "0"}], "}"}]}], "}"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "\:68c0\:504f\:5668", "-", "\:65cb\:8f6c\:900f\:5149\:8f74"}], 
+           "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"LightGray", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"z2", "-", "0.08"}], ",", 
+                RowBox[{"-", "1"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"z2", "+", "0.08"}], ",", "1"}], "}"}]}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", "Thick", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "-", 
+                  RowBox[{"0.9", " ", 
+                   RowBox[{"Cos", "[", 
+                    RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], ",", 
+                 RowBox[{
+                  RowBox[{"-", "0.9"}], " ", 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "+", 
+                  RowBox[{"0.9", " ", 
+                   RowBox[{"Cos", "[", 
+                    RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], ",", 
+                 RowBox[{"0.9", " ", 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], "}"}]}], 
+              "}"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", "Dashed", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "-", 
+                  RowBox[{"0.9", " ", 
+                   RowBox[{"Sin", "[", 
+                    RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], ",", 
+                 RowBox[{"0.9", " ", 
+                  RowBox[{"Cos", "[", 
+                   RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "+", 
+                  RowBox[{"0.9", " ", 
+                   RowBox[{"Sin", "[", 
+                    RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], ",", 
+                 RowBox[{
+                  RowBox[{"-", "0.9"}], " ", 
+                  RowBox[{"Cos", "[", 
+                   RowBox[{"alpha", " ", "Degree"}], "]"}]}]}], "}"}]}], 
+              "}"}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", "\:5165\:5c04\:5149\:793a\:610f", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Arrowheads", "[", "0.02", "]"}], ",", 
+            RowBox[{"Arrow", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0.5"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z1", "-", "0.2"}], ",", "0.5"}], "}"}]}], "}"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:5165\:5c04\:81ea\:7136\:5149\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{"0.5", ",", "0.8"}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{
+          "(*", "\:901a\:8fc7\:8d77\:504f\:5668\:540e\:7684\:7ebf\:504f\:632f\
+\:5149", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", 
+            RowBox[{"Arrowheads", "[", "0.02", "]"}], ",", 
+            RowBox[{"Arrow", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z1", "+", "0.2"}], ",", "0.3"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "-", "0.2"}], ",", "0.3"}], "}"}]}], "}"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:7ebf\:504f\:632f\:5149\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"z1", "+", "z2"}], ")"}], "/", "2"}], ",", "0.6"}], 
+               "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{
+          "(*", "\:901a\:8fc7\:68c0\:504f\:5668\:540e\:7684\:5149", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", 
+            RowBox[{"Arrowheads", "[", "0.02", "]"}], ",", 
+            RowBox[{"Arrow", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"z2", "+", "0.2"}], ",", 
+                 RowBox[{"transI", "*", "0.5"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"zScreen", "-", "0.2"}], ",", 
+                 RowBox[{"transI", "*", "0.5"}]}], "}"}]}], "}"}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{"\"\<\:900f\:5c04\:5149\>\"", ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"z2", "+", "zScreen"}], ")"}], "/", "2"}], ",", 
+                RowBox[{"transI", "*", "0.8"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", "\:5149\:5c4f", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "-", "0.12"}], ",", 
+                RowBox[{"-", "1"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "+", "0.12"}], ",", "1"}], "}"}]}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "-", "0.12"}], ",", 
+                RowBox[{"-", "1.05"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "+", "0.12"}], ",", 
+                RowBox[{"-", "0.95"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "-", "0.12"}], ",", "0.95"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"zScreen", "+", "0.12"}], ",", "1.05"}], "}"}]}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "\:5149\:6591", "-", 
+            "\:4eae\:5ea6\:968f\:900f\:5c04\:5149\:5f3a\:53d8\:5316"}], 
+           "*)"}], 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Blend", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Black", ",", "Yellow", ",", "White"}], "}"}], ",", 
+              "transI"}], "]"}], ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"zScreen", ",", "0"}], "}"}], ",", 
+              RowBox[{"0.7", "+", 
+               RowBox[{"0.2", "*", "transI"}]}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", "\:5149\:6591\:8fb9\:6846", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Gray", ",", 
+            RowBox[{"Circle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"zScreen", ",", "0"}], "}"}], ",", 
+              RowBox[{"0.7", "+", 
+               RowBox[{"0.2", "*", "transI"}]}]}], "]"}]}], "}"}], ",", 
+          RowBox[{
+          "(*", "\:663e\:793a\:900f\:5c04\:5149\:5f3a\:6570\:503c", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"StringJoin", "[", 
+                 RowBox[{"\"\<I = \>\"", ",", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"transI", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "3"}], "}"}]}], "]"}], "]"}]}], "]"}], ",", 
+                RowBox[{"FontSize", "->", "14"}], ",", "Bold"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"zScreen", ",", 
+                RowBox[{"-", "1.4"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"(*", "\:663e\:793a\:5939\:89d2", "*)"}], 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"StringJoin", "[", 
+                 RowBox[{"\"\<\[Theta] = \>\"", ",", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"Abs", "[", 
+                    RowBox[{"90", "-", "alpha"}], "]"}], "]"}], 
+                  ",", "\"\<\[Degree]\>\""}], "]"}], ",", 
+                RowBox[{"FontSize", "->", "14"}], ",", "Bold"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"3", ",", 
+                RowBox[{"-", "1.4"}]}], "}"}]}], "]"}]}], "}"}]}], "}"}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.2"}], ",", "5.2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1.8"}], ",", "1.8"}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"700", ",", "400"}], "}"}]}], ",", 
+        RowBox[{"Background", "->", "White"}], ",", 
+        RowBox[{"Axes", "->", "False"}], ",", 
+        RowBox[{"Frame", "->", "False"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "alpha", ",", "0", 
+       ",", "\"\<\:68c0\:504f\:5668\:89d2\:5ea6 \[Alpha] (\[Degree])\>\""}], 
+      "}"}], ",", "0", ",", "180", ",", "1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Medium"}]}], "}"}], ",", 
+   RowBox[{"(*", "\:6dfb\:52a0\:8f85\:52a9\:4fe1\:606f", "*)"}], 
+   RowBox[{"Dynamic", "[", 
+    RowBox[{"Style", "[", 
+     RowBox[{
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"\"\<\\n\:7269\:7406\:539f\:7406\:ff1aI = I\:2080 cos\.b2\
+\[Theta]\\n\>\"", ",", "\"\<\:5f53 \[Alpha] = \>\"", ",", 
+        RowBox[{"ToString", "[", "alpha", "]"}], 
+        ",", "\"\<\[Degree] \:65f6\:ff0c\[Theta] = \>\"", ",", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"90", "-", "alpha"}], "]"}], "]"}], 
+        ",", "\"\<\[Degree]\\n\>\"", 
+        ",", "\"\<\:900f\:5c04\:5149\:5f3a I = \>\"", ",", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Cos", "[", 
+             RowBox[{
+              RowBox[{"Abs", "[", 
+               RowBox[{"90", "-", "alpha"}], "]"}], " ", "Degree"}], "]"}], "^",
+             "2"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "3"}], "}"}]}], "]"}], "]"}], 
+        ",", "\"\< I\:2080\>\""}], "]"}], ",", 
+      RowBox[{"FontSize", "->", "12"}], ",", 
+      RowBox[{"TextAlignment", "->", "Center"}]}], "]"}], "]"}], ",", 
+   RowBox[{"ControlPlacement", "->", "Bottom"}], ",", 
+   RowBox[{
+   "WindowTitle", 
+    "->", "\"\<\:53cc\:504f\:632f\:7247\:9a6c\:5415\:65af\:5b9a\:5f8b\:6f14\
+\:793a\>\""}], ",", 
+   RowBox[{"ContinuousAction", "->", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.9910184521636753`*^9, 3.9910184521636753`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"d2ee4235-8f6f-5e41-98f8-703b0d293f3f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "OptionValue", "nodef", 
+   "\"\\!\\(\\*RowBox[{\\\"Manipulate\\\"}]\\) \:7684\:672a\:77e5\:9009\:9879 \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"WindowTitle\\\\\\\"\\\"}]\\).\"", 2, 7, 11, 
+   29795633952404933362, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.99101845284774*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[7]:=",ExpressionUUID->"9533ab71-9115-574d-8735-\
+492f137f43ad"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "OptionValue", "nodef", 
+   "\"\\!\\(\\*RowBox[{\\\"Manipulate\\\"}]\\) \:7684\:672a\:77e5\:9009\:9879 \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"WindowTitle\\\\\\\"\\\"}]\\).\"", 2, 7, 12, 
+   29795633952404933362, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.991018452889635*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[7]:=",ExpressionUUID->"04762130-e37e-1940-aa0c-\
+3dd8bb0d0ab1"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`alpha$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`alpha$$], 0, 
+       "\:68c0\:504f\:5668\:89d2\:5ea6 \[Alpha] (\[Degree])"}, 0, 180, 1, 
+      ControlType -> Manipulator}, {
+      Hold[
+       Dynamic[
+        Style[
+        "\n\:7269\:7406\:539f\:7406\:ff1aI = I\:2080 cos\.b2\[Theta]\n" <> 
+         "\:5f53 \[Alpha] = " <> ToString[$CellContext`alpha$$] <> 
+         "\[Degree] \:65f6\:ff0c\[Theta] = " <> ToString[
+           Abs[90 - $CellContext`alpha$$]] <> "\[Degree]\n" <> 
+         "\:900f\:5c04\:5149\:5f3a I = " <> ToString[
+           NumberForm[Cos[Abs[90 - $CellContext`alpha$$] Degree]^2, {2, 3}]] <> 
+         " I\:2080", FontSize -> 12, TextAlignment -> Center]]], 
+      Manipulate`Dump`ThisIsNotAControl, ControlType -> None}}, 
+    Typeset`size$$ = {700., {197.13403328722342`, 202.86596671277658`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`alpha$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`I0$ = 
+         1, $CellContext`theta$, $CellContext`transI$, $CellContext`z1$ = 
+         1.5, $CellContext`z2$ = 3, $CellContext`zScreen$ = 
+         4.5}, $CellContext`theta$ = 
+         Abs[90 - $CellContext`alpha$$] 
+          Degree; $CellContext`transI$ = $CellContext`I0$ 
+          Cos[$CellContext`theta$]^2; Graphics[{{Gray, Thin, 
+            Line[{{0, -1.2}, {5, -1.2}}]}, {Black, 
+            Text["\:8d77\:504f\:5668", {$CellContext`z1$, 1.2}], 
+            Text["\:68c0\:504f\:5668", {$CellContext`z2$, 1.2}], 
+            Text["\:5149\:5c4f", {$CellContext`zScreen$, 1.2}]}, {LightGray, 
+            
+            Rectangle[{$CellContext`z1$ - 0.08, -1}, {$CellContext`z1$ + 0.08,
+               1}]}, {Red, Thick, 
+            Line[{{$CellContext`z1$, -0.9}, {$CellContext`z1$, 0.9}}]}, {
+           Red, Dashed, 
+            
+            Line[{{$CellContext`z1$ - 0.3, 0}, {$CellContext`z1$ + 0.3, 
+               0}}]}, {LightGray, 
+            
+            Rectangle[{$CellContext`z2$ - 0.08, -1}, {$CellContext`z2$ + 0.08,
+               1}]}, {Blue, Thick, 
+            
+            Line[{{$CellContext`z2$ - 0.9 
+               Cos[$CellContext`alpha$$ Degree], (-0.9) 
+               Sin[$CellContext`alpha$$ Degree]}, {$CellContext`z2$ + 
+               0.9 Cos[$CellContext`alpha$$ Degree], 0.9 
+               Sin[$CellContext`alpha$$ Degree]}}]}, {Blue, Dashed, 
+            
+            Line[{{$CellContext`z2$ - 0.9 Sin[$CellContext`alpha$$ Degree], 
+               0.9 Cos[$CellContext`alpha$$ Degree]}, {$CellContext`z2$ + 
+               0.9 Sin[$CellContext`alpha$$ Degree], (-0.9) 
+               Cos[$CellContext`alpha$$ Degree]}}]}, {Orange, 
+            Arrowheads[0.02], 
+            Arrow[{{0, 0.5}, {$CellContext`z1$ - 0.2, 0.5}}]}, {Orange, 
+            Text["\:5165\:5c04\:81ea\:7136\:5149", {0.5, 0.8}]}, {Red, 
+            Arrowheads[0.02], 
+            
+            Arrow[{{$CellContext`z1$ + 0.2, 0.3}, {$CellContext`z2$ - 0.2, 
+               0.3}}]}, {Red, 
+            Text[
+            "\:7ebf\:504f\:632f\:5149", {($CellContext`z1$ + \
+$CellContext`z2$)/2, 0.6}]}, {Blue, 
+            Arrowheads[0.02], 
+            
+            Arrow[{{$CellContext`z2$ + 0.2, $CellContext`transI$ 
+               0.5}, {$CellContext`zScreen$ - 0.2, $CellContext`transI$ 
+               0.5}}]}, {Blue, 
+            Text[
+            "\:900f\:5c04\:5149", {($CellContext`z2$ + $CellContext`zScreen$)/
+              2, $CellContext`transI$ 0.8}]}, {Black, 
+            
+            Rectangle[{$CellContext`zScreen$ - 
+              0.12, -1}, {$CellContext`zScreen$ + 0.12, 1}]}, {Black, 
+            
+            Rectangle[{$CellContext`zScreen$ - 
+              0.12, -1.05}, {$CellContext`zScreen$ + 0.12, -0.95}]}, {Black, 
+            
+            Rectangle[{$CellContext`zScreen$ - 0.12, 
+              0.95}, {$CellContext`zScreen$ + 0.12, 1.05}]}, {
+            Blend[{Black, Yellow, White}, $CellContext`transI$], 
+            
+            Disk[{$CellContext`zScreen$, 0}, 0.7 + 
+             0.2 $CellContext`transI$]}, {Gray, 
+            
+            Circle[{$CellContext`zScreen$, 0}, 0.7 + 
+             0.2 $CellContext`transI$]}, {Black, 
+            Text[
+             Style["I = " <> ToString[
+                NumberForm[$CellContext`transI$, {2, 3}]], FontSize -> 14, 
+              Bold], {$CellContext`zScreen$, -1.4}]}, {Black, 
+            Text[
+             Style["\[Theta] = " <> ToString[
+                Abs[90 - $CellContext`alpha$$]] <> "\[Degree]", FontSize -> 
+              14, Bold], {3, -1.4}]}}, 
+          PlotRange -> {{-0.2, 5.2}, {-1.8, 1.8}}, ImageSize -> {700, 400}, 
+          Background -> White, Axes -> False, Frame -> False]], 
+      "Specifications" :> {{{$CellContext`alpha$$, 0, 
+          "\:68c0\:504f\:5668\:89d2\:5ea6 \[Alpha] (\[Degree])"}, 0, 180, 1, 
+         Appearance -> "Labeled", ImageSize -> Medium}, 
+        Dynamic[
+         Style[
+         "\n\:7269\:7406\:539f\:7406\:ff1aI = I\:2080 cos\.b2\[Theta]\n" <> 
+          "\:5f53 \[Alpha] = " <> ToString[$CellContext`alpha$$] <> 
+          "\[Degree] \:65f6\:ff0c\[Theta] = " <> ToString[
+            Abs[90 - $CellContext`alpha$$]] <> "\[Degree]\n" <> 
+          "\:900f\:5c04\:5149\:5f3a I = " <> ToString[
+            NumberForm[Cos[Abs[90 - $CellContext`alpha$$] Degree]^2, {2, 3}]] <> 
+          " I\:2080", FontSize -> 12, TextAlignment -> Center]]}, 
+      "Options" :> {
+       ControlPlacement -> Bottom, WindowTitle -> 
+        "\:53cc\:504f\:632f\:7247\:9a6c\:5415\:65af\:5b9a\:5f8b\:6f14\:793a", 
+        ContinuousAction -> True}, "DefaultOptions" :> {}],
+     ImageSizeCache->{745.9, {276.46042977159914`, 282.1923631971523}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.9910184529136105`*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"c055ca69-e857-f144-95d9-257c25930ed9"]
+}, Open  ]]
+},
+WindowSize->{1152, 650.4},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"efde49b4-3162-ec42-bfb3-5f8f29c88368"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 15300, 387, 815, "Input",ExpressionUUID->"d2ee4235-8f6f-5e41-98f8-703b0d293f3f"],
+Cell[16785, 424, 446, 11, 26, "Message",ExpressionUUID->"9533ab71-9115-574d-8735-492f137f43ad"],
+Cell[17234, 437, 447, 11, 26, "Message",ExpressionUUID->"04762130-e37e-1940-aa0c-3dd8bb0d0ab1"],
+Cell[17684, 450, 6956, 138, 595, "Output",ExpressionUUID->"c055ca69-e857-f144-95d9-257c25930ed9"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
