@@ -1,0 +1,346 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     15421,        323]
+NotebookOptionsPosition[     15941,        321]
+NotebookOutlinePosition[     16358,        338]
+CellTagsIndexPosition[     16315,        335]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`L$$ = 2, $CellContext`plateGap$$ = 
+    1, $CellContext`q$$ = 1, $CellContext`screenDist$$ = 
+    1, $CellContext`showAxes$$ = True, $CellContext`U$$ = 
+    1, $CellContext`v0$$ = 2, $CellContext`\[Theta]$$ = 0, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`U$$], 1, "\:7535\:538b U / V"}, 0.1, 15, 0.1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`q$$], 1, "\:7535\:8377\:91cf q / C"}, -3, 3, 0.1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`v0$$], 2, "\:521d\:901f\:5ea6 v\:2080 / (m/s)"}, 0.1,
+       8, 0.1, ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Theta]$$], 0, 
+       "\:5165\:5c04\:89d2 \[Theta] / \[Degree]"}, -90, 90, 0.5, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`L$$], 2, "\:6781\:677f\:957f\:5ea6 L / m"}, 0.5, 5, 
+      0.1, ControlType -> Manipulator}, {{
+       Hold[$CellContext`plateGap$$], 1, "\:6781\:677f\:95f4\:8ddd d / m"}, 
+      0.3, 3, 0.1, ControlType -> Manipulator}, {{
+       Hold[$CellContext`screenDist$$], 1, 
+       "\:63a5\:6536\:5c4f\:8ddd\:79bb / m"}, 0, 4, 0.1, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`showAxes$$], True, 
+       "\:663e\:793a\:5750\:6807\:8f74"}, {True, False}, ControlType -> 
+      Checkbox}}, Typeset`size$$ = {
+    650., {237.09133429276318`, 242.38234991776318`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`L$$ = 2, $CellContext`plateGap$$ = 
+        1, $CellContext`q$$ = 1, $CellContext`screenDist$$ = 
+        1, $CellContext`showAxes$$ = True, $CellContext`U$$ = 
+        1, $CellContext`v0$$ = 2, $CellContext`\[Theta]$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`d$ = $CellContext`plateGap$$, $CellContext`m$ = 
+         1, $CellContext`ax$, $CellContext`ay$, $CellContext`t1$, \
+$CellContext`t2$, $CellContext`y1$, $CellContext`vy1$, $CellContext`x2$, \
+$CellContext`y2$, $CellContext`trajectory1$, $CellContext`trajectory2$, \
+$CellContext`hitPlate$, $CellContext`hitX$, $CellContext`vfinal$}, \
+$CellContext`ax$ = 
+         0; $CellContext`ay$ = $CellContext`q$$ \
+($CellContext`U$$/($CellContext`m$ $CellContext`d$)); $CellContext`t1$ = 
+         If[$CellContext`v0$$ Cos[$CellContext`\[Theta]$$ Degree] > 
+           0.001, $CellContext`L$$/($CellContext`v0$$ 
+           Cos[$CellContext`\[Theta]$$ Degree]), 
+           0.001]; $CellContext`y1$ = $CellContext`v0$$ 
+           Sin[$CellContext`\[Theta]$$ Degree] $CellContext`t1$ + 
+          0.5 $CellContext`ay$ $CellContext`t1$^2; $CellContext`vy1$ = \
+$CellContext`v0$$ 
+           Sin[$CellContext`\[Theta]$$ 
+             Degree] + $CellContext`ay$ $CellContext`t1$; \
+$CellContext`hitPlate$ = 
+         Or[$CellContext`y1$ > $CellContext`d$/
+            2, $CellContext`y1$ < (-$CellContext`d$)/2]; $CellContext`hitX$ = 
+         0; If[$CellContext`hitPlate$, If[
+            
+            And[$CellContext`y1$ > $CellContext`d$/2, $CellContext`ay$ != 
+             0], $CellContext`t1$ = ((-$CellContext`v0$$) 
+                Sin[$CellContext`\[Theta]$$ Degree] + 
+               Sqrt[($CellContext`v0$$ Sin[$CellContext`\[Theta]$$ Degree])^2 + 
+                 2 $CellContext`ay$ ($CellContext`d$/
+                   2)])/$CellContext`ay$; $CellContext`y1$ = $CellContext`d$/
+              2; $CellContext`vy1$ = $CellContext`v0$$ 
+               Sin[$CellContext`\[Theta]$$ 
+                 Degree] + $CellContext`ay$ $CellContext`t1$; \
+$CellContext`hitX$ = $CellContext`v0$$ 
+              Cos[$CellContext`\[Theta]$$ Degree] $CellContext`t1$]; If[
+            
+            And[$CellContext`y1$ < (-$CellContext`d$)/2, $CellContext`ay$ != 
+             0], $CellContext`t1$ = ((-$CellContext`v0$$) 
+                Sin[$CellContext`\[Theta]$$ Degree] - 
+               Sqrt[($CellContext`v0$$ Sin[$CellContext`\[Theta]$$ Degree])^2 - 
+                2 $CellContext`ay$ ($CellContext`d$/
+                 2)])/$CellContext`ay$; $CellContext`y1$ = (-$CellContext`d$)/
+              2; $CellContext`vy1$ = $CellContext`v0$$ 
+               Sin[$CellContext`\[Theta]$$ 
+                 Degree] + $CellContext`ay$ $CellContext`t1$; \
+$CellContext`hitX$ = $CellContext`v0$$ 
+              Cos[$CellContext`\[Theta]$$ Degree] $CellContext`t1$]; 
+          If[$CellContext`ay$ == 
+            0, $CellContext`t1$ = 
+             If[$CellContext`v0$$ Sin[$CellContext`\[Theta]$$ Degree] > 
+               0, ($CellContext`d$/2)/($CellContext`v0$$ 
+               Sin[$CellContext`\[Theta]$$ Degree]), 
+               
+               If[$CellContext`v0$$ Sin[$CellContext`\[Theta]$$ Degree] < 
+                0, ((-$CellContext`d$)/2)/($CellContext`v0$$ 
+                Sin[$CellContext`\[Theta]$$ Degree]), 
+                0]]; $CellContext`y1$ = $CellContext`v0$$ 
+              Sin[$CellContext`\[Theta]$$ 
+                Degree] $CellContext`t1$; $CellContext`vy1$ = \
+$CellContext`v0$$ 
+              Sin[$CellContext`\[Theta]$$ 
+                Degree]; $CellContext`hitX$ = $CellContext`v0$$ 
+              Cos[$CellContext`\[Theta]$$ Degree] $CellContext`t1$]; 
+          Null]; $CellContext`vfinal$ = 
+         Sqrt[($CellContext`v0$$ 
+             Cos[$CellContext`\[Theta]$$ 
+               Degree])^2 + $CellContext`vy1$^2]; $CellContext`trajectory1$ = 
+         ParametricPlot[{$CellContext`v0$$ 
+            Cos[$CellContext`\[Theta]$$ 
+              Degree] $CellContext`t, $CellContext`v0$$ 
+             Sin[$CellContext`\[Theta]$$ Degree] $CellContext`t + 
+            0.5 $CellContext`ay$ $CellContext`t^2}, {$CellContext`t, 
+            0, $CellContext`t1$}, PlotStyle -> {Red, 
+             Thickness[0.008], 
+             Opacity[0.9]}, PlotPoints -> 200, MaxRecursion -> 5]; If[
+          
+          Not[$CellContext`hitPlate$], $CellContext`t2$ = \
+$CellContext`screenDist$$/($CellContext`v0$$ 
+             Cos[$CellContext`\[Theta]$$ Degree] + 
+            0.001); $CellContext`x2$ = $CellContext`L$$ + \
+$CellContext`screenDist$$; $CellContext`y2$ = $CellContext`y1$ + \
+$CellContext`vy1$ $CellContext`t2$; $CellContext`trajectory2$ = 
+           ParametricPlot[{$CellContext`L$$ + $CellContext`v0$$ 
+               Cos[$CellContext`\[Theta]$$ 
+                 Degree] $CellContext`s, $CellContext`y1$ + $CellContext`vy1$ \
+$CellContext`s}, {$CellContext`s, 0, $CellContext`t2$}, PlotStyle -> {Red, 
+               Thickness[0.006], 
+               Dashing[{0.02, 0.02}], 
+               Opacity[0.7]}, PlotPoints -> 100], $CellContext`trajectory2$ = 
+          Graphics[{Red, 
+             PointSize[0.025], 
+             Point[{$CellContext`hitX$, $CellContext`y1$}]}]]; Show[{
+           Graphics[{{LightGray, 
+              
+              Rectangle[{
+               0, (-$CellContext`d$)/2}, {$CellContext`L$$, $CellContext`d$/
+                2}]}, {Blue, Thick, 
+              Line[{{0, (-$CellContext`d$)/2}, {0, $CellContext`d$/2}}]}, {
+             Blue, Thick, 
+              
+              Line[{{$CellContext`L$$, (-$CellContext`d$)/
+                 2}, {$CellContext`L$$, $CellContext`d$/2}}]}, 
+             Text[
+              Style[
+              "+", 18, Bold, Red], {$CellContext`L$$/2, $CellContext`d$/2 + 
+               0.2}], 
+             Text[
+              Style[
+              "-", 18, Bold, Blue], {$CellContext`L$$/2, (-$CellContext`d$)/2 - 
+               0.2}], {Purple, 
+              Thickness[0.005], Dashed, 
+              
+              Line[{{$CellContext`L$$ + $CellContext`screenDist$$, \
+(-$CellContext`d$)/2 - 
+                 0.6}, {$CellContext`L$$ + $CellContext`screenDist$$, \
+$CellContext`d$/2 + 0.6}}]}, 
+             Text[
+              Style[
+              "\:63a5\:6536\:5c4f", 10, 
+               Purple], {$CellContext`L$$ + $CellContext`screenDist$$ + 0.12, 
+               0}], {Red, 
+              PointSize[0.025], 
+              Point[{0, 0}]}, 
+             Text[
+              Style["O", 12, Bold], {-0.08, -0.1}], 
+             If[
+              Not[$CellContext`hitPlate$], {Red, 
+               PointSize[0.02], 
+               Point[{$CellContext`L$$, $CellContext`y1$}]}, {Red, 
+               PointSize[0.02], 
+               Point[{$CellContext`hitX$, $CellContext`y1$}]}], 
+             If[
+              Not[$CellContext`hitPlate$], {Red, 
+               PointSize[0.025], 
+               
+               Point[{$CellContext`L$$ + $CellContext`screenDist$$, \
+$CellContext`y2$}]}, {}], 
+             If[$CellContext`showAxes$$, {{Black, 
+                Thickness[0.002], 
+                
+                Arrow[{{-0.3, 
+                   0}, {$CellContext`L$$ + $CellContext`screenDist$$ + 0.3, 
+                   0}}]}, {Black, 
+                Thickness[0.002], 
+                
+                Arrow[{{0, (-$CellContext`d$)/2 - 0.5}, {
+                  0, $CellContext`d$/2 + 0.5}}]}, 
+               Text[
+                Style[
+                "x", 12, Bold], {$CellContext`L$$ + $CellContext`screenDist$$ + 
+                 0.35, -0.05}], 
+               Text[
+                Style["y", 12, Bold], {-0.05, $CellContext`d$/2 + 0.55}], 
+               Text[
+                Style["0", 10], {-0.08, -0.08}]}, {}], 
+             If[$CellContext`hitPlate$, {{Red, 
+                PointSize[0.03], 
+                Point[{$CellContext`hitX$, $CellContext`y1$}]}, {
+               Red, Dashed, 
+                
+                Line[{{$CellContext`hitX$, $CellContext`y1$}, \
+{$CellContext`hitX$, (-$CellContext`d$)/2 - 0.3}}]}, 
+               Text[
+                Style[
+                "\:6253\:5230\:6781\:677f!", 12, Red, 
+                 Bold], {$CellContext`hitX$, 
+                 
+                 If[$CellContext`y1$ > 0, $CellContext`y1$ + 
+                  0.25, $CellContext`y1$ - 0.25]}, Background -> White], 
+               Text[
+                Style["x = " <> ToString[
+                   NumberForm[$CellContext`hitX$, {4, 2}]] <> " m", 
+                 10], {$CellContext`hitX$, (-$CellContext`d$)/2 - 0.35}, 
+                Background -> White]}, {}], 
+             If[Abs[$CellContext`y1$] > 0.05, {Dashed, Green, 
+               Line[{{0, 0}, {0, $CellContext`y1$}}]}, {}], {
+              Text[
+               Style["\:98de\:884c\:65f6\:95f4 = " <> ToString[
+                  NumberForm[$CellContext`t1$, {4, 3}]] <> " s", 10, 
+                Black], {$CellContext`L$$/2 + 0.1, (-$CellContext`d$)/2 - 
+                0.55}, Background -> White], 
+              Text[
+               Style["\:504f\:8f6c\:8ddd\:79bb = " <> ToString[
+                  NumberForm[$CellContext`y1$, {4, 3}]] <> " m", 10, 
+                Black], {$CellContext`L$$/2 + 0.1, (-$CellContext`d$)/2 - 
+                0.7}, Background -> White], 
+              Text[
+               Style["\:672b\:901f\:5ea6 = " <> ToString[
+                  NumberForm[$CellContext`vfinal$, {4, 3}]] <> " m/s", 10, 
+                Black], {$CellContext`L$$/2 + 0.1, (-$CellContext`d$)/2 - 
+                0.85}, Background -> White], 
+              If[
+               Not[$CellContext`hitPlate$], 
+               Text[
+                Style["\:843d\:70b9\:504f\:8f6c = " <> ToString[
+                   NumberForm[$CellContext`y2$, {4, 3}]] <> " m", 10, 
+                 Black], {$CellContext`L$$/2 + 0.1, (-$CellContext`d$)/2 - 
+                 1.}, Background -> White], 
+               Text[
+                Style[
+                "\[FilledDiamond] \:7c92\:5b50\:6253\:5230\:6781\:677f\:ff01",
+                  13, Red, Bold], {$CellContext`L$$/2, $CellContext`d$/2 + 
+                 0.55}, Background -> 
+                White]]}}], $CellContext`trajectory1$, \
+$CellContext`trajectory2$}, Axes -> False, 
+          PlotRange -> {{-0.3, $CellContext`L$$ + $CellContext`screenDist$$ + 
+             0.5}, {(-$CellContext`d$)/2 - 1., $CellContext`d$/2 + 0.8}}, 
+          ImageSize -> 650, AspectRatio -> Automatic, Background -> White, 
+          GridLines -> Automatic, GridLinesStyle -> Directive[Gray, Dashed, 
+            Opacity[0.2]]]], 
+      "Specifications" :> {{{$CellContext`U$$, 1, "\:7535\:538b U / V"}, 0.1, 
+         15, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`q$$, 1, "\:7535\:8377\:91cf q / C"}, -3, 
+         3, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`v0$$, 2, 
+          "\:521d\:901f\:5ea6 v\:2080 / (m/s)"}, 0.1, 8, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Theta]$$, 0, 
+          "\:5165\:5c04\:89d2 \[Theta] / \[Degree]"}, -90, 90, 0.5, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`L$$, 2, "\:6781\:677f\:957f\:5ea6 L / m"},
+          0.5, 5, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`plateGap$$, 1, 
+          "\:6781\:677f\:95f4\:8ddd d / m"}, 0.3, 3, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`screenDist$$, 1, 
+          "\:63a5\:6536\:5c4f\:8ddd\:79bb / m"}, 0, 4, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`showAxes$$, True, 
+          "\:663e\:793a\:5750\:6807\:8f74"}, {True, False}}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`U$$, $CellContext`q$$, \
+$CellContext`v0$$, $CellContext`\[Theta]$$, $CellContext`L$$, \
+$CellContext`plateGap$$, $CellContext`screenDist$$, $CellContext`showAxes$$}},
+       "DefaultOptions" :> {}],
+     ImageSizeCache->{1006.26578125, {264.5167249177631, 269.8077405427631}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]],ExpressionUUID->"8db0146c-abc4-6a49-\
+8af1-7ac925ab57b5"]
+},
+WindowSize->{582, 642},
+WindowMargins->{{343.5, Automatic}, {Automatic, 39.5}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2025\:5e743\:670814\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[1460, 33, 14477, 286, 70, InheritFromParent,ExpressionUUID->"8db0146c-abc4-6a49-8af1-7ac925ab57b5"]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature 1Uk8pclV13d10VzqO3xuWUqT *)
