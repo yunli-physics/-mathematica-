@@ -1,0 +1,116 @@
+Manipulate[
+ Module[{a, b, c, e, r, theta, pos, sunPos, trail, area1, area2, T, v},
+  (* 椭圆参数 *)
+  e = eccentricity;                (* 偏心率 0~0.9 *)
+  a = 1;                           (* 半长轴归一化 *)
+  b = a Sqrt[1 - e^2];             (* 半短轴 *)
+  c = a e;                         (* 焦距 *)
+  sunPos = {-c, 0};                (* 太阳在左焦点 *)
+  
+  (* 椭圆极坐标: r = a(1-e²)/(1+e cosθ), 以太阳为焦点 *)
+  r[θ_] := a (1 - e^2)/(1 + e Cos[θ]);
+  theta = currentTheta;
+  pos = sunPos + r[theta] {Cos[theta], Sin[theta]};
+  
+  (* 周期与速度（开普勒第二定律隐含） *)
+  T = 2 Pi Sqrt[a^3];              (* 归一化 GM=1 *)
+  v = Sqrt[1/a (2 a/r[theta] - 1)]; (* 活力公式 vis-viva *)
+  
+  (* 轨迹 *)
+  trail = Table[
+    sunPos + r[τ] {Cos[τ], Sin[τ]},
+    {τ, 0, If[trailFull, 2 Pi, theta], 0.02}
+  ];
+  
+  (* 等面积扇形演示 *)
+  area1 = Table[
+    sunPos + r[τ] {Cos[τ], Sin[τ]},
+    {τ, 0, sweepAngle, sweepAngle/30}
+  ];
+  area2 = Table[
+    sunPos + r[τ] {Cos[τ], Sin[τ]},
+    {τ, Pi, Pi + sweepAngle, sweepAngle/30}
+  ];
+  
+  Graphics[{
+    (* 坐标轴 *)
+    {GrayLevel[0.85], Dashed, Line[{{-1.3, 0}, {1.3, 0}}], Line[{{0, -1.1}, {0, 1.1}}]},
+    
+    (* 椭圆轨道 *)
+    {Blue, Thickness[0.006], Circle[{-c, 0}, {a, b}]},
+    
+    (* 已走过的轨迹 *)
+    {Red, Thickness[0.005], Line[trail]},
+    
+    (* 等面积扇形 *)
+    If[showArea && sweepAngle > 0.05,
+      {{Orange, Opacity[0.35], Polygon[area1]},
+       {Green, Opacity[0.35], Polygon[area2]}}
+    ],
+    
+    (* 半长轴标注 *)
+    If[showAxis,
+      {{Gray, Dashed, Line[{{-c - a, 0}, {-c + a, 0}}]},
+       Text[Style["a", 12, Gray], {-c, 0.08}],
+       {Gray, Dashed, Line[{{-c, -b}, {-c, b}}]},
+       Text[Style["b", 12, Gray], {-c - 0.08, 0}]}
+    ],
+    
+    (* 太阳 *)
+    {Yellow, Disk[sunPos, 0.06], Orange, Disk[sunPos, 0.04]},
+    Text[Style["太阳", 12, Orange, Bold], sunPos + {0, -0.15}],
+    
+    (* 行星 *)
+    {DarkRed, Disk[pos, 0.045]},
+    Text[Style["行星", 12, DarkRed, Bold], pos + {0.12, 0.12}],
+    
+    (* 日-行星连线 *)
+    {Black, Thickness[0.003], Dashed, Line[{sunPos, pos}]},
+    
+    (* 速度矢量 *)
+    {Purple, Thickness[0.008], Arrow[{pos, pos + 0.3 v {-Sin[theta], Cos[theta]}}]},
+    
+    (* 信息面板 *)
+    Text[Style[
+      Column[{
+        "开普勒第一定律: 椭圆轨道",
+        "开普勒第二定律: 等时等面积",
+        "开普勒第三定律: a³/T² = 常数",
+        "",
+        "偏心率 e = " <> ToString[NumberForm[e, {3, 2}]],
+        "半长轴 a = 1 (归一化)",
+        "周期 T = " <> ToString[NumberForm[T, {3, 2}]],
+        "当前 r = " <> ToString[NumberForm[r[theta], {3, 2}]],
+        "当前 v = " <> ToString[NumberForm[v, {3, 2}]],
+        If[theta < Pi/2 || theta > 3 Pi/2, "位置: 远日点附近 (v 小)", "位置: 近日点附近 (v 大)"]
+        }, Alignment -> Left, Spacings -> 0.3],
+      12, FontFamily -> "Microsoft YaHei"],
+     Scaled[{0.78, 0.78}], Background -> Directive[White, Opacity[0.9]]]
+    },
+   PlotRange -> {{-1.4, 1.4}, {-1.1, 1.1}}, ImageSize -> 550, AspectRatio -> 1,
+   Background -> RGBColor[0.02, 0.02, 0.1]]
+  ],
+  
+  Style["行星的运动 · 开普勒三定律", 20, Bold], Delimiter,
+  
+  {{eccentricity, 0.5, "偏心率 e"}, 0, 0.9, 0.01, Appearance -> "Labeled"},
+  {{currentTheta, 0, "行星位置 θ"}, 0, 2 Pi, 0.02, 
+   Animator, AnimationRunning -> True, Appearance -> "Labeled"},
+  {{sweepAngle, 0.4, "等面积张角"}, 0.1, 1.2, 0.05, Appearance -> "Labeled"},
+  
+  Delimiter,
+  {{showArea, True, "显示等面积扇形"}, {True, False}},
+  {{showAxis, True, "显示半长轴/半短轴"}, {True, False}},
+  {{trailFull, False, "显示完整轨迹"}, {True, False}},
+  
+  Delimiter,
+  Row[{
+    Button["近似圆轨道", eccentricity = 0.02, ImageSize -> Automatic],
+    Button["明显椭圆", eccentricity = 0.7, ImageSize -> Automatic],
+    Button["重置", eccentricity = 0.5; currentTheta = 0; sweepAngle = 0.4; 
+      showArea = True; showAxis = True; trailFull = False, ImageSize -> Automatic]
+    }],
+  
+  ControlPlacement -> Left,
+  TrackedSymbols :> {eccentricity, currentTheta, sweepAngle, showArea, showAxis, trailFull}
+]
