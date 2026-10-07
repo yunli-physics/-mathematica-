@@ -1,0 +1,538 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22523,        528]
+NotebookOptionsPosition[     22006,        510]
+NotebookOutlinePosition[     22434,        527]
+CellTagsIndexPosition[     22391,        524]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"===", "\:5916\:90e8\:5b9a\:4e49"}], "\:ff1a", 
+    "\:63a5\:6536\:529b\:8868\:8fbe\:5f0f\:4e0e\:53c2\:6570", "\:ff0c", 
+    RowBox[{"\:8fd4\:56de\:5404\:9879\:7269\:7406\:91cf", "==="}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearAll", "[", "calcMomentum", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"calcMomentum", "[", 
+     RowBox[{"str_String", ",", 
+      RowBox[{"mm_", "?", "NumericQ"}], ",", 
+      RowBox[{"vv0_", "?", "NumericQ"}], ",", 
+      RowBox[{"tmax_", "?", "NumericQ"}], ",", 
+      RowBox[{"tc_", "?", "NumericQ"}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"exprHeld", ",", "f", ",", "imp", ",", "mom"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"exprHeld", "=", 
+        RowBox[{"Quiet", "@", 
+         RowBox[{"Check", "[", 
+          RowBox[{
+           RowBox[{"ToExpression", "[", 
+            RowBox[{"str", ",", "InputForm", ",", "Hold"}], "]"}], ",", 
+           RowBox[{"Hold", "[", "0", "]"}]}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"f", "[", 
+         RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+        RowBox[{"Quiet", "@", 
+         RowBox[{"Check", "[", 
+          RowBox[{
+           RowBox[{"ReleaseHold", "[", 
+            RowBox[{"exprHeld", "/.", " ", 
+             RowBox[{"t", "->", "x"}]}], "]"}], ",", "0.0"}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"imp", "[", 
+         RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+        RowBox[{"NIntegrate", "[", 
+         RowBox[{
+          RowBox[{"f", "[", "s", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"s", ",", "0", ",", 
+            RowBox[{"Min", "[", 
+             RowBox[{"x", ",", "tmax"}], "]"}]}], "}"}], ",", 
+          RowBox[{"MaxRecursion", "->", "20"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"mom", "[", 
+         RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+        RowBox[{"mm", "*", 
+         RowBox[{"(", 
+          RowBox[{"vv0", "+", 
+           RowBox[{
+            RowBox[{"imp", "[", "x", "]"}], "/", "mm"}]}], ")"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"f", ",", "imp", ",", "mom"}], "}"}]}]}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "f", ",", "imp", ",", "mom", ",", "tCur", ",", "fCur", ",", "iCur", ",",
+        "dpCur"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"f", ",", "imp", ",", "mom"}], "}"}], "=", 
+       RowBox[{"calcMomentum", "[", 
+        RowBox[{"forceStr", ",", "m", ",", "v0", ",", "tMax", ",", "t"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"tCur", "=", 
+       RowBox[{"Min", "[", 
+        RowBox[{"t", ",", "tMax"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"fCur", "=", 
+       RowBox[{"f", "[", "tCur", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"iCur", "=", 
+       RowBox[{"imp", "[", "tCur", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dpCur", "=", 
+       RowBox[{
+        RowBox[{"mom", "[", "tCur", "]"}], "-", 
+        RowBox[{"m", "*", "v0"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Panel", "[", 
+          RowBox[{
+           RowBox[{"Column", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                "\"\<\:81ea\:5b9a\:4e49\:53d8\:529b F(t)\>\"", ",", "Bold", 
+                 ",", "14"}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "5", "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<F(t) = \>\"", ",", 
+                  RowBox[{"InputField", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", "forceStr", "]"}], ",", "String", 
+                    ",", 
+                    RowBox[{"FieldSize", "->", "22"}]}], "]"}]}], "}"}], 
+                "]"}], ",", 
+               RowBox[{"Spacer", "[", "8", "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:8d28\:91cf m (kg): \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"m", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], 
+                "]"}], ",", 
+               RowBox[{"Slider", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "m", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0.5", ",", "20", ",", "0.5"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:521d\:901f\:5ea6 v\:2080 (m/s): \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"v0", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], 
+                "]"}], ",", 
+               RowBox[{"Slider", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "v0", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "5"}], ",", "5", ",", "0.1"}], "}"}]}], "]"}],
+                ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:65f6\:95f4\:4e0a\:9650 T (s): \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"tMax", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], 
+                "]"}], ",", 
+               RowBox[{"Slider", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "tMax", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", "10", ",", "0.1"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:89c2\:5bdf\:65f6\:95f4 t (s): \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"tCur", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], 
+                "]"}], ",", 
+               RowBox[{"Slider", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "t", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "10", ",", "0.05"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "10", "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                "\"\<\:5b9e\:65f6\:76d1\:6d4b\>\"", ",", "Bold", ",", "14"}], 
+                "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<F(t): \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"fCur", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "2"}], "}"}]}], "]"}], "]"}], ",", 
+                  "\"\< N\>\""}], "}"}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\:51b2\:91cf I: \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"iCur", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "3"}], "}"}]}], "]"}], "]"}], ",", 
+                  "\"\< N\[CenterDot]s\>\""}], "}"}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<\[CapitalDelta]p: \>\"", ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"NumberForm", "[", 
+                    RowBox[{"dpCur", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "3"}], "}"}]}], "]"}], "]"}], ",", 
+                  "\"\< kg\[CenterDot]m/s\>\""}], "}"}], "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<\:9a8c\:8bc1: \>\"", ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Abs", "[", 
+                    RowBox[{"iCur", "-", "dpCur"}], "]"}], "<", 
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "5"}]}]}], ",", 
+                    "\"\<I = \[CapitalDelta]p \:6210\:7acb\>\"", ",", 
+                    "\"\<\:2718 \:504f\:5dee\:5f02\:5e38\>\""}], "]"}], 
+                    "]"}]}], "}"}], "]"}], ",", "Green", ",", "Bold"}], "]"}],
+                ",", 
+               RowBox[{"Spacer", "[", "8", "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                "\"\<\:793a\:4f8b\:ff1a4t / 20*Sin[Pi*t/4] / \
+15*Exp[-t/2]\>\"", ",", "10", ",", "Gray"}], "]"}]}], "}"}], ",", 
+             RowBox[{"Spacings", "->", "1"}]}], "]"}], ",", 
+           RowBox[{"ImageSize", "->", 
+            RowBox[{"{", 
+             RowBox[{"270", ",", "Automatic"}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"Spacer", "[", "15", "]"}], ",", 
+         RowBox[{"Panel", "[", 
+          RowBox[{"Column", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Plot", "[", 
+              RowBox[{
+               RowBox[{"f", "[", "x", "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", "0", ",", "tMax"}], "}"}], ",", 
+               RowBox[{"PlotRange", "->", "All"}], ",", 
+               RowBox[{"Filling", "->", "Axis"}], ",", 
+               RowBox[{"FillingStyle", "->", 
+                RowBox[{"Opacity", "[", 
+                 RowBox[{"0.25", ",", "Red"}], "]"}]}], ",", 
+               RowBox[{"AxesLabel", "->", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<t (s)\>\"", ",", "\"\<F (N)\>\""}], "}"}]}], 
+               ",", 
+               RowBox[{"ImageSize", "->", 
+                RowBox[{"{", 
+                 RowBox[{"480", ",", "220"}], "}"}]}], ",", 
+               RowBox[{
+               "PlotLabel", "->", 
+                "\"\<F-t \:56fe\:50cf\:ff08\:7ea2\:8272\:9762\:79ef = \:51b2\
+\:91cf\:ff09\>\""}], ",", 
+               RowBox[{"Epilog", "->", 
+                RowBox[{"{", 
+                 RowBox[{"Black", ",", "Dashed", ",", 
+                  RowBox[{"Line", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"tCur", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"tCur", ",", "fCur"}], "}"}]}], "}"}], "]"}], ",",
+                   "Red", ",", 
+                  RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+                  RowBox[{"Point", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"tCur", ",", "fCur"}], "}"}], "]"}]}], "}"}]}]}], 
+              "]"}], ",", 
+             RowBox[{"Spacer", "[", "8", "]"}], ",", 
+             RowBox[{"Plot", "[", 
+              RowBox[{
+               RowBox[{"mom", "[", "x", "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", "0", ",", "tMax"}], "}"}], ",", 
+               RowBox[{"PlotRange", "->", "All"}], ",", 
+               RowBox[{"AxesLabel", "->", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "\"\<t (s)\>\"", ",", "\"\<p (kg\[CenterDot]m/s)\>\""}], 
+                 "}"}]}], ",", 
+               RowBox[{"ImageSize", "->", 
+                RowBox[{"{", 
+                 RowBox[{"480", ",", "180"}], "}"}]}], ",", 
+               RowBox[{"PlotLabel", "->", "\"\<p-t \:56fe\:50cf\>\""}], ",", 
+               RowBox[{"Epilog", "->", 
+                RowBox[{"{", 
+                 RowBox[{"Red", ",", 
+                  RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+                  RowBox[{"Point", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"tCur", ",", 
+                    RowBox[{"mom", "[", "tCur", "]"}]}], "}"}], "]"}]}], 
+                 "}"}]}]}], "]"}]}], "}"}], "]"}], "]"}]}], "}"}], "]"}]}]}], 
+    "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "forceStr", ",", "\"\<4t\>\"", ",", "\"\<\:53d8\:529b F(t)\>\""}], 
+      "}"}], ",", 
+     RowBox[{"ControlType", "->", "None"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "5", ",", "\"\<\:8d28\:91cf\>\""}], "}"}], ",", "0.5",
+      ",", "20", ",", "0.5", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"v0", ",", "0", ",", "\"\<\:521d\:901f\:5ea6\>\""}], "}"}], ",", 
+     RowBox[{"-", "5"}], ",", "5", ",", "0.1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"tMax", ",", "4", ",", "\"\<\:65f6\:95f4\:4e0a\:9650\>\""}], 
+      "}"}], ",", "1", ",", "10", ",", "0.1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "\"\<\:89c2\:5bdf\:65f6\:95f4\>\""}], "}"}],
+      ",", "0", ",", "10", ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"TrackedSymbols", ":>", 
+    RowBox[{"{", 
+     RowBox[{"forceStr", ",", "m", ",", "v0", ",", "tMax", ",", "t"}], 
+     "}"}]}], ",", 
+   RowBox[{"ControlPlacement", "->", "Left"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{4.000348875967844*^9, 4.000348875967844*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"0ae158f7-f529-284d-a3ac-1cc4cafef651"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`forceStr$$ = "4t", $CellContext`m$$ = 
+    5, $CellContext`t$$ = 0, $CellContext`tMax$$ = 4, $CellContext`v0$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`forceStr$$], "4t", "\:53d8\:529b F(t)"}, ControlType -> 
+      None}, {{
+       Hold[$CellContext`m$$], 5, "\:8d28\:91cf"}, 0.5, 20, 0.5, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`v0$$], 0, "\:521d\:901f\:5ea6"}, -5, 5, 0.1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`tMax$$], 4, "\:65f6\:95f4\:4e0a\:9650"}, 1, 10, 0.1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`t$$], 0, "\:89c2\:5bdf\:65f6\:95f4"}, 0, 10, 0.05, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    491.75, {692.49365234375, 234.44970703125}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`forceStr$$ = "4t", $CellContext`m$$ = 
+        5, $CellContext`t$$ = 0, $CellContext`tMax$$ = 4, $CellContext`v0$$ = 
+        0}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`f$, $CellContext`imp$, $CellContext`mom$, \
+$CellContext`tCur$, $CellContext`fCur$, $CellContext`iCur$, \
+$CellContext`dpCur$}, {$CellContext`f$, $CellContext`imp$, $CellContext`mom$} = \
+$CellContext`calcMomentum[$CellContext`forceStr$$, $CellContext`m$$, \
+$CellContext`v0$$, $CellContext`tMax$$, $CellContext`t$$]; $CellContext`tCur$ = 
+         Min[$CellContext`t$$, $CellContext`tMax$$]; $CellContext`fCur$ = \
+$CellContext`f$[$CellContext`tCur$]; $CellContext`iCur$ = \
+$CellContext`imp$[$CellContext`tCur$]; $CellContext`dpCur$ = \
+$CellContext`mom$[$CellContext`tCur$] - $CellContext`m$$ $CellContext`v0$$; 
+        Row[{
+           Panel[
+            Column[{
+              Style["\:81ea\:5b9a\:4e49\:53d8\:529b F(t)", Bold, 14], 
+              Spacer[5], 
+              Row[{"F(t) = ", 
+                InputField[
+                 Dynamic[$CellContext`forceStr$$], String, FieldSize -> 22]}], 
+              Spacer[8], 
+              Row[{"\:8d28\:91cf m (kg): ", 
+                Dynamic[
+                 NumberForm[$CellContext`m$$, {4, 2}]]}], 
+              Slider[
+               Dynamic[$CellContext`m$$], {0.5, 20, 0.5}], 
+              Row[{"\:521d\:901f\:5ea6 v\:2080 (m/s): ", 
+                Dynamic[
+                 NumberForm[$CellContext`v0$$, {4, 2}]]}], 
+              Slider[
+               Dynamic[$CellContext`v0$$], {-5, 5, 0.1}], 
+              Row[{"\:65f6\:95f4\:4e0a\:9650 T (s): ", 
+                Dynamic[
+                 NumberForm[$CellContext`tMax$$, {4, 2}]]}], 
+              Slider[
+               Dynamic[$CellContext`tMax$$], {1, 10, 0.1}], 
+              Row[{"\:89c2\:5bdf\:65f6\:95f4 t (s): ", 
+                Dynamic[
+                 NumberForm[$CellContext`tCur$, {4, 2}]]}], 
+              Slider[
+               Dynamic[$CellContext`t$$], {0, 10, 0.05}], 
+              Spacer[10], 
+              Style["\:5b9e\:65f6\:76d1\:6d4b", Bold, 14], 
+              Row[{"F(t): ", 
+                Dynamic[
+                 NumberForm[$CellContext`fCur$, {5, 2}]], " N"}], 
+              Row[{"\:51b2\:91cf I: ", 
+                Dynamic[
+                 NumberForm[$CellContext`iCur$, {6, 3}]], " N\[CenterDot]s"}], 
+              Row[{"\[CapitalDelta]p: ", 
+                Dynamic[
+                 NumberForm[$CellContext`dpCur$, {6, 3}]], 
+                " kg\[CenterDot]m/s"}], 
+              Style[
+               Row[{"\:9a8c\:8bc1: ", 
+                 Dynamic[
+                  If[
+                  Abs[$CellContext`iCur$ - $CellContext`dpCur$] < 10^(-5), 
+                   "I = \[CapitalDelta]p \:6210\:7acb", 
+                   "\:2718 \:504f\:5dee\:5f02\:5e38"]]}], Green, Bold], 
+              Spacer[8], 
+              Style[
+              "\:793a\:4f8b\:ff1a4t / 20*Sin[Pi*t/4] / 15*Exp[-t/2]", 10, 
+               Gray]}, Spacings -> 1], ImageSize -> {270, Automatic}], 
+           Spacer[15], 
+           Panel[
+            Column[{
+              Plot[
+               $CellContext`f$[$CellContext`x], {$CellContext`x, 
+                0, $CellContext`tMax$$}, PlotRange -> All, Filling -> Axis, 
+               FillingStyle -> Opacity[0.25, Red], 
+               AxesLabel -> {"t (s)", "F (N)"}, ImageSize -> {480, 220}, 
+               PlotLabel -> 
+               "F-t \:56fe\:50cf\:ff08\:7ea2\:8272\:9762\:79ef = \:51b2\:91cf\
+\:ff09", Epilog -> {Black, Dashed, 
+                 
+                 Line[{{$CellContext`tCur$, 
+                    0}, {$CellContext`tCur$, $CellContext`fCur$}}], Red, 
+                 PointSize[Large], 
+                 Point[{$CellContext`tCur$, $CellContext`fCur$}]}], 
+              Spacer[8], 
+              Plot[
+               $CellContext`mom$[$CellContext`x], {$CellContext`x, 
+                0, $CellContext`tMax$$}, PlotRange -> All, 
+               AxesLabel -> {"t (s)", "p (kg\[CenterDot]m/s)"}, 
+               ImageSize -> {480, 180}, PlotLabel -> "p-t \:56fe\:50cf", 
+               Epilog -> {Red, 
+                 PointSize[Large], 
+                 Point[{$CellContext`tCur$, 
+                   $CellContext`mom$[$CellContext`tCur$]}]}]}]]}]], 
+      "Specifications" :> {{{$CellContext`forceStr$$, "4t", 
+          "\:53d8\:529b F(t)"}, ControlType -> 
+         None}, {{$CellContext`m$$, 5, "\:8d28\:91cf"}, 0.5, 20, 0.5, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`v0$$, 0, "\:521d\:901f\:5ea6"}, -5, 5, 
+         0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`tMax$$, 4, "\:65f6\:95f4\:4e0a\:9650"}, 1,
+          10, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`t$$, 0, "\:89c2\:5bdf\:65f6\:95f4"}, 0, 
+         10, 0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`forceStr$$, $CellContext`m$$, \
+$CellContext`v0$$, $CellContext`tMax$$, $CellContext`t$$}, ControlPlacement -> 
+        Left}, "DefaultOptions" :> {}],
+     ImageSizeCache->{822., {490.13403309800196`, 495.86596690199804`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{4.0003488776439037`*^9},
+ CellLabel->"Out[25]=",ExpressionUUID->"30bb212a-a085-634a-b972-4f3e76ea51a4"]
+}, Open  ]]
+},
+WindowSize->{573.75, 541.875},
+WindowMargins->{{248.25, Automatic}, {10.125, Automatic}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (2023\:5e7412\:670812\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2bfe340e-03b2-594e-98d2-cfd8f3247d7e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 14332, 340, 2378, "Input",ExpressionUUID->"0ae158f7-f529-284d-a3ac-1cc4cafef651"],
+Cell[14915, 364, 7075, 143, 1027, "Output",ExpressionUUID->"30bb212a-a085-634a-b972-4f3e76ea51a4"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
