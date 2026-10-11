@@ -1,0 +1,195 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[      7263,        172]
+NotebookOptionsPosition[      7646,        167]
+NotebookOutlinePosition[      8081,        184]
+CellTagsIndexPosition[      8038,        181]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"h", "=", "4"}], ";", 
+     RowBox[{"n", "=", 
+      RowBox[{"4", "/", "3"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"hPrimeStd", "=", 
+      RowBox[{"h", "/", "n"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"choiceInput", "=", 
+      RowBox[{
+      "Input", "[", "\"\<\:8bf7\:8f93\:5165\:4f60\:7684\:9009\:9879(A/B/C)\
+\:ff1a\>\"", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"stdChoice", "=", "\"\<B\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:3010\:7efc\:5408\:4e60\:98982 \:89c6\:6df1\:6982\
+\:5ff5\:8ba1\:7b97\:9898\:3011\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:9898\:76ee\:ff1a\:6c34\:6c60\:5b9e\:9645\:6df1\:5ea6\
+h=4 m\:ff0c\:6c34\:6298\:5c04\:7387n=4/3\:3002\>\"", ",", "\"\<\>\""}], "}"}],
+          ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<(1)\:5782\:76f4\:89c2\:5bdf\:6c42\:89c6\:6df1\:ff1b(2)\
+\:9009\:62e9\:6b63\:786e\:8bf4\:6cd5\:ff1aA\:659c\:770b\:4e5f\:53ef\:7528h'=h/\
+n\:ff1bB\:89c6\:6df1\:516c\:5f0f\:4ec5\:5782\:76f4\:89c2\:5bdf\:53ef\:7528\
+\:ff1bC\:659c\:770b\:50cf\:4f4d\:7f6e\:4e0d\:53d8\:3002\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:4f60\:7684\:9009\:62e9\:ff1a\>\"", ",", 
+           "choiceInput"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<------\:53c2\:8003\:7b54\:6848------\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<(1)\:5782\:76f4\:89c6\:6df1/m\:ff1a\>\"", ",", 
+           RowBox[{"N", "[", "hPrimeStd", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<(2)\:6b63\:786e\:9009\:9879\:ff1a\>\"", ",", 
+           "stdChoice"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:89e3\:6790\:ff1ah'=h/n = 4/(4/3)=3 m\:ff1b\:89c6\
+\:6df1\:516c\:5f0f**\:53ea\:9002\:7528\:4e8e\:5782\:76f4\:89c2\:5bdf**\:ff1b\
+\:659c\:770b\:4e0d\:80fd\:7528\:8be5\:516c\:5f0f\:ff0c\:50cf\:4f4d\:7f6e\:968f\
+\:89c6\:89d2\:53d1\:751f\:504f\:79fb\:3002\>\"", ",", "\"\<\>\""}], "}"}]}], 
+        "}"}], ",", 
+       RowBox[{"Frame", "->", "All"}]}], "]"}]}], ",", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<\:91cd\:7f6e\:9898\:76ee\>\"", ",", 
+      RowBox[{"(", 
+       RowBox[{"choiceInput", "=."}], ")"}]}], "]"}], ",", 
+    RowBox[{"Initialization", ":>", 
+     RowBox[{"(", 
+      RowBox[{"choiceInput", "=."}], ")"}]}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{4.0007015528347645`*^9, 4.0007015528347645`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"9af6a3f0-8b09-8e41-8765-2a6cb0676280"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{
+      Hold[
+       Button["\:91cd\:7f6e\:9898\:76ee", 
+        Unset[$CellContext`choiceInput]]], Manipulate`Dump`ThisIsNotAControl, 
+      ControlType -> None}}, Typeset`size$$ = {
+    408.02, {106.80866588456557`, 112.54059931011871`}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> ($CellContext`h = 4; $CellContext`n = 
+        4/3; $CellContext`hPrimeStd = $CellContext`h/$CellContext`n; \
+$CellContext`choiceInput = 
+        Input["\:8bf7\:8f93\:5165\:4f60\:7684\:9009\:9879(A/B/C)\:ff1a"]; \
+$CellContext`stdChoice = "B"; 
+       Grid[{{"\:3010\:7efc\:5408\:4e60\:98982 \:89c6\:6df1\:6982\:5ff5\:8ba1\
+\:7b97\:9898\:3011", ""}, {
+          "\:9898\:76ee\:ff1a\:6c34\:6c60\:5b9e\:9645\:6df1\:5ea6h=4 m\:ff0c\
+\:6c34\:6298\:5c04\:7387n=4/3\:3002", ""}, {
+          "(1)\:5782\:76f4\:89c2\:5bdf\:6c42\:89c6\:6df1\:ff1b(2)\:9009\:62e9\
+\:6b63\:786e\:8bf4\:6cd5\:ff1aA\:659c\:770b\:4e5f\:53ef\:7528h'=h/n\:ff1bB\
+\:89c6\:6df1\:516c\:5f0f\:4ec5\:5782\:76f4\:89c2\:5bdf\:53ef\:7528\:ff1bC\
+\:659c\:770b\:50cf\:4f4d\:7f6e\:4e0d\:53d8\:3002", ""}, {
+          "\:4f60\:7684\:9009\:62e9\:ff1a", $CellContext`choiceInput}, {
+          "------\:53c2\:8003\:7b54\:6848------", ""}, {
+          "(1)\:5782\:76f4\:89c6\:6df1/m\:ff1a", 
+           N[$CellContext`hPrimeStd]}, {
+          "(2)\:6b63\:786e\:9009\:9879\:ff1a", $CellContext`stdChoice}, {
+          "\:89e3\:6790\:ff1ah'=h/n = 4/(4/3)=3 m\:ff1b\:89c6\:6df1\:516c\
+\:5f0f**\:53ea\:9002\:7528\:4e8e\:5782\:76f4\:89c2\:5bdf**\:ff1b\:659c\:770b\
+\:4e0d\:80fd\:7528\:8be5\:516c\:5f0f\:ff0c\:50cf\:4f4d\:7f6e\:968f\:89c6\:89d2\
+\:53d1\:751f\:504f\:79fb\:3002", ""}}, Frame -> All]), "Specifications" :> {
+        Button["\:91cd\:7f6e\:9898\:76ee", 
+         Unset[$CellContext`choiceInput]]}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      453.91999999999996`, {150.21960338456626`, 155.95153681011942`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(Unset[$CellContext`choiceInput]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{4.0007015537139854`*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"5e274720-d7e4-6348-978f-f8b31a36ebfd"]
+}, Open  ]]
+},
+WindowSize->{571.8, 579},
+WindowMargins->{{284.4, Automatic}, {12.600000000000023`, Automatic}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"84c8ce2b-c96d-5b42-8d2d-081533d259db"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 2833, 66, 500, "Input",ExpressionUUID->"9af6a3f0-8b09-8e41-8765-2a6cb0676280"],
+Cell[4318, 103, 3312, 61, 342, "Output",ExpressionUUID->"5e274720-d7e4-6348-978f-f8b31a36ebfd"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

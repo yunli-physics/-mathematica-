@@ -1,0 +1,242 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[      9376,        219]
+NotebookOptionsPosition[      9569,        212]
+NotebookOutlinePosition[     10004,        229]
+CellTagsIndexPosition[      9961,        226]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Clear", "[", 
+      RowBox[{"n", ",", "C", ",", "judge"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"n", "=", 
+      RowBox[{"Sqrt", "[", "2", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"C", "=", 
+      RowBox[{"ArcSin", "[", 
+       RowBox[{"1", "/", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", "\:7528\:6237\:8f93\:5165\:4f5c\:7b54", "*)"}], 
+     RowBox[{"ans1Input", "=", 
+      RowBox[{
+      "Input", "[", "\"\<(1)\:4e34\:754c\:89d2C\:7684\:5ea6\:6570\:ff0c\:8bf7\
+\:8f93\:5165\:6570\:5b57\:ff1a\>\"", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ans2Input", "=", 
+      RowBox[{
+      "Input", "[", \
+"\"\<(2)\:53d1\:751f\:5168\:53cd\:5c04\:ff1f\:8f93\:5165True\:662f\:ff0cFalse\
+\:5426\:ff1a\>\"", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", "\:6807\:51c6\:7b54\:6848", "*)"}], 
+     RowBox[{"stdC", "=", 
+      RowBox[{"N", "[", 
+       RowBox[{"C", "*", 
+        RowBox[{"180", "/", "Pi"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"stdJudge", "=", "True"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:3010\:7efc\:5408\:8ba1\:7b97\:98981 \:6298\:5c04+\
+\:5168\:53cd\:5c04\:68f1\:955c\:3011\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:9898\:76ee\:ff1a\:73bb\:7483\:68f1\:955c\:6298\:5c04\
+\:7387n=\[Sqrt]2\:3002(1)\:6c42\:73bb\:7483\:76f8\:5bf9\:7a7a\:6c14\:4e34\
+\:754c\:89d2(\:89d2\:5ea6\:5236)\:ff1b(2)\:68f1\:955c\:5185\:90e8\:5149\:7ebf\
+\:5165\:5c04\:73bb\:7483\:2011\:7a7a\:6c14\:754c\:9762\:5165\:5c04\:89d245\
+\[Degree]\:ff0c\:5224\:65ad\:662f\:5426\:5168\:53cd\:5c04\:3002\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:4f60\:7684\:7b54\:6848(1)\:4e34\:754c\:89d2\:ff1a\>\"\
+", ",", "ans1Input"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:4f60\:7684\:7b54\:6848(2)\:662f\:5426\:5168\:53cd\
+\:5c04\:ff1a\>\"", ",", "ans2Input"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<------\:53c2\:8003\:7b54\:6848------\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<(1)\:4e34\:754c\:89d2C(\[Degree]):\>\"", ",", "stdC"}],
+           "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<(2)\:662f\:5426\:53d1\:751f\:5168\:53cd\:5c04\:ff1a\>\"\
+", ",", "stdJudge"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:89e3\:6790\:ff1asinC=1/n =1/\[Sqrt]2 \
+\[DoubleRightArrow] C=45\[Degree]\:ff1b\:5165\:5c04\:89d2\:7b49\:4e8e\:4e34\
+\:754c\:89d2\:ff0c\:6ee1\:8db3\:5168\:53cd\:5c04\:6761\:4ef6(\:5149\:5bc6\
+\[RightArrow]\:5149\:758f\:ff0ci\[GreaterEqual]C)\:ff0c\:53d1\:751f\:5168\
+\:53cd\:5c04\>\"", ",", "\"\<\>\""}], "}"}]}], "}"}], ",", 
+       RowBox[{"Frame", "->", "All"}]}], "]"}]}], ",", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<\:70b9\:51fb\:8fd0\:884c\:672c\:9898\>\"", ",", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"ans1Input", "=."}], ";", 
+        RowBox[{"ans2Input", "=."}]}], ")"}]}], "]"}], ",", 
+    RowBox[{"Initialization", ":>", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"ans1Input", "=."}], ";", 
+       RowBox[{"ans2Input", "=."}]}], ")"}]}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{4.000701479971239*^9, 4.000701479971239*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"44b39423-9074-af43-bcdd-a8795568d3fe"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{
+      Hold[
+       Button[
+       "\:70b9\:51fb\:8fd0\:884c\:672c\:9898", Unset[$CellContext`ans1Input]; 
+        Unset[$CellContext`ans2Input]]], Manipulate`Dump`ThisIsNotAControl, 
+      ControlType -> None}}, Typeset`size$$ = {
+    408.02, {132.51508647929876`, 138.24701990485192`}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> (
+       Clear[$CellContext`n, C, $CellContext`judge]; $CellContext`n = Sqrt[2]; 
+       C = ArcSin[1/$CellContext`n]; $CellContext`ans1Input = 
+        Input["(1)\:4e34\:754c\:89d2C\:7684\:5ea6\:6570\:ff0c\:8bf7\:8f93\
+\:5165\:6570\:5b57\:ff1a"]; $CellContext`ans2Input = 
+        Input["(2)\:53d1\:751f\:5168\:53cd\:5c04\:ff1f\:8f93\:5165True\:662f\
+\:ff0cFalse\:5426\:ff1a"]; $CellContext`stdC = 
+        N[C (180/Pi)]; $CellContext`stdJudge = True; 
+       Grid[{{"\:3010\:7efc\:5408\:8ba1\:7b97\:98981 \
+\:6298\:5c04+\:5168\:53cd\:5c04\:68f1\:955c\:3011", ""}, {
+          "\:9898\:76ee\:ff1a\:73bb\:7483\:68f1\:955c\:6298\:5c04\:7387n=\
+\[Sqrt]2\:3002(1)\:6c42\:73bb\:7483\:76f8\:5bf9\:7a7a\:6c14\:4e34\:754c\:89d2(\
+\:89d2\:5ea6\:5236)\:ff1b(2)\:68f1\:955c\:5185\:90e8\:5149\:7ebf\:5165\:5c04\
+\:73bb\:7483\:2011\:7a7a\:6c14\:754c\:9762\:5165\:5c04\:89d245\[Degree]\:ff0c\
+\:5224\:65ad\:662f\:5426\:5168\:53cd\:5c04\:3002", ""}, {
+          "\:4f60\:7684\:7b54\:6848(1)\:4e34\:754c\:89d2\:ff1a", \
+$CellContext`ans1Input}, {
+          "\:4f60\:7684\:7b54\:6848(2)\:662f\:5426\:5168\:53cd\:5c04\:ff1a", \
+$CellContext`ans2Input}, {"------\:53c2\:8003\:7b54\:6848------", ""}, {
+          "(1)\:4e34\:754c\:89d2C(\[Degree]):", $CellContext`stdC}, {
+          "(2)\:662f\:5426\:53d1\:751f\:5168\:53cd\:5c04\:ff1a", \
+$CellContext`stdJudge}, {
+          "\:89e3\:6790\:ff1asinC=1/n =1/\[Sqrt]2 \[DoubleRightArrow] C=45\
+\[Degree]\:ff1b\:5165\:5c04\:89d2\:7b49\:4e8e\:4e34\:754c\:89d2\:ff0c\:6ee1\
+\:8db3\:5168\:53cd\:5c04\:6761\:4ef6(\:5149\:5bc6\[RightArrow]\:5149\:758f\
+\:ff0ci\[GreaterEqual]C)\:ff0c\:53d1\:751f\:5168\:53cd\:5c04", ""}}, Frame -> 
+         All]), "Specifications" :> {
+        Button[
+        "\:70b9\:51fb\:8fd0\:884c\:672c\:9898", Unset[$CellContext`ans1Input]; 
+         Unset[$CellContext`ans2Input]]}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      453.91999999999996`, {175.9260239792995, 181.65795740485265`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Unset[$CellContext`ans1Input]; 
+      Unset[$CellContext`ans2Input]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{4.0007014820232735`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"a28064c0-c6a2-cd49-9872-c8c10a61c582"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Clear", "wrsym", 
+   "\"\:7b26\:53f7 \\!\\(\\*RowBox[{\\\"C\\\"}]\\) \:88ab\:4fdd\:62a4.\"", 2, 
+   2, 5, 29859093667316578508, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{4.000701490548031*^9},
+ CellLabel->"",ExpressionUUID->"72602054-4dae-7847-8364-cd13fe3fe656"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Set", "wrsym", 
+   "\"\:7b26\:53f7 \\!\\(\\*RowBox[{\\\"C\\\"}]\\) \:88ab\:4fdd\:62a4.\"", 2, 
+   2, 6, 29859093667316578508, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{4.0007014906074123`*^9},
+ CellLabel->"",ExpressionUUID->"2b762e0f-7059-b34d-a3e2-443d69bc3f7f"]
+}, Open  ]]
+},
+WindowSize->{571.8, 579},
+WindowMargins->{{284.4, Automatic}, {12.600000000000023`, Automatic}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"7445f3cc-6482-814b-9f26-a7f1d6383748"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 3624, 84, 690, "Input",ExpressionUUID->"44b39423-9074-af43-bcdd-a8795568d3fe"],
+Cell[5109, 121, 3766, 68, 374, "Output",ExpressionUUID->"a28064c0-c6a2-cd49-9872-c8c10a61c582"],
+Cell[8878, 191, 336, 8, 26, "Message",ExpressionUUID->"72602054-4dae-7847-8364-cd13fe3fe656"],
+Cell[9217, 201, 336, 8, 26, "Message",ExpressionUUID->"2b762e0f-7059-b34d-a3e2-443d69bc3f7f"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,248 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[      9634,        225]
+NotebookOptionsPosition[     10016,        220]
+NotebookOutlinePosition[     10451,        237]
+CellTagsIndexPosition[     10408,        234]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"L", "=", "1.00"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"d", "=", 
+      RowBox[{"0.20", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "3"}]}]}]}], ";", 
+     RowBox[{"(*", "m", "*)"}], 
+     RowBox[{"X", "=", 
+      RowBox[{"12.0", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "3"}]}]}]}], ";", 
+     RowBox[{"(*", "m", "*)"}], 
+     RowBox[{"nStripe", "=", "6"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"deltaXstd", "=", 
+      RowBox[{"X", "/", 
+       RowBox[{"(", 
+        RowBox[{"nStripe", "-", "1"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"lambdaStd", "=", 
+      RowBox[{"deltaXstd", "*", 
+       RowBox[{"d", "/", "L"}], "*", 
+       RowBox[{"10", "^", "9"}]}]}], ";", 
+     RowBox[{"(*", "\:8f6cnm", "*)"}], 
+     RowBox[{"ansDeltaX", "=", 
+      RowBox[{
+      "Input", "[", "\"\<(1)\:76f8\:90bb\:6761\:7eb9\:95f4\:8ddd\
+\[CapitalDelta]x (\:5355\:4f4dmm\:ff0c\:8f93\:5165\:6570\:503c)\>\"", "]"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"ansLambda", "=", 
+      RowBox[{
+      "Input", "[", "\"\<(2)\:6ce2\:957f\[Lambda](nm)\:8f93\:5165\:6570\:503c\
+\>\"", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ansDchange", "=", 
+      RowBox[{
+      "Input", "[", "\"\<(3)d\:589e\:5927\:6761\:7eb9\:53d8\:5316\:ff0c\:8f93\
+\:5165\:ff1a\:53d8\:5bbd / \:53d8\:5bc6\>\"", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:3010\:7efc\:5408\:4e60\:98983 \:53cc\:7f1d\:5e72\
+\:6d89\:5b9e\:9a8c\:8ba1\:7b97\:9898\:3011\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:5df2\:77e5 L=1.00 m\:ff0cd=0.20 \
+mm\:ff0c6\:6761\:4eae\:7eb9\:603b\:5bbd\:5ea6X=12.0 mm\:3002\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<(1)\:6c42\:76f8\:90bb\:4eae\:7eb9\:95f4\:8ddd\
+\[CapitalDelta]x\:ff1b(2)\:6c42\:5149\:6ce2\:957f(nm)\:ff1b(3)\:589e\:5927\
+\:53cc\:7f1d\:95f4\:8dddd\:ff0c\:6761\:7eb9\:53d8\:5bbd\:8fd8\:662f\:53d8\
+\:5bc6\:ff1f\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:4f60\:7684\[CapitalDelta]x(mm):\>\"", ",", 
+           "ansDeltaX"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\:4f60\:7684\[Lambda](nm):\>\"", ",", "ansLambda"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:4f60\:7684\:5224\:65ad\:ff1a\>\"", ",", 
+           "ansDchange"}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<------\:53c2\:8003\:7b54\:6848------\>\"", 
+           ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\:6807\:51c6\[CapitalDelta]x/mm\:ff1a\>\"", ",", 
+           RowBox[{"N", "[", 
+            RowBox[{"deltaXstd", "*", "1000"}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\:6807\:51c6\[Lambda]/nm\:ff1a\>\"", ",", 
+           RowBox[{"N", "[", "lambdaStd", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<d\:589e\:5927\:6761\:7eb9\:53d8\:5316\:ff1a\>\"", 
+           ",", "\"\<\:53d8\:5bc6\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<\:89e3\:6790\:ff1a6\:6761\:4eae\:7eb9\:ff0c\:95f4\:9694\
+\:65705\:ff0c\[CapitalDelta]x=12/5=2.4 mm\:ff1b\[Lambda] = \[CapitalDelta]x\
+\[CenterDot]d / L =480 \
+nm\:ff1b\[CapitalDelta]x\:4e0ed\:6210\:53cd\:6bd4\:ff0cd\:53d8\:5927\:ff0c\
+\:6761\:7eb9\:53d8\:5bc6\:3002\>\"", ",", "\"\<\>\""}], "}"}]}], "}"}], ",", 
+       RowBox[{"Frame", "->", "All"}]}], "]"}]}], ",", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<\:91cd\:7f6e\:672c\:9898\>\"", ",", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"ansDeltaX", "=."}], ";", 
+        RowBox[{"ansLambda", "=."}], ";", 
+        RowBox[{"ansDchange", "=."}]}], ")"}]}], "]"}], ",", 
+    RowBox[{"Initialization", ":>", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"ansDeltaX", "=."}], ";", 
+       RowBox[{"ansLambda", "=."}], ";", 
+       RowBox[{"ansDchange", "=."}]}], ")"}]}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{4.0007015972623196`*^9, 4.0007015972623196`*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"df8de9cd-3f64-db4e-b23a-b639bda412c1"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"\:65e0\:6807\:9898\"", Typeset`specs$$ = {{
+      Hold[
+       Button[
+       "\:91cd\:7f6e\:672c\:9898", Unset[$CellContext`ansDeltaX]; 
+        Unset[$CellContext`ansLambda]; Unset[$CellContext`ansDchange]]], 
+      Manipulate`Dump`ThisIsNotAControl, ControlType -> None}}, 
+    Typeset`size$$ = {408.02, {137.2336654880084, 142.96559891356156`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> ($CellContext`L = 1.; $CellContext`d = 
+        0.2 10^(-3); $CellContext`X = 12. 10^(-3); $CellContext`nStripe = 
+        6; $CellContext`deltaXstd = $CellContext`X/($CellContext`nStripe - 
+         1); $CellContext`lambdaStd = $CellContext`deltaXstd \
+($CellContext`d/$CellContext`L) 10^9; $CellContext`ansDeltaX = 
+        Input["(1)\:76f8\:90bb\:6761\:7eb9\:95f4\:8ddd\[CapitalDelta]x \
+(\:5355\:4f4dmm\:ff0c\:8f93\:5165\:6570\:503c)"]; $CellContext`ansLambda = 
+        Input["(2)\:6ce2\:957f\[Lambda](nm)\:8f93\:5165\:6570\:503c"]; \
+$CellContext`ansDchange = 
+        Input["(3)d\:589e\:5927\:6761\:7eb9\:53d8\:5316\:ff0c\:8f93\:5165\
+\:ff1a\:53d8\:5bbd / \:53d8\:5bc6"]; 
+       Grid[{{"\:3010\:7efc\:5408\:4e60\:98983 \:53cc\:7f1d\:5e72\:6d89\:5b9e\
+\:9a8c\:8ba1\:7b97\:9898\:3011", ""}, {
+          "\:5df2\:77e5 L=1.00 m\:ff0cd=0.20 \
+mm\:ff0c6\:6761\:4eae\:7eb9\:603b\:5bbd\:5ea6X=12.0 mm\:3002", ""}, {
+          "(1)\:6c42\:76f8\:90bb\:4eae\:7eb9\:95f4\:8ddd\[CapitalDelta]x\:ff1b\
+(2)\:6c42\:5149\:6ce2\:957f(nm)\:ff1b(3)\:589e\:5927\:53cc\:7f1d\:95f4\:8dddd\
+\:ff0c\:6761\:7eb9\:53d8\:5bbd\:8fd8\:662f\:53d8\:5bc6\:ff1f", ""}, {
+          "\:4f60\:7684\[CapitalDelta]x(mm):", $CellContext`ansDeltaX}, {
+          "\:4f60\:7684\[Lambda](nm):", $CellContext`ansLambda}, {
+          "\:4f60\:7684\:5224\:65ad\:ff1a", $CellContext`ansDchange}, {
+          "------\:53c2\:8003\:7b54\:6848------", ""}, {
+          "\:6807\:51c6\[CapitalDelta]x/mm\:ff1a", 
+           N[$CellContext`deltaXstd 1000]}, {"\:6807\:51c6\[Lambda]/nm\:ff1a", 
+           N[$CellContext`lambdaStd]}, {
+          "d\:589e\:5927\:6761\:7eb9\:53d8\:5316\:ff1a", "\:53d8\:5bc6"}, {
+          "\:89e3\:6790\:ff1a6\:6761\:4eae\:7eb9\:ff0c\:95f4\:9694\:65705\
+\:ff0c\[CapitalDelta]x=12/5=2.4 mm\:ff1b\[Lambda] = \[CapitalDelta]x\
+\[CenterDot]d / L =480 \
+nm\:ff1b\[CapitalDelta]x\:4e0ed\:6210\:53cd\:6bd4\:ff0cd\:53d8\:5927\:ff0c\
+\:6761\:7eb9\:53d8\:5bc6\:3002", ""}}, Frame -> All]), "Specifications" :> {
+        Button[
+        "\:91cd\:7f6e\:672c\:9898", Unset[$CellContext`ansDeltaX]; 
+         Unset[$CellContext`ansLambda]; Unset[$CellContext`ansDchange]]}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      453.91999999999996`, {180.64460298800913`, 186.3765364135623}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Unset[$CellContext`ansDeltaX]; 
+      Unset[$CellContext`ansLambda]; Unset[$CellContext`ansDchange]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{4.0007015979804916`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"1327ea04-3d1f-d745-93cd-e3eba78b250e"]
+}, Open  ]]
+},
+WindowSize->{571.8, 579},
+WindowMargins->{{284.4, Automatic}, {12.600000000000023`, Automatic}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ba948889-1b1e-d349-880e-54653bf128c7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 4379, 107, 676, "Input",ExpressionUUID->"df8de9cd-3f64-db4e-b23a-b639bda412c1"],
+Cell[5864, 144, 4136, 73, 403, "Output",ExpressionUUID->"1327ea04-3d1f-d745-93cd-e3eba78b250e"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
