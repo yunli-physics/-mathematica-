@@ -1,0 +1,118 @@
+Manipulate[
+ Module[{G = 6.674*^-11, M, m, F, gVal, gPole, gEquator, omega = 7.292*^-5, 
+   R = 6.371*^6, r, T, v, sunPos = {0, 0}, earthPos, pos, trail,
+   scaleR, showVec, Fvec, Fn, Fg, frep},
+  
+  M = mass1; m = mass2;
+  r = distance;
+  
+  (* 万有引力计算 (质点模型) *)
+  F = G M m / r^2;
+  
+  (* 重力加速度: 地表 vs 高空 *)
+  gVal = G M / r^2;
+  
+  (* 黄金代换: gR² = GM, 这里R为地球半径 *)
+  frep = G M / R^2;
+  
+  (* 地球自转效应 *)
+  gPole = G M / R^2;
+  gEquator = G M / R^2 - omega^2 R;
+  
+  (* 可视化缩放 *)
+  scaleR = 1.0; (* 归一化显示 *)
+  
+  earthPos = {0, 0};
+  pos = {r/R * scaleR, 0};
+  
+  Graphics[{
+    {RGBColor[0.02, 0.02, 0.08], Rectangle[{-3, -2.5}, {3, 2.5}]},
+    
+    (* 星体 *)
+    {RGBColor[0.9, 0.7, 0.2], Disk[earthPos, 0.25*scaleR]},
+    Text[Style["M", 12, White, Bold], earthPos],
+    
+    {RGBColor[0.3, 0.6, 0.95], Disk[pos, 0.12*scaleR]},
+    Text[Style["m", 11, White, Bold], pos],
+    
+    (* 连线与距离标注 *)
+    {Gray, Dashed, Line[{earthPos, pos}]},
+    Text[Style["r = " <> ToString[NumberForm[r/1000, {4, 0}]] <> " km", 11, Gray],
+     (earthPos + pos)/2 + {0, 0.15}],
+    
+    (* 引力箭头 *)
+    If[showVec && F > 0,
+      Module[{Fdir = Normalize[earthPos - pos], Fmag},
+        Fmag = Min[1.2, 0.5*Log[10, F]/10];
+        {Red, Thickness[0.008],
+         Arrow[{pos, pos + Fmag*Fdir}],
+         Text[Style["F = " <> ToString[NumberForm[F, {3, 2}]] <> " N", 11, Red],
+          pos + Fmag*Fdir + {0.15, 0.15}]}
+      ]
+    ],
+    
+    (* 信息面板 *)
+    Text[Style[
+      Column[{
+        Style["万有引力定律", 13, Bold, Yellow],
+        "",
+        "F = G·M·m / r²",
+        "G = 6.674×10⁻¹¹ N·m²/kg²",
+        "",
+        "F = " <> ToString[NumberForm[F, {4, 3}]] <> " N",
+        "g = GM/r² = " <> ToString[NumberForm[gVal, {4, 3}]] <> " m/s²",
+        "",
+        Style["黄金代换式: GM = gR²", 11, Bold, Cyan],
+        "GM = " <> ToString[ScientificForm[G M, 4]] <> " m³/s²",
+        "",
+        Style["地球自转效应", 11, Bold, Orange],
+        "两极 g₀ = " <> ToString[NumberForm[gPole, {4, 3}]] <> " m/s²",
+        "赤道 g = " <> ToString[NumberForm[gEquator, {4, 3}]] <> " m/s²",
+        "差值 Δg = " <> ToString[NumberForm[gPole - gEquator, {4, 5}]] <> " m/s²"
+        }, Alignment -> Left, Spacings -> 0.25],
+      11, FontFamily -> "Microsoft YaHei"],
+     Scaled[{0.78, 0.80}], Background -> Directive[White, Opacity[0.88]]]
+    },
+   PlotRange -> {{-3, 3}, {-2.5, 2.5}}, ImageSize -> 620,
+   AspectRatio -> 0.85, Background -> RGBColor[0.02, 0.02, 0.08]]
+  ],
+  
+  Style["万有引力定律 · 交互演示", 20, Bold], Delimiter,
+  
+  Delimiter,
+  
+  (* 天体质量 *)
+  Style["天体参数", Bold, 14],
+  {{mass1, 5.97*^24, "中心天体质量 M (kg)"}, 
+   {5.97*^24 -> "地球 (5.97×10²⁴)", 1.99*^30 -> "太阳 (1.99×10³⁰)", 
+    6.42*^23 -> "火星 (6.42×10²³)", 1.90*^27 -> "木星 (1.90×10²⁷)"},
+   ControlType -> PopupMenu},
+  
+  {{mass2, 1.0, "物体质量 m (kg)"}, 0.1, 1000, 0.1, Appearance -> "Labeled"},
+  
+  {{distance, 6.371*^6, "距离 r (m)"}, 6.371*^6, 1.0*^8, 1.0*^6, 
+   Appearance -> "Labeled"},
+  
+  Delimiter,
+  
+  {{showVec, True, "显示引力矢量"}, {True, False}},
+  
+  Delimiter,
+  
+  Style["预设场景", Bold, 13],
+  Row[{
+    Button["地球表面", distance = 6.371*^6; mass1 = 5.97*^24; mass2 = 1.0,
+      ImageSize -> Automatic],
+    Button["近地卫星", distance = 6.771*^6; mass1 = 5.97*^24; mass2 = 100.0,
+      ImageSize -> Automatic],
+    Button["月球轨道", distance = 3.844*^8; mass1 = 5.97*^24; mass2 = 7.35*^22,
+      ImageSize -> Automatic]
+    }],
+  Row[{
+    Button["重置", mass1 = 5.97*^24; mass2 = 1.0; distance = 6.371*^6; 
+      showVec = True, ImageSize -> Automatic]
+    }],
+  
+  ControlPlacement -> Left,
+  TrackedSymbols :> {mass1, mass2, distance, showVec}
+]
